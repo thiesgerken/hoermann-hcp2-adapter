@@ -23,7 +23,6 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 ### Schaltung
 
 - [ ] D-005 entscheiden: Verpol-, Überspannungs- und ESD-Schutz am HCP-Eingang. Aktuell gibt es keinen.
-- [ ] Prüfen, ob U2 mit 3,3 V zuverlässig läuft und der 3V3-Regler des Super Mini die Reserve hat (D-007).
 - [ ] Transceiver-Typ auf U2 ablesen. Nur als Input für D-005: ein fehlertoleranter Typ (±70 V Busfestigkeit) überlebt 25 V auf A/B durch ein gedrehtes Kabel, ein MAX3485-Typ nicht.
 
 ## Vor der ersten Inbetriebnahme
