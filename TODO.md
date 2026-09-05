@@ -24,13 +24,9 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 
 - [ ] PS1 lose an 25 V auf 5,0 V einstellen, Einschwingen und Überschwingen beim Einschalten messen. Der Trimmer ist auf der Platine noch erreichbar, aber ein falsch eingestellter Wandler darf nie am ESP32 hängen.
 
-## Vor der ersten Inbetriebnahme
+## Weitere Aufgaben
 
 - [ ] Widerstand zwischen A und B am stromlosen U2 messen (integrierter 120-Ohm-Abschluss).
 - [ ] W1 6P6C-Kabel: sechs Adern, 1:1 und ohne Kurzschluss.
 - [ ] ESPHome-Konfiguration mit `hcp` Komponente, UART auf GPIO21/GPIO20, 57600 8E1.
-
-## Später
-
 - [ ] Gehäuse. Aussparungen für J1 an der oberen Kante und USB-C von U1 an der rechten Kante, Höhe der Elkos auf PS1 (etwa 13 mm) beachten.
-- [ ] Entscheiden, ob `generated/` weiter im Repo liegt oder nur die Gerber als Release-Artefakt.
