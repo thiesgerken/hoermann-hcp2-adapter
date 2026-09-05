@@ -1,0 +1,15 @@
+# Entscheidungsprotokoll
+
+| ID | Datum | Status | Entscheidung | Begründung oder Freigabebedingung |
+|---|---|---|---|---|
+| D-001 | 2026-09-05 | beschlossen | Noch kein vollständiger Schaltplan und kein PCB-Layout. Zuerst werden vorhandene Kaufteile dokumentiert und vermessen. | Modulvarianten und Footprints müssen am gelieferten Exemplar geprüft werden. |
+| D-002 | 2026-09-05 | beschlossen | Die erste Platine wird eine Trägerplatine für ESP32-C3-, LM2596- und isoliertes RS485-Modul. | Alle drei Module sind bereits gekauft. Eine Integration der Einzel-ICs wäre ein anderes Design. |
+| D-003 | 2026-09-05 | beschlossen | J1 ist die ungeschirmte Variante `6P6C` aus AliExpress-Artikel 1005003078110991. | Die Auswahl ist verbindlich. Lochbild und Kontaktfolge werden vor dem PCB-Layout am gelieferten Muster vermessen. |
+| D-004 | 2026-09-05 | beschlossen | Die Trägerplatine erhält keinen zusätzlichen 120-Ohm-Abschlusswiderstand und keinen entsprechenden Footprint. | Das ausgewählte RS485-Modul enthält den Abschluss laut Händler bereits. Der Widerstand zwischen A und B wird am Modul trotzdem vor Inbetriebnahme geprüft. |
+| D-005 | 2026-09-05 | offen | Umfang von Verpol-, Überspannungs- und ESD-Schutz. | Entscheidung nach elektrischer Prüfung der gelieferten Module und des verfügbaren Platzes. |
+| D-006 | 2026-09-05 | beschlossen | Die vom LM2596 kommende 5-V-Versorgung erhält eine trennbare Verbindung `BUS_PWR`. | USB und externe Versorgung des SuperMini dürfen laut Bauformunterlage nicht gleichzeitig verbunden sein. |
+| D-007 | 2026-09-05 | vorläufig beschlossen | Das RS485-Modul wird aus 3,3 V des ESP32-C3 Super Mini versorgt. | Dies vermeidet ein mögliches 5-V-Signal am ESP32-RX. Funktion und Stromreserve werden am gelieferten Aufbau geprüft. |
+| D-008 | 2026-09-05 | festgestellt | Der erste Aufbau ist nicht vollständig galvanisch getrennt. | Der nicht isolierte LM2596 verbindet die Versorgungsmassen. Das RS485-Modul trennt nur den Signalpfad. |
+| D-009 | 2026-09-05 | beschlossen | Der erste Schaltplan wird jetzt aus SKiDL erzeugt, obwohl die Footprints noch offen sind. | Die elektrische Topologie ist bekannt. Ungeprüfte Maße werden nicht benötigt, solange keine Fertigungsfootprints zugewiesen werden. |
+
+Neue Entscheidungen erhalten eine fortlaufende ID. Änderungen werden als neuer Eintrag dokumentiert, damit die ursprüngliche Begründung erhalten bleibt.

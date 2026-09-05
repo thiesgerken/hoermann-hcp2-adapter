@@ -1,0 +1,549 @@
+TENSTAR ROBOT ESP32-C3 Entwicklungsboard ESP32 C3 SuperMini WiFi Bluetooth - AliExpress 502
+
+Source: https://de.aliexpress.com/item/1005005967641936.html
+Archived: 2026-09-05
+
+AliExpress
+AliExpress App herunterladen
+Other/DE/
+EUR
+Willkommen
+Anmelden / Registrieren
+0
+Einkaufswagen
+TENSTAR ROBOT ESP32-C3 Entwicklungsboard ESP32 C3 SuperMini WiFi Bluetooth
+  4.9  
+489 Bewertungen
+  ౹  
+10.000+ verkauft
+ 
+Ausgewähltes Produkt mit Spitzenqualität
+ 
+Ende : 7. Sept. 23:59 CET
+2,85€
+ 5,79€ sparen
+8,64€
+2,69€ 
+≥ 2 Stück
+2,59€ 
+≥ 5 Stück
+Preis inkl. MwSt. | Zölle werden an der Kasse berechnet  ; Zusätzlicher 1 % Rabatt
+Mit PayPal Zahlung in 30 Tagen ohne Zinsen bezahlen.
+KI-generierte Artikelübersicht
+
+Haftungsausschluss: Dieser Inhalt wurde mithilfe von KI generiert und spiegelt nicht die Meinung des Verkäufers wider. Die Plattform und die Verkäufer übernehmen hierfür keine rechtliche Haftung.
+
+TENSTAR ROBOT ESP32-C3 Entwicklungsboard Dieses SuperMini Development Board ist ideal für Entwickler und Hobbys. Mit dem ESP32-C3 bietet es leistungsstarke Funktionen in kompakter Form. Perfekt für Projekte mit WiFi und Bluetooth.
+Leistungsstarkes Mikrocontroller-System Der ESP32-C3 unterstützt moderne Kommunikationsstandards wie WiFi und Bluetooth. Er ist bestens geeignet für IoT-Anwendungen und Smart Devices mit geringem Energieverbrauch.
+Kompatibel mit gängigen Entwicklungsumgebungen Das Board ist kompatibel mit Arduino IDE und anderen gängigen Tools. Die einfache Einrichtung ermöglicht schnelle Prototypenentwicklung und schnelle Projektumsetzung.
+Effiziente Stromversorgung und geringer Energieverbrauch Mit einer Supply Voltage von 1 V und niedrigem Dissipation Power ist das Board energiesparend. Ideal für batteriebetriebene Anwendungen und mobile Projekte.
+Robustes Design für vielseitige Anwendungen Das SuperMini Development Board ist stabil und langlebig. Der Operating Temperature von 1 °C ermöglicht Einsatz in verschiedenen Umgebungen, auch bei Temperaturen nahe der Grenze.
+Mehr
+Weitere Preisinformationen 
+Kundenbewertungen (489)
+Spezifikationen
+Übersicht
+Laden
+Das könnte Sie auch interessieren
+Bewertungen | 4.9
+ 
+ 
+488 Bewertungen
+ 
+Alle von verifizierten Einkäufen
+Kompatibilität : Vollständig kompatibel
+88%
+Funktionalität : Schnell
+76%
+Anwendungsbereich : Groß
+67%
+Alle Bewertungen (27) (20) (0)alles ok (23)funktioniert wie erwartet (20)gute qualität (14)schneller versand (12)alles ist richtig (10)schnelle lieferung (10)
+5.0
+5.0
+5.0
+5.0
+5.0
+5.0
+Mehr anzeigen
+Standardmäßig sortierenOriginalsprache anzeigen
+Es ist ein sehr gutes Board; bei diesem Modell muss ich es nicht durch Drücken der Boot-Taste anschließen, wie bei anderen, die dies erfordern, damit der PC sie erkennt.
+c***r | 25 Jan. 2026
+ Hilfreich (0)   
+Die Verarbeitungsqualität ist gut – die Chip-Antenne empfängt im Innenbereich ein ordentliches Signal. Getestet mit verschiedenen WLAN-Zugangspunkten rund um das Gebäude und alles funktioniert einwandfrei.
+B***y | 30 Sept. 2025
+ Hilfreich (0)   
+Ich mag diese sehr Sie sind sehr klein, werden nicht heiß und haben eine gute WLAN-Reichweite. Sie haben auch einen C3 mit externer Antenne Ich habe alle meine alten ESP8266-Geräte damit ersetzt.
+R***d | 01 Dez. 2025
+ Hilfreich (0)   
+Mehr anzeigen
+Ähnliche Artikel
+Previous
+Seeed Studio XIAO für ESP32 C3 Mini Entwicklungsboard Seeeduino Xiao ESP32C3 Modul WiFi BlE5.0 RISC-V für Arduino
+8,99€
+5
+1.000+ verkauft
+0,5€ sparen
+Auf AliExpress meistverkauft
+1-10 Stück ESP32-C3 Entwicklungsboard mit ESP32 SuperMini Entwicklungsboard ESP32 WiFi Bluetooth mit 4M Flash C3
+27,79€
+(2,78€/Stück)
+4.6
+2.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand ab 10€
+ESP32 C3 SuperMini Entwicklungsboard ESP32-C3 WiFi Bluetooth Modul für Arduino
+2,69€
+4.7
+10.000+ verkauft
+Jedes 2,59€, ≥ 2 Stücke
+5,22€ sparen
+ESP32-S3 Entwicklungsboard DevKitC-1 N8R2 N16R8 WiFi BT Modul 44-Pin Typ-C USB ESP32-S3 WROOM-1
+5,99€
+4.8
+2.000+ verkauft
+1,47€ sparen
+Auf AliExpress meistverkauft
+Werbeanzeige
+ESP32-S3 2,4 GHz WiFi Bluetooth Modul ESP32-S3-WROOM-1 N16R8 N8R2 Entwicklungsboard CORE Board Typ-C ESP32 S3
+6,59€
+4.7
+2.000+ verkauft
+0,37€ sparen
+Auf AliExpress meistverkauft
+Werbeanzeige
+Next
+Spezifikationen
+Hochbetriebenes Chemikalienunternehmen
+Keine
+Paket
+SOP
+ist kundenspezifisch
+Ja
+Verlustleistung
+SuperMini Development Board
+Versorgungsspannung
+1
+Typ
+SPANNUNGSREGELER
+Mehr anzeigen
+Übersicht
+Melden
+Mehr anzeigen
+Fragen und Antworten von Käufern (8)
+
+Könnte dieses Board mit WLED geladen werden
+
+Ja mit Wled esp Flasher, aber dieses Board sehr heiß :(
+
+Welches Board in Arduino IDE auszuwählen?
+
+Ich habe das ESP32C3DevModule Board def verwendet und es hat gut funktioniert
+
+Hat dies eine WiFi-Antenne
+
+Es verwendet eine kombinierte Wifi/Bluetooth-Antenne. Der mit "C3" gekennzeichnete Chip ist die Antenne auf denen, die ich erhalten habe.
+
+Informationen zu Zusatzkosten
+Bei von außerhalb der Europäischen Union gelieferten Artikeln fallen in Ihrem Land u. U. weitere MwSt.- und wenn anwendbar Zollgebühren an. Wenn AliExpress per Gesetz zur Erhebung der MwSt. verpflichtet ist, wird der Preis an der Kasse inklusive Mehrwertsteuer angezeigt. Für weitere Informationen zu diesen Kosten wenden Sie sich bitte an das Finanzamt bzw. die Zollbehörde Ihres Landes.
+Verkauft durch TENSTAR ROBOT Store. Logistik durch AliExpress.
+Informationen zur Produktkonformität
+Haftungsausschluss
+Haftungsausschluss: Bilder und Produktinformationen auf dieser Seite können automatisch von KI übersetzt worden sein. Diese Übersetzungen werden nur zur Bequemlichkeit und im Ist-Zustand bereitgestellt und können Ungenauigkeiten oder Inkonsistenzen enthalten.
+2,85€ 8,64€
+Preis inkl. MwSt. | Zölle werden an der Kasse berechnet  ; Zusätzlicher 1 % Rabatt
+Verkauft von
+TENSTAR ROBOT Store
+(Händler)
+ Kontaktieren
+  
+  
+AliExpress-Verpflichtung
+Pick-up points  
+Kostenloser Versand über 10,00€  
+Zustellung: Um Sep 10 - 15 
+Kurierdienst:   DHL Paket   Hermes ,etc.  
+Expresslieferung
+ 
+1,00€ Coupon-Code für die verspätete Lieferung
+ 
+Geld zurück bei defekt geliefertem Artikel
+ 
+Geld zurück bei verlorenem Paket
+ 
+Geld zurück bei Nichtlieferung in 40 Tagen
+Rückgabe bis 90 Tage kostenlos
+Sicherheit und Datenschutz persönliche Daten schützen
+Sichere Zahlungen: Wir geben keine Ihrer personengebundenen Daten ohne Ihre Zustimmung an Dritte weiter.
+Persönliche Angaben schützen: Wir schützen Ihre Privatsphäre und bewahren Ihre personengebundenen Daten sicher auf.
+Menge
+128 verfügbar
+Jetzt kaufenIn den Warenkorb
+ Teilen
+ 7609
+  
+TENSTAR ROBOT Store
+98.3% Positives Feedback | 3311 Follower
+ 
+Kontaktieren
+Empfohlen von TENSTAR ROBOT Store
+BMI160 GY-BMI160 6DOF 6-Achsen-Rate Gyro Schwerkraft-Beschleunigungsmesser-Sensormodul IIC I2C SPI Kommunikationsprotokoll 3–5 V
+1,89€
+4.9
+5.000+ verkauft
+Jedes 1,85€, ≥ 3 Stücke
+3,84€ sparen
+PIR Sensor HC-SR501 HC-SR602 HC-Sr505 Einstellen IR Pyroelektrische Infrarot Motion Detektor Modul Für Raspberry Pi Sensing Menschlichen Körper
+1,45€
+4.8
+5.000+ verkauft
+Jedes 1,39€, ≥ 3 Stücke
+0,85€ sparen
+TENSTAR UDA1334A DAC Modul UDA1334 I2S DAC Audio Stereo Decoder Modul Board Für Raspberry Pi
+3,49€
+5
+442 verkauft
+Jedes 3,29€, ≥ 2 Stücke
+3,79€ sparen
+TENSTAR 2 stücke UV Sensor GUVA-S12SD 240-370nm 3528 Solar Uv Intensität Modul DC 3,3-5 V Für Arduino/Himbeere pi
+2,99€
+(3,1€/Stück)
+4.8
+452 verkauft
+Jedes 2,79€, ≥ 2 Stücke
+3,24€ sparen
+ESP32 Für Wemos D1 Mini D1 R32 WIFI Drahtlose Bluetooth Entwicklung Bord CH340 4M Speicher Ein ESP 32
+5,09€
+4.7
+1.000+ verkauft
+Jedes 4,79€, ≥ 2 Stücke
+10,82€ sparen
+Das könnte Sie auch interessieren
+1-10 Stück ESP32-C3 Entwicklungsboard ESP32 SuperMini Entwicklungsboard ESP32 Entwicklungsboard WiFi Bluetooth
+12,49€
+(2,5€/Stück)
+4.7
+1.000+ verkauft
+0,89€ sparen
+Auf AliExpress meistverkauft
+TENSTAR ESP32-S3 ESP32-C3 ESP32-H2 ESP32-C6 Entwicklungsboard WiFi Bluetooth Modul Single-Core SupmerMini XIAO
+2,79€
+4.9
+10.000+ verkauft
+3,15€ sparen
+Kostenloser Versand ab 10€
+Xiao esp32c6 winzige super mini board wi-fi und bluetooth 5,0 für arduino für seeed studio esp32 c6
+9,05€
+4.9
+2.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand ab 10€
+Werbeanzeige
+ESP32-C3 MINI Development Board ESP32 SuperMini Development Board ESP32-C3 Development Board WiFi Bluetooth Erweiterungsboard
+2,55€
+4.8
+10.000+ verkauft
+Jedes 2,39€, ≥ 2 Stücke
+5,42€ sparen
+ESP ESP32-S3 CAM WiFi Bluetooth Development Board Modul Onboard ESP32-S3 N16R8 Dual TYPE-C OV2640 /OV5640/OV3660 Kamera
+8,06€
+4.6
+3.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand ab 10€
+NEUES ESP32-S3 Entwicklungsboard mit 2,4G WLAN BT Modul für AI IOT DIY ESP32-S3WROOM1 N16R8 MCU 44Pin Type-C 8M PSRAM
+6,89€
+4.9
+5.000+ verkauft
+0,36€ sparen
+Auf AliExpress meistverkauft
+Werbeanzeige
+TOOLEYE 10-teiliges PCB-Bohrer-Set, Mikrobohrer, Leiterplatte, 1/8 Zoll Schaft, Mini-CNC-Bohrer, 0,1–3,175 mm Bohrwerkzeuge
+2,79€
+(0,28€/Stück)
+4.8
+10.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand ab 10€
+Werbeanzeige
+TENSTAR ESP32-C3 Supermini Plus Entwicklungsboard WiFi Bluetooth ESP32 C3 Super mini V2.0 Rotes Board
+4,69€
+4.9
+10.000+ verkauft
+5,73€ sparen
+Kostenloser Versand ab 10€
+Basic Starter Kit für ESP32 ESP-32S WIFI Development Board Project Learning Kit mit Tutorials ESP32 Kit mit Box
+14,19€
+4.8
+2.000+ verkauft
+Jedes 13,39€, ≥ 2 Stücke
+36,49€ sparen
+SONOFF Zigbee Smart TRV Gen2 Thermostatischer Heizkörperventil-Steuermotor TRV-ZBT Kompatibel mit Alexa, Google Home Assistant und Matter
+31,79€
+5
+197 verkauft
+43,9€ sparen
+Auf AliExpress meistverkauft
+Werbeanzeige
+ESP32-32D ESP32-32U Entwicklungsboard mit GPIO-Erweiterungsplatine Kit BT WLAN-Modul USB Typ-C 38PIN CP2102 ESP32-DevKitC
+5,19€
+4.8
+10.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand ab 10€
+Werbeanzeige
+Holyiot Nordic nRF54L15 Bluetooth Beacon mit 3-Achsen-Befestigungsmesser-Ble-Modul, geringer Stromverbrauch, IoT-Gerät für Smart Home
+9,19€
+5
+800+ verkauft
+Auf AliExpress meistverkauft
+Nordic wohnkultur Kronleuchter für esszimmer glanz anhänger lichter hängen lampen für decke Leuchte innen beleuchtung
+189,69€
+3.7
+17 verkauft
+155,2€ sparen
+Kostenloser Versand
+Werbeanzeige
+TENSTAR RP2040 Pro Micro Development Board 4 MB/16 MB Flash Dual-Core unterstützt Mciro Python kompatibel für Raspberry PI PICO
+3,05€
+4.9
+5.000+ verkauft
+3,88€ sparen
+Kostenloser Versand ab 10€
+1-10PCS MPU6050 GY-521 6DOF IMU-Modul mit 3-Achsen-Beschleunigungsmesser und Gyroskop für Arduino/Raspberry Pi
+1,65€
+4.6
+2.000+ verkauft
+0,07€ sparen
+Auf AliExpress meistverkauft
+12 V 200 Ah 100 Ah LiFePO4-Akku 2560 Wh Bluetooth BMS 140 Ah 24 V Fischboot-Akku 6000 Zyklen IP56 USB QC-Ladung EU Schnelle Lieferung
+260,08€
+472,87€
+-45%
+4.8
+900+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand
+Werbeanzeige
+TENSTAR T-Display ESP32-D0WD CH9102 Chip 16 MB WiFi Und Bluetooth-Kompatibel Modul Entwicklung Bord 1,14 Zoll LCD Steuerung
+10,39€
+4.9
+10.000+ verkauft
+Jedes 9,79€, ≥ 2 Stücke
+11,72€ sparen
+1-10 stücke Original 0,96 zoll oled IIC Serielle Weiß OLED Display Modul 128X64 I2C SSD1306 12864 LCD Screen Board Für Arduino
+2,19€
+4.8
+10.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand ab 10€
+8TB tragbares Solid-State-Laufwerk, 32TB externes SSD mit großer Kapazität, USB3.1 Plug-and-Play, geeignet für Laptops/MAC/PC
+17,19€
+5
+3 verkauft
+9,67€ sparen
+Werbeanzeige
+ESP32 WiFi Bluetooth Entwicklungsboard Typ-C Micro USB CP2102 CH340C 30-Pin 38-Pin Dual-Core MCU Modul
+2,45€
+4.7
+2.000+ verkauft
+0,14€ sparen
+Auf AliExpress meistverkauft
+Werbeanzeige
+TENSTAR RP2350 Red Board PICO2 Entwicklungsboard TYPE-C USB RP2350A Chip Mikrocontroller kompatibel mit Raspberry Pi PICO2
+5,09€
+4.9
+5.000+ verkauft
+5,74€ sparen
+Kostenloser Versand ab 10€
+Tragbare SSD-Festplatte 2TB Externe Festplatte Schnelle Datenübertragung USB-C Solid-State-Disk für Laptop, Mac, Windows-PC
+10,19€
+29,11€
+-64%
+5
+30 verkauft
+Frühbucherangebot, nur noch 2990 übrig
+Kostenloser Versand
+Werbeanzeige
+TENSTAR NRF52840 Entwicklungsboard kompatibel mit Nice!Nano V2.0 Bluetooth-Lademanagement Pro Micro NRF52840
+4,79€
+4.9
+2.000+ verkauft
+3+, kein Zollaufschlag
+5,97€ sparen
+Kombi-Knaller
+UN0 R3 Board ATmega328P Entwicklungsboard mit Stiftleiste und Kabel, kompatibel mit Arduino IDE-Projekten
+3,59€
+4.9
+10.000+ verkauft
+4,05€ sparen
+Kostenloser Versand ab 10€
+ESP32-C3 supermini wifi bluetooth-kompatibles board esp32 c3 supermini entwicklungs board iot board für arduino
+3,39€
+4.8
+10.000+ verkauft
+Jedes 3,25€, ≥ 2 Stücke
+6,88€ sparen
+ESP32-C3 ESP32-S3 ESP32-H2 ESP32-C6 Entwicklungsboard ESP32 C3 SuperMini WiFi Bluetooth ESP32C3
+1,79€
+4.8
+5.000+ verkauft
+Auf AliExpress meistverkauft
+ESP32-S3 2,4GHz WiFi Bluetooth Modul ESP32-S3-N16R8 N8R2 Entwicklungsboard CORE Board Typ-C ESP32 S3
+2,49€
+4.8
+1.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand ab 10€
+Werbeanzeige
+ESP32 Entwicklungsboard WiFi Bluetooth Modul Typ-C/Micro USB CH340C CP2102 30Pin 38Pin Erweiterungsplatine für Arduino
+6,09€
+4.7
+2.000+ verkauft
+0,45€ sparen
+Auf AliExpress meistverkauft
+Werbeanzeige
+EstarDyn Omnidirektionales Mikrofonmodul I2S-Schnittstelle INMP441 MEMS Hochpräzise Stromsparend Ultra-kompaktes Format für ESP32
+2,05€
+4.9
+2.000+ verkauft
+Jedes 1,95€, ≥ 3 Stücke
+2,41€ sparen
+Werbeanzeige
+Das SCD40 SCD41 Gas-Sensormodul erkennt CO2-Kohlendioxid-Temperatur und Luftfeuchtigkeit in einer Sensor-I2C-Kommunikation
+14,59€
+4.8
+2.000+ verkauft
+Jedes 13,89€, ≥ 2 Stücke
+9,97€ sparen
+Original Lenovo XT80 Sport-Funkkopfhörer mit Mikrofonen, LED-Leistungsanzeige, Hifi-Stereo-Sound, Bluetooth 5.3 TWS-Kopfhörer
+15,49€
+4.7
+10.000+ verkauft
+19,71€ sparen
+Auf AliExpress meistverkauft
+Werbeanzeige
+1–10 Stück hochpräzise MEMS-Mikrofone MS3625 – I2S-Schnittstelle, kompatibel mit INMP441 und für ESP32 (omnidirektional)
+1,65€
+4.9
+3.000+ verkauft
+0,06€ sparen
+Auf AliExpress meistverkauft
+RP2040-Zero RP2040 für Raspberry Pi Mikrocontroller PICO Development Board Modul Dual-core Cortex M0 + Prozessor 2 MB Flash
+2,65€
+4.9
+5.000+ verkauft
+Jedes 2,49€, ≥ 2 Stücke
+5,14€ sparen
+RadioLink T12D T16D Fernbedienung mit Empfänger Unterstützt ELRS Hochfrequenz-Head für UAV FPV Ferngesteuertes Auto Roboter Virtuelle Spiele
+17,39€
+5
+17 verkauft
+7,81€ sparen
+Bester Preis in ähnlichen Angeboten
+Werbeanzeige
+ESP32-C3 OLED-Entwicklungsboard mit 0,42 Zoll OLED-Modul, Keramikantenne, ESP32 Supermini-Entwicklungsboard, WLAN, Bluetooth
+3,45€
+4.9
+5.000+ verkauft
+Jedes 3,29€, ≥ 2 Stücke
+3,28€ sparen
+BIGTREETECH TMC2209 V1.3 Schrittmotortreiber UART VS TMC2208 TMC2130 3D-Druckerteile für Octopus V1.1 SKR 2 Board Ender 3 V2
+4,79€
+4.9
+4.000+ verkauft
+0,2€ sparen
+Auf AliExpress meistverkauft
+DT28F640J5A150 DA28F640J5A150 DA28F640 SSOP-56 10 teile/los
+17,39€
+2 verkauft
+Individuell anpassbar
+Werbeanzeige
+ESP32 32D Entwicklungsboard / Modul Drahtloses WiFi-Bluetooth-Modul Ultra-Niedriger Stromverbrauch Dual-Core 30-Pin Smart Home
+3,59€
+4.8
+10.000+ verkauft
+8,79€ sparen
+Auf AliExpress meistverkauft
+0,42 Zoll OLED-Entwicklungsboard für ESP32-C3, WLAN-BT-Funkmodul mit Keramikantenne, SuperMini-Entwicklungsboard
+3,85€
+4.8
+5.000+ verkauft
+Jedes 3,69€, ≥ 2 Stücke
+4,9€ sparen
+Metall-Messschieber, digitales Pachometer, professionelles Messgerät, Messwerkzeuge, Holzbearbeitung, Dickenmessgerät, Tiefe, elektronisches Lineal
+13,19€
+18,58€
+-29%
+4.7
+3.000+ verkauft
+Auf AliExpress meistverkauft
+Kostenloser Versand
+Werbeanzeige
+EstarDyn ESP32-C3 MINI Entwicklungsboard / ESP32 SuperMini Development WiFi Bluetooth Erweiterungsboard
+2,55€
+4.9
+10.000+ verkauft
+Jedes 2,39€, ≥ 2 Stücke
+3€ sparen
+Werbeanzeige
+1-10 Stück 32D Entwicklungsboard WiFi+Bluetooth-kompatibel TYPE-C 30Pin Nodemcu Entwicklungsmodul
+5,09€
+4.9
+2.000+ verkauft
+Jedes 4,89€, ≥ 2 Stücke
+10,82€ sparen
+4TB Tragbare Externe Solid-State-Festplatte USB-C Robustes Design Stoßfeste Speicherlösung für Feldarbeit und Alltäglichen Datenspeicherung
+14,39€
+4.6
+70 verkauft
+10€ sparen
+Werbeanzeige
+ESP32C3 Entwicklungsboard Mini WLAN BT Modul Typ-C ESP32-C3 16-Pin RISC-V 32-Bit Single-Core Prozessor Erweiterungsplatine
+8,39€
+(2,8€/Stück)
+4.6
+1.000+ verkauft
+Kostenloser Versand ab 10€
+Werbeanzeige
+ESP32 Entwicklungsboard 2,4G WLAN Bluetooth-Modul 30-Pin 38-Pin CP2102 Micro Type-C Ultra-Niedriger Stromverbrauch Dual-Core ESP-32
+6,69€
+4.9
+1.000+ verkauft
+Jedes 6,39€, ≥ 2 Stücke
+8,18€ sparen
+Effiziente Original Tragbare SSD-Festplatte USB3.1 Typ-C 1TB 4TB 128TB Große Kapazität Externe Solid-State-Festplatte Kompatibel
+15,89€
+24,45€
+-35%
+5
+1 verkauft
+Werbeanzeige
+ESP32C6 Mini-Entwicklungsboard XIAO ESP32 C6-2.4 GHz WiFi6, BLE5.3, Zigbee Thread (802.15.4) ESP Rain Maker, AWS IoT, Microsoft Azure
+16,49€
+33,65€
+-50%
+4.9
+1.000+ verkauft
+Auf AliExpress meistverkauft
+Werbeanzeige
+TFT-Display 1,28 Zoll TFT-LCD-Anzeigemodul Runde RGB 240 * 240 GC9A01 Treiber 4-Draht-SPI-Schnittstelle 240 x 240 PCB
+3,59€
+4.9
+5.000+ verkauft
+Jedes 3,39€, ≥ 2 Stücke
+2,02€ sparen
+Andere suchten auch
+Dieser Artikel gehört zur Home
+Hilfe
+Hilfe-Center, Streitigkeiten & Berichte, Rückgabe-und Erstattungsrichtlinie, RGE-Verletzung melden, DSA/OSA-Informationen , Integrität und Konformität , Transparenz zentrum, Beschwerdeeinstieg ohne Anmeldung, Rückerstattungsrichtlinie
+Mehrsprachige AliExpress-Websites
+Pусский, Portuguese, Spanish, French, German, Italian, Dutch, Turkish, Japanese, Korean, Thai, Arabic, Hebrew, Polish
+Browse by Category
+Alle beliebten , Produkt , Aktion , Günstiger Preis , Toller Wert , Bewertungen , Wiki, Video
+Alibaba Group
+Alibaba Group Website, AliExpress, Alimama, Fliggy, Alibaba Cloud, Alibaba International, AliTelecom, DingTalk, Juhuasuan, Taobao Marketplace, Tmall, Taobao Global, AliOS, 1688
+Intellectual Property Protection - Privacy Policy - Cookie‑Einstellungen - Sitemap - AliExpress.com Nutzungsbedingungen - Informationen für EU-Verbraucher - Rechtliche Hinweise / Impressum - Transaktionsdienstleistungsvertrag für Verbraucher außerhalb der EU/des Vereinigten Königreichs - Allgemeine Geschäftsbedingungen für EU/EEA/UK-Verbraucher - User Information Legal Enquiry Guide ©️ 2010-2025 AliExpress.com. All rights reserved.
+Cookie-Einstellungen
+Später
+Wir verwenden Cookies und ähnliche Technologien für die Verbesserung des Benutzererlebnisses und die Personalisierung von Werbung.Auf diese Weise können wir und Drittanbieter Ihnen sowohl auf als auch außerhalb unserer Websites Inhalte, Marketing und Werbung anbieten, die Ihnen gefallen könnten. Ihre Einstellungen können Sie jederzeit unter Cookie-Einstellungen“ ändern. Weitere Informationen finden Sie in unserem Cookie-Hinweis.
+Cookies personalisierenCookies ablehnenCookies akzeptieren

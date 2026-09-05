@@ -1,0 +1,293 @@
+(export 
+  (version "D")
+  (design
+    (source "circuit.py")
+    (date "09/05/2026 07:25 PM")
+    (tool "SKiDL (2.3.0)")
+    (sheet
+      (number 1)
+      (name "/")
+      (tstamps "/")
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source "../../circuit.py")
+        (comment
+          (number "1")
+          (value ""))
+        (comment
+          (number "2")
+          (value ""))
+        (comment
+          (number "3")
+          (value ""))
+        (comment
+          (number "4")
+          (value ""))
+        (comment
+          (number "5")
+          (value ""))
+        (comment
+          (number "6")
+          (value ""))
+        (comment
+          (number "7")
+          (value ""))
+        (comment
+          (number "8")
+          (value ""))
+        (comment
+          (number "9")
+          (value "")))))
+  (components
+    (comp
+      (ref "J1")
+      (value "HCP2 6P6C unshielded, AliExpress 1005003078110991")
+      (description "Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint ":")
+      (fields
+        (field
+          (name "Description") "Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)")
+        (field
+          (name "Footprint") ":")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "hcp-connector-j1")
+        (field
+          (name "SKiDL Line") "circuit.py:22"))
+      (libsource
+        (lib "Conn_01x06")
+        (part "Conn_01x06"))
+      (sheetpath
+        (names "/")
+        (tstamps "/"))
+      (component_classes)
+      (tstamps "bfcd81be-66f8-5719-86e9-40198e0e6cb0"))
+    (comp
+      (ref "JP1")
+      (value "BUS_PWR")
+      (description "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint ":")
+      (fields
+        (field
+          (name "Description") "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
+        (field
+          (name "Footprint") ":")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "bus-power-jumper-jp1")
+        (field
+          (name "SKiDL Line") "circuit.py:22"))
+      (libsource
+        (lib "Conn_01x02")
+        (part "Conn_01x02"))
+      (sheetpath
+        (names "/")
+        (tstamps "/"))
+      (component_classes)
+      (tstamps "bacb4295-6781-593f-b381-2cf4ea1192f8"))
+    (comp
+      (ref "PS1")
+      (value "LM2596 HW-411, adjust to 5.0 V")
+      (description "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint ":")
+      (fields
+        (field
+          (name "Description") "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)")
+        (field
+          (name "Footprint") ":")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "buck-module-ps1")
+        (field
+          (name "SKiDL Line") "circuit.py:22"))
+      (libsource
+        (lib "Conn_01x04")
+        (part "Conn_01x04"))
+      (sheetpath
+        (names "/")
+        (tstamps "/"))
+      (component_classes)
+      (tstamps "98bba1e7-f7e8-5ade-9eec-ef6c1b1688e8"))
+    (comp
+      (ref "U1")
+      (value "ESP32-C3 Super Mini")
+      (description "Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint ":")
+      (fields
+        (field
+          (name "Description") "Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
+        (field
+          (name "Footprint") ":")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "controller-u1")
+        (field
+          (name "SKiDL Line") "circuit.py:22"))
+      (libsource
+        (lib "Conn_02x08_Odd_Even")
+        (part "Conn_02x08_Odd_Even"))
+      (sheetpath
+        (names "/")
+        (tstamps "/"))
+      (component_classes)
+      (tstamps "cb7444fd-4120-599c-99fa-708ed717804a"))
+    (comp
+      (ref "U2")
+      (value "Isolated auto-direction RS485, onboard 120R")
+      (description "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
+      (footprint ":")
+      (fields
+        (field
+          (name "Description") "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
+        (field
+          (name "Footprint") ":")
+        (field
+          (name "Datasheet"))
+        (field
+          (name "SKiDL Tag") "rs485-module-u2")
+        (field
+          (name "SKiDL Line") "circuit.py:22"))
+      (libsource
+        (lib "Conn_01x07")
+        (part "Conn_01x07"))
+      (sheetpath
+        (names "/")
+        (tstamps "/"))
+      (component_classes)
+      (tstamps "243045ee-7b9b-59a0-9a6a-cf791a152b7c")))
+  (nets
+    (net
+      (code 1)
+      (name "BUCK_5V")
+      (class "Default")
+      (node
+        (ref "JP1")
+        (pin "1")
+        (pintype "POWER-IN"))
+      (node
+        (ref "PS1")
+        (pin "3")
+        (pintype "POWER-OUT")))
+    (net
+      (code 2)
+      (name "ESP_3V3")
+      (class "Default")
+      (node
+        (ref "U1")
+        (pin "5")
+        (pintype "POWER-OUT"))
+      (node
+        (ref "U2")
+        (pin "1")
+        (pintype "POWER-IN")))
+    (net
+      (code 3)
+      (name "ESP_5V")
+      (class "Default")
+      (node
+        (ref "JP1")
+        (pin "2")
+        (pintype "POWER-OUT"))
+      (node
+        (ref "U1")
+        (pin "1")
+        (pintype "POWER-IN")))
+    (net
+      (code 4)
+      (name "HCP_25V")
+      (class "Default")
+      (node
+        (ref "J1")
+        (pin "5")
+        (pintype "POWER-OUT"))
+      (node
+        (ref "J1")
+        (pin "6")
+        (pintype "PASSIVE"))
+      (node
+        (ref "PS1")
+        (pin "1")
+        (pintype "POWER-IN")))
+    (net
+      (code 5)
+      (name "HCP_A_PLUS")
+      (class "Default")
+      (node
+        (ref "J1")
+        (pin "4")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U2")
+        (pin "5")
+        (pintype "BIDIRECTIONAL")))
+    (net
+      (code 6)
+      (name "HCP_B_MINUS")
+      (class "Default")
+      (node
+        (ref "J1")
+        (pin "3")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U2")
+        (pin "6")
+        (pintype "BIDIRECTIONAL")))
+    (net
+      (code 7)
+      (name "HCP_GND")
+      (class "Default")
+      (node
+        (ref "J1")
+        (pin "1")
+        (pintype "POWER-OUT"))
+      (node
+        (ref "J1")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
+        (ref "PS1")
+        (pin "2")
+        (pintype "PASSIVE"))
+      (node
+        (ref "PS1")
+        (pin "4")
+        (pintype "PASSIVE"))
+      (node
+        (ref "U1")
+        (pin "3")
+        (pintype "POWER-IN"))
+      (node
+        (ref "U2")
+        (pin "4")
+        (pintype "POWER-IN")))
+    (net
+      (code 8)
+      (name "UART_RX_GPIO20")
+      (class "Default")
+      (node
+        (ref "U1")
+        (pin "14")
+        (pintype "INPUT"))
+      (node
+        (ref "U2")
+        (pin "3")
+        (pintype "OUTPUT")))
+    (net
+      (code 9)
+      (name "UART_TX_GPIO21")
+      (class "Default")
+      (node
+        (ref "U1")
+        (pin "16")
+        (pintype "OUTPUT"))
+      (node
+        (ref "U2")
+        (pin "2")
+        (pintype "INPUT")))))
