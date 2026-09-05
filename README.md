@@ -52,6 +52,8 @@ uv run python hardware/kicad/circuit.py
 
 Die Quelle prüft die erwartete Topologie, führt den SKiDL-ERC aus und rendert anschließend mit `kicad-cli` das PDF. Dafür muss KiCad installiert sein. Footprints bleiben absichtlich unzugewiesen, bis die gelieferten Bauteile vermessen sind. Es existiert noch kein ausgearbeitetes PCB-Layout. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
 
+Der erzeugte Schaltplan zeichnet für jedes Netz eine sichtbare, beschriftete Leitung zwischen allen angeschlossenen Pins. Die Netzliste wird zusätzlich gegen die erwartete Pin-Topologie geprüft.
+
 ## Feste HCP2-Rahmenbedingungen
 
 Laut ESPHome gilt für unterstützte Hörmann Serie-4-Antriebe:

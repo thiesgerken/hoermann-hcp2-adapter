@@ -1,6 +1,8 @@
 import os
+import re
 import shutil
 import subprocess
+import uuid
 from pathlib import Path
 
 OUTPUT_DIR = Path(__file__).parent
@@ -41,6 +43,93 @@ def render_pdf(schematic_path):
         check=True,
     )
     return pdf_path
+
+GLOBAL_LABEL_PATTERN = re.compile(
+    r'  \(global_label "(?P<name>[^"]+)"\n'
+    r".*?"
+    r"    \(uuid [^)]+\)\)",
+    re.DOTALL,
+)
+
+
+def replace_pin_labels_with_wired_buses(schematic_path, expected_pin_counts):
+    schematic = schematic_path.read_text()
+    labels_by_net = {}
+    for match in GLOBAL_LABEL_PATTERN.finditer(schematic):
+        label = match.group(0)
+        position = re.search(r"\(at ([0-9.]+) ([0-9.]+) [^)]+\)", label)
+        if not position:
+            raise RuntimeError(f"Cannot locate label position for {match.group('name')}")
+        labels_by_net.setdefault(match.group("name"), []).append(
+            (label, float(position.group(1)), float(position.group(2)))
+        )
+
+    actual_pin_counts = {name: len(labels) for name, labels in labels_by_net.items()}
+    if actual_pin_counts != expected_pin_counts:
+        raise RuntimeError(
+            f"Generated labels differ from topology: expected {expected_pin_counts}, "
+            f"got {actual_pin_counts}"
+        )
+
+    def wire(start, end, net_name, index):
+        wire_uuid = uuid.uuid5(
+            uuid.NAMESPACE_URL,
+            f"hoermann:{net_name}:{index}:{start}:{end}",
+        )
+        return (
+            "  (wire\n"
+            "    (pts\n"
+            f"      (xy {start[0]:.2f} {start[1]:.2f})\n"
+            f"      (xy {end[0]:.2f} {end[1]:.2f}))\n"
+            "    (stroke\n"
+            "      (width 0)\n"
+            "      (type default))\n"
+            f"    (uuid {wire_uuid}))\n"
+        )
+
+    moved_labels = []
+    wires = []
+    for net_index, (net_name, labels) in enumerate(sorted(labels_by_net.items())):
+        points = [(x, y) for _, x, y in labels]
+        routing_x = min(x for x, _ in points) - 12 - net_index * 4
+        routing_ys = sorted({y for _, y in points})
+
+        label = re.sub(
+            r"\(at [^)]+\)",
+            f"(at {routing_x:.2f} {routing_ys[0]:.2f} 180)",
+            labels[0][0],
+            count=1,
+        )
+        moved_labels.append(label.replace("(justify left)", "(justify right)") + "\n")
+
+        segment_index = 0
+        for point in points:
+            wires.append(wire(point, (routing_x, point[1]), net_name, segment_index))
+            segment_index += 1
+        for start_y, end_y in zip(routing_ys, routing_ys[1:]):
+            wires.append(
+                wire(
+                    (routing_x, start_y),
+                    (routing_x, end_y),
+                    net_name,
+                    segment_index,
+                )
+            )
+            segment_index += 1
+
+    # SKiDL emits one label directly on every connected pin. Replacing those
+    # labels with one labelled bus per net makes the same topology visible.
+    schematic = GLOBAL_LABEL_PATTERN.sub("", schematic).rstrip()
+    if not schematic.endswith(")"):
+        raise RuntimeError("Generated KiCad schematic has an unexpected structure")
+    schematic = (
+        schematic[:-1]
+        + "\n"
+        + "".join(moved_labels)
+        + "".join(wires)
+        + ")\n"
+    )
+    schematic_path.write_text(schematic)
 
 
 def connector(symbol, reference, value, tag):
@@ -197,5 +286,9 @@ generate_schematic(
     flatness=1.0,
     auto_stub=False,
     tool=KICAD10,
+)
+replace_pin_labels_with_wired_buses(
+    schematic_path,
+    {net.name: len(expected_pins) for net, expected_pins in expected_topology.items()},
 )
 render_pdf(schematic_path)
