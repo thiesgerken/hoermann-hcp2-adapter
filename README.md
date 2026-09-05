@@ -42,6 +42,7 @@ IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbüch
 - SKiDL-Quelle: [`hardware/kicad/circuit.py`](hardware/kicad/circuit.py)
 - editierbarer KiCad-Schaltplan: [`hardware/kicad/hoermann-hcp-adapter.kicad_sch`](hardware/kicad/hoermann-hcp-adapter.kicad_sch)
 - KiCad-Netzliste: [`hardware/kicad/hoermann-hcp-adapter.net`](hardware/kicad/hoermann-hcp-adapter.net)
+- gerendertes PDF: [`hardware/kicad/hoermann-hcp-adapter.pdf`](hardware/kicad/hoermann-hcp-adapter.pdf)
 
 Erzeugung:
 
@@ -49,7 +50,7 @@ Erzeugung:
 uv run python hardware/kicad/circuit.py
 ```
 
-Die Quelle prüft die erwartete Topologie und führt den SKiDL-ERC aus. Footprints bleiben absichtlich unzugewiesen, bis die gelieferten Bauteile vermessen sind. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
+Die Quelle prüft die erwartete Topologie, führt den SKiDL-ERC aus und rendert anschließend mit `kicad-cli` das PDF. Dafür muss KiCad installiert sein. Footprints bleiben absichtlich unzugewiesen, bis die gelieferten Bauteile vermessen sind. Es existiert noch kein ausgearbeitetes PCB-Layout. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
 
 ## Feste HCP2-Rahmenbedingungen
 

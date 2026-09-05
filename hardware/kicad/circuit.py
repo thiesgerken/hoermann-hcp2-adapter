@@ -1,4 +1,6 @@
 import os
+import shutil
+import subprocess
 from pathlib import Path
 
 OUTPUT_DIR = Path(__file__).parent
@@ -16,6 +18,29 @@ from skidl.logger import stop_log_file_output
 skidl.lib_search_paths[KICAD10] = [str(LIBRARY_DIR)]
 stop_log_file_output()
 
+def render_pdf(schematic_path):
+    kicad_cli = shutil.which("kicad-cli")
+    if not kicad_cli:
+        macos_cli = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
+        if macos_cli.is_file():
+            kicad_cli = str(macos_cli)
+        else:
+            raise RuntimeError("kicad-cli is required to render the schematic PDF")
+
+    pdf_path = schematic_path.with_suffix(".pdf")
+    subprocess.run(
+        [
+            kicad_cli,
+            "sch",
+            "export",
+            "pdf",
+            "--output",
+            str(pdf_path),
+            str(schematic_path),
+        ],
+        check=True,
+    )
+    return pdf_path
 
 
 def connector(symbol, reference, value, tag):
@@ -164,11 +189,13 @@ generate_netlist(
     tool=KICAD10,
     do_backup=False,
 )
+schematic_path = OUTPUT_DIR / "hoermann-hcp-adapter.kicad_sch"
 generate_schematic(
     filepath=str(OUTPUT_DIR),
-    top_name="hoermann-hcp-adapter",
+    top_name=schematic_path.stem,
     title="Hörmann HCP2 ESP32-C3 Adapter",
     flatness=1.0,
     auto_stub=False,
     tool=KICAD10,
 )
+render_pdf(schematic_path)
