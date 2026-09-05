@@ -28,8 +28,13 @@ Lokale Kopien:
 - [Gerenderte Produktseite](../hardware/reference/aliexpress-1005003078110991/product-page-rendered.html)
 - [Beschriftete SKU-Liste](../hardware/reference/aliexpress-1005003078110991/sku-options.txt)
 - [SKU-Bild der ausgewählten Variante](../hardware/reference/aliexpress-1005003078110991/sku-6p6c-unshielded.avif)
+- [Händlerzeichnung der 8P8C-Variante](../hardware/reference/aliexpress-1005003078110991/drawing-8p8c-variant.png) mit Pinnummern und PCB-Layout
 
 Die allgemeinen Galeriebilder zeigen verschiedene Varianten. Sie dürfen nicht als Footprint-Nachweis für die ausgewählte Option verwendet werden.
+
+## Footprint
+
+`HCP:RJ12_95001_6P6C` in `hardware/pcb/HCP.pretty/` folgt der 95001-Familie: Frontfläche bündig mit der Platinenkante, zwei Zapfen Ø2,4 mm im Abstand 12 mm, 6 mm hinter der Kante. Die Kontaktstifte stehen in zwei Reihen 8,3 und 10,84 mm hinter der Kante, 1,02 mm versetzt, Pin 1 in Draufsicht links. Der Zapfenabstand stammt aus der [Zeichnung der nicht gewählten 6P6C-Buchse](../hardware/reference/aliexpress-1005008379850389/mechanical-drawing.webp); die 8P8C-Zeichnung des gewählten Händlers zeigt dasselbe Muster mit 15 mm.
 
 ## Elektrische HCP2-Belegung
 

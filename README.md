@@ -79,7 +79,7 @@ Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitunge
 
 | Ref. | Footprint | Lage |
 |---|---|---|
-| J1 | `RJ12_Amphenol_54601-x06_Horizontal` (KiCad-Bibliothek, Lochbild des 95001-Typs) | oben links, Stecköffnung an der oberen Platinenkante |
+| J1 | `RJ12_95001_6P6C`, Lochbild der 95001-Familie aus den Händlerzeichnungen (Zapfen Ø2,4 im Abstand 12 mm, Stifte 1,02 mm versetzt in Reihen 8,3 und 10,84 mm hinter der Kante) | oben links, Frontfläche bündig mit der oberen Platinenkante |
 | PS1 | `LM2596_HW-411`, 43,5 × 21,5 mm, Eckpads, zwei 3,2-mm-Löcher deckungsgleich mit den Modullöchern | oben rechts, IN-Seite zu J1 |
 | U2 | `RS485_Isolated_34x18`, SMD-Pads für die Halblöcher | unten links, Busseite an der linken Kante |
 | U1 | `ESP32-C3_SuperMini`, 2 × 8 Pins, Reihenabstand 15,24 mm | unten rechts, USB-Ende bündig mit der rechten Kante, Antenne zu U2 |
@@ -90,7 +90,7 @@ Befestigung: die beiden PS1-Löcher und H1. Eigene Eckbohrungen entfallen, weil 
 
 Dieser Stand darf nicht gefertigt werden. Vor der Freigabe am gelieferten Teil zu prüfen:
 
-- J1: Gehäusemaße und Zapfenposition des gelieferten 95001-Typs gegen den Amphenol-Footprint. Die Kontaktzählung 1 bis 6 ist bei Modularbuchsen standardisiert und im Footprint entsprechend vergeben, die Silkscreen-Markierungen `1` und `6` zeigen sie an.
+- J1: Zapfenabstand und Gehäusebreite der 6P6C-Variante (12 mm laut Zeichnung einer baugleichen Buchse, die 8P8C-Zeichnung des Händlers zeigt 15 mm). Pin 1 liegt in Draufsicht links, wie in der Händlerzeichnung, und ist im Silkscreen markiert.
 - PS1: Pad- und Lochpositionen (aus Händlerfoto gemessen, Lochabstand 30,7 × 16,8 mm laut Händlerzeichnung).
 - U2: Padpositionen und Pinreihenfolge beider Seiten (aus Händlerfoto gemessen, 2,54 mm TTL, 5,08 mm Bus, jeweils zentriert).
 - U1: Reihenabstand 15,24 mm laut Bauformunterlage, Pinseite laut Produktfoto. USB ist im eingebauten Zustand steckbar, vorher JP1 ziehen.
