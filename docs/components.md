@@ -20,11 +20,6 @@ Dieses Dokument erfasst nur konkrete Kaufteile. Ein generischer Chipname ersetzt
 | PS1 | 25 V auf 5 V | LM2596 DC-DC HW-411, einstellbar, AliExpress 1005006362601789 | Vorhanden | [Modulnotiz](purchased-modules.md#lm2596-abwärtswandlermodul), [TI-Datenblatt](../hardware/datasheets/lm2596-ti-snvs124g.pdf) | auf 5,0 V einstellen, Abmessungen, Lastverhalten, Anlaufzeit und Überschwingen messen |
 | U2 | RS485 | isoliertes 3,3-V/5-V-TTL-zu-RS485-Modul mit automatischer Richtung, AliExpress 1005010178764203 | Vorhanden | [Modulnotiz](purchased-modules.md#isoliertes-ttl-zu-rs485-modul), [Händlerarchiv](../hardware/reference/aliexpress-1005010178764203/) | Pinout, 3,3-V-Betrieb, Isolation, A/B-Bezeichnung und integrierten Abschluss messen |
 
-## Vor Freigabe benötigte Messungen
+## Offene Prüfungen
 
-1. J1: Gehäuse, Lochbild, Kontaktfolge und Pin-1-Ansicht.
-2. W1: sechs Adern und vollständig gerade 1:1-Belegung.
-3. U1: Pinleistenabstand, Versorgungspfade, UART-Pins und maximaler Startstrom.
-4. PS1: auf 5,0 V eingestellter Ausgang, Einschwingverhalten und Temperatur unter Last.
-5. U2: Versorgung, Logikpegel, Isolation, A/B-Zuordnung und Widerstand zwischen A und B.
-6. Gesamtaufbau: Start während des BUS-Scans und Gesamtstrom deutlich unter der Hörmann-Grenze von 350 mA.
+Stehen in [TODO.md](../TODO.md).

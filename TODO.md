@@ -26,9 +26,7 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 
 ## Vor der ersten Inbetriebnahme
 
-- [ ] Gesamtstrom beim Booten und mit WLAN messen, deutlich unter der Hörmann-Grenze von 350 mA.
 - [ ] Widerstand zwischen A und B am stromlosen U2 messen (integrierter 120-Ohm-Abschluss).
-- [ ] Isolation zwischen TTL-Masse und Busseite von U2 messen.
 - [ ] W1 6P6C-Kabel: sechs Adern, 1:1 und ohne Kurzschluss.
 - [ ] ESPHome-Konfiguration mit `hcp` Komponente, UART auf GPIO21/GPIO20, 57600 8E1.
 
