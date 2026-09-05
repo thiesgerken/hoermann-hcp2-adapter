@@ -27,6 +27,5 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 ## Weitere Aufgaben
 
 - [ ] Widerstand zwischen A und B am stromlosen U2 messen (integrierter 120-Ohm-Abschluss).
-- [ ] W1 6P6C-Kabel: sechs Adern, 1:1 und ohne Kurzschluss.
 - [ ] ESPHome-Konfiguration mit `hcp` Komponente, UART auf GPIO21/GPIO20, 57600 8E1.
 - [ ] Gehäuse. Aussparungen für J1 an der oberen Kante und USB-C von U1 an der rechten Kante, Höhe der Elkos auf PS1 (etwa 13 mm) beachten.
