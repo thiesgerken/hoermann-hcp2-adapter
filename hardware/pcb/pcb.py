@@ -1,7 +1,7 @@
 """Generate the carrier PCB from the footprints in HCP.pretty and the net model in design.py.
 
-Placement and routing are explicit coordinates. Run the file to rebuild the board,
-run KiCad DRC on it and render a preview PNG.
+Placement and routing are explicit coordinates. Run the file to rebuild the KiCad project
+in generated/, run KiCad DRC on it and render previews.
 """
 import json
 import math
@@ -14,10 +14,13 @@ from pathlib import Path
 
 from design import EXPECTED_CONNECTIONS
 
-OUTPUT_DIR = Path(__file__).parent
-LIBRARY_DIR = OUTPUT_DIR / "HCP.pretty"
+SOURCE_DIR = Path(__file__).parent
+LIBRARY_DIR = SOURCE_DIR / "HCP.pretty"
+OUTPUT_DIR = SOURCE_DIR / "generated"
 BOARD_PATH = OUTPUT_DIR / "hoermann-hcp-adapter.kicad_pcb"
-PREVIEW_TOP_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.png"
+PROJECT_PATH = OUTPUT_DIR / "hoermann-hcp-adapter.kicad_pro"
+FP_LIB_TABLE_PATH = OUTPUT_DIR / "fp-lib-table"
+PREVIEW_TOP_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb-top.png"
 PREVIEW_BOTTOM_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb-bottom.png"
 PDF_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.pdf"
 DRC_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-drc.json"
@@ -220,6 +223,20 @@ def segments(net_name, layer, width, points, index):
     return result
 
 
+def write_project():
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    # H1 deliberately sits under the socketed ESP32, so that DRC check is switched off.
+    PROJECT_PATH.write_text(json.dumps({
+        "board": {"design_settings": {"rule_severities": {"npth_inside_courtyard": "ignore"}}},
+        "meta": {"filename": PROJECT_PATH.name, "version": 3},
+    }, indent=2) + "\n")
+    FP_LIB_TABLE_PATH.write_text(
+        "(fp_lib_table\n  (version 7)\n"
+        '  (lib (name "HCP") (type "KiCad") (uri "${KIPRJMOD}/../HCP.pretty") (options "") (descr "Project footprints"))\n'
+        ")\n"
+    )
+
+
 def build_board():
     board = (
         '(kicad_pcb\n  (version 20241229)\n  (generator "pcbnew")\n  (generator_version "9.0")\n'
@@ -308,6 +325,7 @@ def render_previews():
 
 
 if __name__ == "__main__":
+    write_project()
     build_board()
     run_drc()
     render_previews()

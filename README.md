@@ -35,19 +35,19 @@ Der LM2596 ist nicht galvanisch getrennt. Deshalb teilt der Gesamtadapter trotz 
 - [Entscheidungsprotokoll](docs/decisions.md)
 - [Lokales Händlerarchiv](hardware/reference/README.md)
 
-IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbücher liegen unter `hardware/manuals/hoermann/`. Archivierte Händlerseiten, Produktbeschreibungen und Bilder liegen unter `hardware/reference/`. SKiDL-Quelle und erzeugte KiCad-Dateien liegen unter `hardware/kicad/`.
+IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbücher liegen unter `hardware/manuals/hoermann/`. Archivierte Händlerseiten, Produktbeschreibungen und Bilder liegen unter `hardware/reference/`. SKiDL-Quelle, PCB-Generator und Footprints liegen unter `hardware/pcb/`, alle daraus erzeugten KiCad-Dateien unter `hardware/pcb/generated/`.
 
 ## Schaltplanentwurf
 
-- SKiDL-Quelle: [`hardware/kicad/circuit.py`](hardware/kicad/circuit.py)
-- editierbarer KiCad-Schaltplan: [`hardware/kicad/hoermann-hcp-adapter.kicad_sch`](hardware/kicad/hoermann-hcp-adapter.kicad_sch)
-- KiCad-Netzliste: [`hardware/kicad/hoermann-hcp-adapter.net`](hardware/kicad/hoermann-hcp-adapter.net)
-- gerendertes PDF: [`hardware/kicad/hoermann-hcp-adapter.pdf`](hardware/kicad/hoermann-hcp-adapter.pdf)
+- SKiDL-Quelle: [`hardware/pcb/circuit.py`](hardware/pcb/circuit.py)
+- editierbarer KiCad-Schaltplan: [`hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch`](hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch)
+- KiCad-Netzliste: [`hardware/pcb/generated/hoermann-hcp-adapter.net`](hardware/pcb/generated/hoermann-hcp-adapter.net)
+- gerendertes PDF: [`hardware/pcb/generated/hoermann-hcp-adapter-schematic.pdf`](hardware/pcb/generated/hoermann-hcp-adapter-schematic.pdf)
 
 Erzeugung:
 
 ```sh
-uv run python hardware/kicad/circuit.py
+uv run python hardware/pcb/circuit.py
 ```
 
 Die Quelle prüft die erwartete Topologie, führt den SKiDL-ERC aus und rendert anschließend mit `kicad-cli` das PDF. Dafür muss KiCad installiert sein. Der Schaltplan enthält noch keine freigegebenen Fertigungsfootprints. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
@@ -56,22 +56,22 @@ Der erzeugte Schaltplan platziert den ESP32 zentral, ordnet Versorgung und Busmo
 
 ## Vorläufiger PCB-Entwurf
 
-- Generator: [`hardware/kicad/pcb.py`](hardware/kicad/pcb.py)
-- gemeinsames Netzmodell: [`hardware/kicad/design.py`](hardware/kicad/design.py)
-- Projekt-Footprints: [`hardware/kicad/HCP.pretty/`](hardware/kicad/HCP.pretty/)
-- KiCad-Projekt: [`hardware/kicad/hoermann-hcp-adapter.kicad_pro`](hardware/kicad/hoermann-hcp-adapter.kicad_pro)
-- editierbares PCB: [`hardware/kicad/hoermann-hcp-adapter.kicad_pcb`](hardware/kicad/hoermann-hcp-adapter.kicad_pcb)
-- gerenderte Oberseite: [`hardware/kicad/hoermann-hcp-adapter-pcb.png`](hardware/kicad/hoermann-hcp-adapter-pcb.png)
-- gerenderte Unterseite: [`hardware/kicad/hoermann-hcp-adapter-pcb-bottom.png`](hardware/kicad/hoermann-hcp-adapter-pcb-bottom.png)
-- Lagen-PDF (F.Cu, B.Cu, Silkscreen, Kontur): [`hardware/kicad/hoermann-hcp-adapter-pcb.pdf`](hardware/kicad/hoermann-hcp-adapter-pcb.pdf)
+- Generator: [`hardware/pcb/pcb.py`](hardware/pcb/pcb.py)
+- gemeinsames Netzmodell: [`hardware/pcb/design.py`](hardware/pcb/design.py)
+- Projekt-Footprints: [`hardware/pcb/HCP.pretty/`](hardware/pcb/HCP.pretty/)
+- KiCad-Projekt: [`hardware/pcb/generated/hoermann-hcp-adapter.kicad_pro`](hardware/pcb/generated/hoermann-hcp-adapter.kicad_pro)
+- editierbares PCB: [`hardware/pcb/generated/hoermann-hcp-adapter.kicad_pcb`](hardware/pcb/generated/hoermann-hcp-adapter.kicad_pcb)
+- gerenderte Oberseite: [`hardware/pcb/generated/hoermann-hcp-adapter-pcb-top.png`](hardware/pcb/generated/hoermann-hcp-adapter-pcb-top.png)
+- gerenderte Unterseite: [`hardware/pcb/generated/hoermann-hcp-adapter-pcb-bottom.png`](hardware/pcb/generated/hoermann-hcp-adapter-pcb-bottom.png)
+- Lagen-PDF (F.Cu, B.Cu, Silkscreen, Kontur): [`hardware/pcb/generated/hoermann-hcp-adapter-pcb.pdf`](hardware/pcb/generated/hoermann-hcp-adapter-pcb.pdf)
 
 Erzeugung:
 
 ```sh
-uv run python hardware/kicad/pcb.py
+uv run python hardware/pcb/pcb.py
 ```
 
-Der Generator liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus und rendert beide Seiten als PNG sowie die Lagen als PDF. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
+Der Generator schreibt KiCad-Projekt und `fp-lib-table` nach `generated/`, liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus und rendert beide Seiten als PNG sowie die Lagen als PDF. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
 
 Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
 

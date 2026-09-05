@@ -6,8 +6,10 @@ import uuid
 from pathlib import Path
 from design import EXPECTED_CONNECTIONS
 
-OUTPUT_DIR = Path(__file__).parent
-LIBRARY_DIR = OUTPUT_DIR / "libraries"
+SOURCE_DIR = Path(__file__).parent
+LIBRARY_DIR = SOURCE_DIR / "libraries"
+OUTPUT_DIR = SOURCE_DIR / "generated"
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 # SKiDL imports every supported KiCad backend. Point all of them at the vendored symbols.
 for version in ("", "6", "7", "8", "9", "10"):
@@ -30,7 +32,7 @@ def render_pdf(schematic_path):
         else:
             raise RuntimeError("kicad-cli is required to render the schematic PDF")
 
-    pdf_path = schematic_path.with_suffix(".pdf")
+    pdf_path = schematic_path.with_name(f"{schematic_path.stem}-schematic.pdf")
     subprocess.run(
         [
             kicad_cli,

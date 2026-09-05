@@ -1,4 +1,0 @@
-(fp_lib_table
-  (version 7)
-  (lib (name "HCP") (type "KiCad") (uri "${KIPRJMOD}/HCP.pretty") (options "") (descr "Project footprints"))
-)
