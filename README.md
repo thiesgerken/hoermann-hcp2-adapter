@@ -90,7 +90,7 @@ Befestigung: die beiden PS1-Löcher und H1. Eigene Eckbohrungen entfallen, weil 
 
 Dieser Stand darf nicht gefertigt werden. Vor der Freigabe am gelieferten Teil zu prüfen:
 
-- J1: Kontaktfolge und Pin 1. Eine gespiegelte Zählung würde +25 V und GND vertauschen. Die Silkscreen-Markierungen `1` und `6` zeigen die im Layout angenommene Zählung.
+- J1: Gehäusemaße und Zapfenposition des gelieferten 95001-Typs gegen den Amphenol-Footprint. Die Kontaktzählung 1 bis 6 ist bei Modularbuchsen standardisiert und im Footprint entsprechend vergeben, die Silkscreen-Markierungen `1` und `6` zeigen sie an.
 - PS1: Pad- und Lochpositionen (aus Händlerfoto gemessen, Lochabstand 30,7 × 16,8 mm laut Händlerzeichnung).
 - U2: Padpositionen und Pinreihenfolge beider Seiten (aus Händlerfoto gemessen, 2,54 mm TTL, 5,08 mm Bus, jeweils zentriert).
 - U1: Reihenabstand 15,24 mm laut Bauformunterlage, Pinseite laut Produktfoto. USB ist im eingebauten Zustand steckbar, vorher JP1 ziehen.

@@ -141,7 +141,7 @@ LABELS = (
     ("UART_RX_GPIO20", 152.4, 115.57, 0),
 )
 NOTES = (
-    ("HCP2 bus, 6P6C. Pin order per ESPHome, verify pin 1 on the delivered jack.", 25.4, 128.27),
+    ("HCP2 bus, 6P6C. Contact numbering per ESPHome HCP documentation.", 25.4, 128.27),
     ("Adjust PS1 to 5.0 V before connecting U1. Open JP1 whenever USB is plugged into U1.", 99.06, 45.72),
     ("U2 is powered from 3V3 so its RX output stays at ESP32 logic level.", 99.06, 132.08),
 )
