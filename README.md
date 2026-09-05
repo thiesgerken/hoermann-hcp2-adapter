@@ -4,7 +4,7 @@ Planungsprojekt für einen ESPHome-Adapter am HCP2-Bus eines Hörmann Serie-4-To
 
 ## Status
 
-Ein ausführbarer Schaltplan und ein vollständig gerouteter, vorläufiger PCB-Entwurf mit echten Modul-Footprints liegen vor. Die Footprint-Geometrie stammt aus Händlerfotos und -zeichnungen und ist erst nach Vermessung der gelieferten Teile zur Fertigung freigegeben. Die Schutzbeschaltung steht noch aus.
+Ein ausführbarer Schaltplan und ein vollständig gerouteter, vorläufiger PCB-Entwurf mit echten Modul-Footprints liegen vor. Die Footprint-Geometrie stammt aus Händlerfotos und -zeichnungen und ist erst nach Vermessung der gelieferten Teile zur Fertigung freigegeben. Auf eine eigene Schutzbeschaltung wird verzichtet (D-005, D-014).
 
 ## Ziel
 
@@ -52,7 +52,7 @@ Erzeugung:
 uv run python hardware/pcb/schematic.py
 ```
 
-Der Generator schreibt den Schaltplan mit eigenen Symbolen, Drähten und Netzlabels direkt als `.kicad_sch`, lässt `kicad-cli` den ERC laufen, exportiert die Netzliste, vergleicht sie mit `design.py` und rendert das PDF. Dafür muss KiCad installiert sein. Die Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist noch offen und im Schaltplan nicht enthalten.
+Der Generator schreibt den Schaltplan mit eigenen Symbolen, Drähten und Netzlabels direkt als `.kicad_sch`, lässt `kicad-cli` den ERC laufen, exportiert die Netzliste, vergleicht sie mit `design.py` und rendert das PDF. Dafür muss KiCad installiert sein.
 
 ## Vorläufiger PCB-Entwurf
 

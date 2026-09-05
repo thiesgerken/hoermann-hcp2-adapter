@@ -20,10 +20,6 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 - [ ] U1 ESP32-C3 Super Mini: Reihenabstand 15,24 mm und Pinseite (5V/GND/3V3 rechts bei USB oben, Bauteilseite) am Board prüfen.
 - [ ] Papiertest 1:1 für alle vier Module.
 
-### Schaltung
-
-- [ ] D-005 entscheiden: Überspannungs- und ESD-Schutz am HCP-Eingang, zum Beispiel TVS SMBJ30A parallel zum 25-V-Eingang. Verpolungsschutz entfällt (D-014).
-
 ## Vor der ersten Inbetriebnahme
 
 - [ ] PS1 ohne Last an 25 V auf 5,0 V einstellen, Einschwingen und Überschwingen beim Einschalten messen.
