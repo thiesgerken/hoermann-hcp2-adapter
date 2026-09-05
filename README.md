@@ -73,7 +73,7 @@ uv run python hardware/pcb/pcb.py
 
 Der Generator schreibt KiCad-Projekt und `fp-lib-table` nach `generated/`, liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus, rendert beide Seiten als PNG und die Lagen als PDF und packt Gerber- und Excellon-Dateien in ein Zip.
 
-Silkscreen und Schaltplan-Titelblock tragen den kurzen Git-Hash von `HEAD`, mit Suffix `-dirty`, wenn Quellen außerhalb von `generated/` ungespeicherte Änderungen haben. Für Fertigungsdaten deshalb zuerst die Quellen committen, dann beide Generatoren laufen lassen und die Ausgaben in einem Folgecommit ablegen. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
+Silkscreen und Schaltplan-Titelblock tragen den kurzen Git-Hash von `HEAD`. Für Fertigungsdaten deshalb zuerst die Quellen committen, dann beide Generatoren laufen lassen und die Ausgaben in einem Folgecommit ablegen. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
 
 Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
 

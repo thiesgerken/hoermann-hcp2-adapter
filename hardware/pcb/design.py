@@ -12,13 +12,11 @@ EXPECTED_CONNECTIONS = {
 
 
 def git_version():
-    """Short HEAD hash, with -dirty when tracked sources (not generated outputs) changed."""
+    """Short hash of HEAD, the commit the generated outputs are based on."""
     import subprocess
     from pathlib import Path
 
-    root = Path(__file__).resolve().parent
-    run = lambda *args: subprocess.run(["git", *args], cwd=root, capture_output=True, text=True, check=True).stdout
-    version = run("rev-parse", "--short", "HEAD").strip()
-    if run("status", "--porcelain", "--", ".", ":!generated").strip():
-        version += "-dirty"
-    return version
+    return subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"],
+        cwd=Path(__file__).resolve().parent, capture_output=True, text=True, check=True,
+    ).stdout.strip()
