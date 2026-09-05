@@ -20,9 +20,12 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 - [ ] U1 ESP32-C3 Super Mini: Reihenabstand 15,24 mm und Pinseite (5V/GND/3V3 rechts bei USB oben, Bauteilseite) am Board prüfen.
 - [ ] Papiertest 1:1 für alle vier Module.
 
+## Vor dem Bestücken
+
+- [ ] PS1 lose an 25 V auf 5,0 V einstellen, Einschwingen und Überschwingen beim Einschalten messen. Der Trimmer ist auf der Platine noch erreichbar, aber ein falsch eingestellter Wandler darf nie am ESP32 hängen.
+
 ## Vor der ersten Inbetriebnahme
 
-- [ ] PS1 ohne Last an 25 V auf 5,0 V einstellen, Einschwingen und Überschwingen beim Einschalten messen.
 - [ ] Gesamtstrom beim Booten und mit WLAN messen, deutlich unter der Hörmann-Grenze von 350 mA.
 - [ ] Widerstand zwischen A und B am stromlosen U2 messen (integrierter 120-Ohm-Abschluss).
 - [ ] Isolation zwischen TTL-Masse und Busseite von U2 messen.
