@@ -8,3 +8,4 @@ __pycache__/
 *.kicad_sch-bak
 *.pyc
 *-drc.json
+*-erc.json

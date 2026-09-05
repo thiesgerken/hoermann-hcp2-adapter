@@ -35,11 +35,12 @@ Der LM2596 ist nicht galvanisch getrennt. Deshalb teilt der Gesamtadapter trotz 
 - [Entscheidungsprotokoll](docs/decisions.md)
 - [Lokales Händlerarchiv](hardware/reference/README.md)
 
-IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbücher liegen unter `hardware/manuals/hoermann/`. Archivierte Händlerseiten, Produktbeschreibungen und Bilder liegen unter `hardware/reference/`. SKiDL-Quelle, PCB-Generator und Footprints liegen unter `hardware/pcb/`, alle daraus erzeugten KiCad-Dateien unter `hardware/pcb/generated/`.
+IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbücher liegen unter `hardware/manuals/hoermann/`. Archivierte Händlerseiten, Produktbeschreibungen und Bilder liegen unter `hardware/reference/`. Schaltplan- und PCB-Generator sowie Footprints liegen unter `hardware/pcb/`, alle daraus erzeugten KiCad-Dateien unter `hardware/pcb/generated/`.
 
-## Schaltplanentwurf
+## Schaltplan
 
-- SKiDL-Quelle: [`hardware/pcb/circuit.py`](hardware/pcb/circuit.py)
+- Generator: [`hardware/pcb/schematic.py`](hardware/pcb/schematic.py)
+- gemeinsames Netzmodell: [`hardware/pcb/design.py`](hardware/pcb/design.py)
 - editierbarer KiCad-Schaltplan: [`hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch`](hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch)
 - KiCad-Netzliste: [`hardware/pcb/generated/hoermann-hcp-adapter.net`](hardware/pcb/generated/hoermann-hcp-adapter.net)
 - gerendertes PDF: [`hardware/pcb/generated/hoermann-hcp-adapter-schematic.pdf`](hardware/pcb/generated/hoermann-hcp-adapter-schematic.pdf)
@@ -47,12 +48,10 @@ IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbüch
 Erzeugung:
 
 ```sh
-uv run python hardware/pcb/circuit.py
+uv run python hardware/pcb/schematic.py
 ```
 
-Die Quelle prüft die erwartete Topologie, führt den SKiDL-ERC aus und rendert anschließend mit `kicad-cli` das PDF. Dafür muss KiCad installiert sein. Der Schaltplan enthält noch keine freigegebenen Fertigungsfootprints. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
-
-Der erzeugte Schaltplan platziert den ESP32 zentral, ordnet Versorgung und Busmodule räumlich darum an und zeichnet blaue, beschriftete Verbindungslinien. Die elektrischen Netze bleiben über kleine Labels direkt an den Pins definiert und werden zusätzlich gegen die erwartete Pin-Topologie geprüft.
+Der Generator schreibt den Schaltplan mit eigenen Symbolen, Drähten und Netzlabels direkt als `.kicad_sch`, lässt `kicad-cli` den ERC laufen, exportiert die Netzliste, vergleicht sie mit `design.py` und rendert das PDF. Dafür muss KiCad installiert sein. Die Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist noch offen und im Schaltplan nicht enthalten.
 
 ## Vorläufiger PCB-Entwurf
 

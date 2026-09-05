@@ -1,293 +1,960 @@
-(export 
-  (version "D")
-  (design
-    (source "circuit.py")
-    (date "09/05/2026 10:30 PM")
-    (tool "SKiDL (2.3.0)")
-    (sheet
-      (number 1)
-      (name "/")
-      (tstamps "/")
-      (title_block
-        (title)
-        (company)
-        (rev)
-        (date)
-        (source "../../circuit.py")
-        (comment
-          (number "1")
-          (value ""))
-        (comment
-          (number "2")
-          (value ""))
-        (comment
-          (number "3")
-          (value ""))
-        (comment
-          (number "4")
-          (value ""))
-        (comment
-          (number "5")
-          (value ""))
-        (comment
-          (number "6")
-          (value ""))
-        (comment
-          (number "7")
-          (value ""))
-        (comment
-          (number "8")
-          (value ""))
-        (comment
-          (number "9")
-          (value "")))))
-  (components
-    (comp
-      (ref "J1")
-      (value "HCP2 6P6C unshielded, AliExpress 1005003078110991")
-      (description "Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "HCP:RJ12_Amphenol_54601-x06_Horizontal")
-      (fields
-        (field
-          (name "Description") "Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)")
-        (field
-          (name "Footprint") "HCP:RJ12_Amphenol_54601-x06_Horizontal")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "hcp-connector-j1")
-        (field
-          (name "SKiDL Line") "circuit.py:257"))
-      (libsource
-        (lib "Conn_01x06")
-        (part "Conn_01x06"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "bfcd81be-66f8-5719-86e9-40198e0e6cb0"))
-    (comp
-      (ref "JP1")
-      (value "BUS_PWR")
-      (description "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "HCP:PinHeader_1x02_P2.54mm_Vertical")
-      (fields
-        (field
-          (name "Description") "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
-        (field
-          (name "Footprint") "HCP:PinHeader_1x02_P2.54mm_Vertical")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "bus-power-jumper-jp1")
-        (field
-          (name "SKiDL Line") "circuit.py:257"))
-      (libsource
-        (lib "Conn_01x02")
-        (part "Conn_01x02"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "bacb4295-6781-593f-b381-2cf4ea1192f8"))
-    (comp
-      (ref "PS1")
-      (value "LM2596 HW-411, adjust to 5.0 V")
-      (description "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "HCP:LM2596_HW-411")
-      (fields
-        (field
-          (name "Description") "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)")
-        (field
-          (name "Footprint") "HCP:LM2596_HW-411")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "buck-module-ps1")
-        (field
-          (name "SKiDL Line") "circuit.py:257"))
-      (libsource
-        (lib "Conn_01x04")
-        (part "Conn_01x04"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "98bba1e7-f7e8-5ade-9eec-ef6c1b1688e8"))
-    (comp
-      (ref "U1")
-      (value "ESP32-C3 Super Mini")
-      (description "Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "HCP:ESP32-C3_SuperMini")
-      (fields
-        (field
-          (name "Description") "Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
-        (field
-          (name "Footprint") "HCP:ESP32-C3_SuperMini")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "controller-u1")
-        (field
-          (name "SKiDL Line") "circuit.py:257"))
-      (libsource
-        (lib "Conn_02x08_Odd_Even")
-        (part "Conn_02x08_Odd_Even"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "cb7444fd-4120-599c-99fa-708ed717804a"))
-    (comp
-      (ref "U2")
-      (value "Isolated auto-direction RS485, onboard 120R")
-      (description "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint "HCP:RS485_Isolated_34x18")
-      (fields
-        (field
-          (name "Description") "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
-        (field
-          (name "Footprint") "HCP:RS485_Isolated_34x18")
-        (field
-          (name "Datasheet"))
-        (field
-          (name "SKiDL Tag") "rs485-module-u2")
-        (field
-          (name "SKiDL Line") "circuit.py:257"))
-      (libsource
-        (lib "Conn_01x07")
-        (part "Conn_01x07"))
-      (sheetpath
-        (names "/")
-        (tstamps "/"))
-      (component_classes)
-      (tstamps "243045ee-7b9b-59a0-9a6a-cf791a152b7c")))
-  (nets
-    (net
-      (code 1)
-      (name "BUCK_5V")
-      (class "Default")
-      (node
-        (ref "JP1")
-        (pin "1")
-        (pintype "POWER-IN"))
-      (node
-        (ref "PS1")
-        (pin "3")
-        (pintype "POWER-OUT")))
-    (net
-      (code 2)
-      (name "ESP_3V3")
-      (class "Default")
-      (node
-        (ref "U1")
-        (pin "5")
-        (pintype "POWER-OUT"))
-      (node
-        (ref "U2")
-        (pin "1")
-        (pintype "POWER-IN")))
-    (net
-      (code 3)
-      (name "ESP_5V")
-      (class "Default")
-      (node
-        (ref "JP1")
-        (pin "2")
-        (pintype "POWER-OUT"))
-      (node
-        (ref "U1")
-        (pin "1")
-        (pintype "POWER-IN")))
-    (net
-      (code 4)
-      (name "HCP_25V")
-      (class "Default")
-      (node
-        (ref "J1")
-        (pin "5")
-        (pintype "POWER-OUT"))
-      (node
-        (ref "J1")
-        (pin "6")
-        (pintype "PASSIVE"))
-      (node
-        (ref "PS1")
-        (pin "1")
-        (pintype "POWER-IN")))
-    (net
-      (code 5)
-      (name "HCP_A_PLUS")
-      (class "Default")
-      (node
-        (ref "J1")
-        (pin "4")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U2")
-        (pin "5")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 6)
-      (name "HCP_B_MINUS")
-      (class "Default")
-      (node
-        (ref "J1")
-        (pin "3")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U2")
-        (pin "6")
-        (pintype "BIDIRECTIONAL")))
-    (net
-      (code 7)
-      (name "HCP_GND")
-      (class "Default")
-      (node
-        (ref "J1")
-        (pin "1")
-        (pintype "POWER-OUT"))
-      (node
-        (ref "J1")
-        (pin "2")
-        (pintype "PASSIVE"))
-      (node
-        (ref "PS1")
-        (pin "2")
-        (pintype "PASSIVE"))
-      (node
-        (ref "PS1")
-        (pin "4")
-        (pintype "PASSIVE"))
-      (node
-        (ref "U1")
-        (pin "3")
-        (pintype "POWER-IN"))
-      (node
-        (ref "U2")
-        (pin "4")
-        (pintype "POWER-IN")))
-    (net
-      (code 8)
-      (name "UART_RX_GPIO20")
-      (class "Default")
-      (node
-        (ref "U1")
-        (pin "14")
-        (pintype "INPUT"))
-      (node
-        (ref "U2")
-        (pin "3")
-        (pintype "OUTPUT")))
-    (net
-      (code 9)
-      (name "UART_TX_GPIO21")
-      (class "Default")
-      (node
-        (ref "U1")
-        (pin "16")
-        (pintype "OUTPUT"))
-      (node
-        (ref "U2")
-        (pin "2")
-        (pintype "INPUT")))))
+(export
+	(version "E")
+	(design
+		(source "/Users/tgerken/Privat/Projekte/hoermann/hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch")
+		(date "2026-09-05T22:52:29")
+		(tool "Eeschema 10.0.6")
+		(sheet
+			(number "1")
+			(name "/")
+			(tstamps "/")
+			(title_block
+				(title "Hörmann HCP2 ESP32-C3 Adapter")
+				(company "Thies Gerken")
+				(rev "1.0")
+				(date "2026-09-05")
+				(source "hoermann-hcp-adapter.kicad_sch")
+				(comment
+					(number "1")
+					(value "")
+				)
+				(comment
+					(number "2")
+					(value "")
+				)
+				(comment
+					(number "3")
+					(value "")
+				)
+				(comment
+					(number "4")
+					(value "")
+				)
+				(comment
+					(number "5")
+					(value "")
+				)
+				(comment
+					(number "6")
+					(value "")
+				)
+				(comment
+					(number "7")
+					(value "")
+				)
+				(comment
+					(number "8")
+					(value "")
+				)
+				(comment
+					(number "9")
+					(value "")
+				)
+			)
+		)
+	)
+	(components
+		(comp
+			(ref "J1")
+			(value "HCP2 6P6C")
+			(footprint "HCP:RJ12_Amphenol_54601-x06_Horizontal")
+			(fields
+				(field
+					(name "Footprint") "HCP:RJ12_Amphenol_54601-x06_Horizontal")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "HCP")
+				(part "J1")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "hoermann-hcp-adapter")
+			)
+			(property
+				(name "Sheetfile")
+				(value "hoermann-hcp-adapter.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "8fa51d8b-6813-53ce-afde-5f0222cabe14")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "JP1")
+			(value "BUS_PWR")
+			(footprint "HCP:PinHeader_1x02_P2.54mm_Vertical")
+			(fields
+				(field
+					(name "Footprint") "HCP:PinHeader_1x02_P2.54mm_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "HCP")
+				(part "JP1")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "hoermann-hcp-adapter")
+			)
+			(property
+				(name "Sheetfile")
+				(value "hoermann-hcp-adapter.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d3f34678-eec8-5e5d-b3b6-b044d9d7fa51")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "PS1")
+			(value "LM2596 HW-411, 5.0 V")
+			(footprint "HCP:LM2596_HW-411")
+			(fields
+				(field
+					(name "Footprint") "HCP:LM2596_HW-411")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "HCP")
+				(part "PS1")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "hoermann-hcp-adapter")
+			)
+			(property
+				(name "Sheetfile")
+				(value "hoermann-hcp-adapter.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "342b9e47-6bde-59e6-90a3-2922ba696ab3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U1")
+			(value "ESP32-C3 Super Mini")
+			(footprint "HCP:ESP32-C3_SuperMini")
+			(fields
+				(field
+					(name "Footprint") "HCP:ESP32-C3_SuperMini")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "HCP")
+				(part "U1")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "hoermann-hcp-adapter")
+			)
+			(property
+				(name "Sheetfile")
+				(value "hoermann-hcp-adapter.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "b52ab95f-be96-5dcf-90e7-434d17159589")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "12")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U2")
+			(value "Isolated RS485, auto direction, 120R")
+			(footprint "HCP:RS485_Isolated_34x18")
+			(fields
+				(field
+					(name "Footprint") "HCP:RS485_Isolated_34x18")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "HCP")
+				(part "U2")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "hoermann-hcp-adapter")
+			)
+			(property
+				(name "Sheetfile")
+				(value "hoermann-hcp-adapter.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c889269d-11dd-55e7-8fd5-40062e999a50")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+					)
+				)
+			)
+		)
+	)
+	(groups)
+	(variants)
+	(libparts
+		(libpart
+			(lib "HCP")
+			(part "J1")
+			(fields
+				(field
+					(name "Reference") "J1")
+				(field
+					(name "Value") "HCP2 6P6C")
+				(field
+					(name "Footprint") "HCP:RJ12_Amphenol_54601-x06_Horizontal")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "power_out")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "passive")
+				)
+				(pin
+					(num "3")
+					(name "B-")
+					(type "passive")
+				)
+				(pin
+					(num "4")
+					(name "A+")
+					(type "passive")
+				)
+				(pin
+					(num "5")
+					(name "+25V")
+					(type "power_out")
+				)
+				(pin
+					(num "6")
+					(name "+25V")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "HCP")
+			(part "JP1")
+			(fields
+				(field
+					(name "Reference") "JP1")
+				(field
+					(name "Value") "BUS_PWR")
+				(field
+					(name "Footprint") "HCP:PinHeader_1x02_P2.54mm_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "power_out")
+				)
+			)
+		)
+		(libpart
+			(lib "HCP")
+			(part "PS1")
+			(fields
+				(field
+					(name "Reference") "PS1")
+				(field
+					(name "Value") "LM2596 HW-411, 5.0 V")
+				(field
+					(name "Footprint") "HCP:LM2596_HW-411")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "IN+")
+					(type "power_in")
+				)
+				(pin
+					(num "2")
+					(name "IN-")
+					(type "passive")
+				)
+				(pin
+					(num "3")
+					(name "OUT+")
+					(type "power_out")
+				)
+				(pin
+					(num "4")
+					(name "OUT-")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "HCP")
+			(part "U1")
+			(fields
+				(field
+					(name "Reference") "U1")
+				(field
+					(name "Value") "ESP32-C3 Super Mini")
+				(field
+					(name "Footprint") "HCP:ESP32-C3_SuperMini")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "5V")
+					(type "power_in")
+				)
+				(pin
+					(num "2")
+					(name "GPIO5")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "4")
+					(name "GPIO6")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "3V3")
+					(type "power_out")
+				)
+				(pin
+					(num "6")
+					(name "GPIO7")
+					(type "bidirectional")
+				)
+				(pin
+					(num "7")
+					(name "GPIO4")
+					(type "bidirectional")
+				)
+				(pin
+					(num "8")
+					(name "GPIO8/LED")
+					(type "bidirectional")
+				)
+				(pin
+					(num "9")
+					(name "GPIO3")
+					(type "bidirectional")
+				)
+				(pin
+					(num "10")
+					(name "GPIO9/BOOT")
+					(type "bidirectional")
+				)
+				(pin
+					(num "11")
+					(name "GPIO2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "12")
+					(name "GPIO10")
+					(type "bidirectional")
+				)
+				(pin
+					(num "13")
+					(name "GPIO1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "14")
+					(name "GPIO20/U0RXD")
+					(type "input")
+				)
+				(pin
+					(num "15")
+					(name "GPIO0")
+					(type "bidirectional")
+				)
+				(pin
+					(num "16")
+					(name "GPIO21/U0TXD")
+					(type "output")
+				)
+			)
+		)
+		(libpart
+			(lib "HCP")
+			(part "U2")
+			(fields
+				(field
+					(name "Reference") "U2")
+				(field
+					(name "Value") "Isolated RS485, auto direction, 120R")
+				(field
+					(name "Footprint") "HCP:RS485_Isolated_34x18")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VIN")
+					(type "power_in")
+				)
+				(pin
+					(num "2")
+					(name "TX")
+					(type "input")
+				)
+				(pin
+					(num "3")
+					(name "RX")
+					(type "output")
+				)
+				(pin
+					(num "4")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "5")
+					(name "A+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "6")
+					(name "B+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "7")
+					(name "EARTH/NC")
+					(type "passive")
+				)
+			)
+		)
+	)
+	(libraries)
+	(nets
+		(net
+			(code "1")
+			(name "/BUCK_5V")
+			(class "Default")
+			(node
+				(ref "JP1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "PS1")
+				(pin "3")
+				(pinfunction "OUT+_3")
+				(pintype "power_out")
+			)
+		)
+		(net
+			(code "2")
+			(name "/ESP_3V3")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "5")
+				(pinfunction "3V3_5")
+				(pintype "power_out")
+			)
+			(node
+				(ref "U2")
+				(pin "1")
+				(pinfunction "VIN_1")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "3")
+			(name "/ESP_5V")
+			(class "Default")
+			(node
+				(ref "JP1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "power_out")
+			)
+			(node
+				(ref "U1")
+				(pin "1")
+				(pinfunction "5V_1")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "4")
+			(name "/HCP_25V")
+			(class "Default")
+			(node
+				(ref "J1")
+				(pin "5")
+				(pinfunction "+25V_5")
+				(pintype "power_out")
+			)
+			(node
+				(ref "J1")
+				(pin "6")
+				(pinfunction "+25V_6")
+				(pintype "passive")
+			)
+			(node
+				(ref "PS1")
+				(pin "1")
+				(pinfunction "IN+_1")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "5")
+			(name "/HCP_A_PLUS")
+			(class "Default")
+			(node
+				(ref "J1")
+				(pin "4")
+				(pinfunction "A+_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "5")
+				(pinfunction "A+_5")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "6")
+			(name "/HCP_B_MINUS")
+			(class "Default")
+			(node
+				(ref "J1")
+				(pin "3")
+				(pinfunction "B-_3")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "6")
+				(pinfunction "B+_6")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "7")
+			(name "/UART_RX_GPIO20")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "14")
+				(pinfunction "GPIO20/U0RXD_14")
+				(pintype "input")
+			)
+			(node
+				(ref "U2")
+				(pin "3")
+				(pinfunction "RX_3")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "8")
+			(name "/UART_TX_GPIO21")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "16")
+				(pinfunction "GPIO21/U0TXD_16")
+				(pintype "output")
+			)
+			(node
+				(ref "U2")
+				(pin "2")
+				(pinfunction "TX_2")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "9")
+			(name "HCP_GND")
+			(class "Default")
+			(node
+				(ref "J1")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "power_out")
+			)
+			(node
+				(ref "J1")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "PS1")
+				(pin "2")
+				(pinfunction "IN-_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "PS1")
+				(pin "4")
+				(pinfunction "OUT-_4")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "3")
+				(pinfunction "GND_3")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U2")
+				(pin "4")
+				(pinfunction "GND_4")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "10")
+			(name "unconnected-(U1-GPIO0-Pad15)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "15")
+				(pinfunction "GPIO0_15")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "11")
+			(name "unconnected-(U1-GPIO1-Pad13)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "13")
+				(pinfunction "GPIO1_13")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "12")
+			(name "unconnected-(U1-GPIO2-Pad11)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "11")
+				(pinfunction "GPIO2_11")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "13")
+			(name "unconnected-(U1-GPIO3-Pad9)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "9")
+				(pinfunction "GPIO3_9")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "14")
+			(name "unconnected-(U1-GPIO4-Pad7)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "7")
+				(pinfunction "GPIO4_7")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "15")
+			(name "unconnected-(U1-GPIO5-Pad2)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "2")
+				(pinfunction "GPIO5_2")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "16")
+			(name "unconnected-(U1-GPIO6-Pad4)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "4")
+				(pinfunction "GPIO6_4")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "17")
+			(name "unconnected-(U1-GPIO7-Pad6)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "6")
+				(pinfunction "GPIO7_6")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "18")
+			(name "unconnected-(U1-GPIO8{slash}LED-Pad8)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "8")
+				(pinfunction "GPIO8/LED_8")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "19")
+			(name "unconnected-(U1-GPIO9{slash}BOOT-Pad10)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "10")
+				(pinfunction "GPIO9/BOOT_10")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "20")
+			(name "unconnected-(U1-GPIO10-Pad12)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "12")
+				(pinfunction "GPIO10_12")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "21")
+			(name "unconnected-(U2-EARTH{slash}NC-Pad7)")
+			(class "Default")
+			(node
+				(ref "U2")
+				(pin "7")
+				(pinfunction "EARTH/NC_7")
+				(pintype "passive+no_connect")
+			)
+		)
+	)
+)

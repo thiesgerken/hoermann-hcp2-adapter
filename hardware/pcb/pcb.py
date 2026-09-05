@@ -26,6 +26,9 @@ PDF_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.pdf"
 DRC_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-drc.json"
 
 BOARD_W, BOARD_H = 65.0, 44.5
+# Board-relative design coordinates are shifted by this origin when written, so the
+# board sits centred on the A4 sheet used by the layer PDF.
+ORIGIN = (116.0, 68.0)
 SIGNAL, POWER = 0.5, 0.8
 
 NET_NAMES = tuple(EXPECTED_CONNECTIONS)
@@ -116,6 +119,10 @@ def object_uuid(name):
     return uuid.uuid5(uuid.NAMESPACE_URL, f"hoermann-pcb:{name}")
 
 
+def sheet(x, y):
+    return round(x + ORIGIN[0], 2), round(y + ORIGIN[1], 2)
+
+
 def sexp_block(text, start):
     depth = 0
     quoted = False
@@ -154,7 +161,8 @@ def place_footprint(ref):
     text = re.sub(r'^\s*\((version|generator|generator_version) [^\n]*\n', "", text, flags=re.MULTILINE)
     text = text.replace(f'(footprint "{name}"', f'(footprint "HCP:{name}"', 1)
     x, y, rotation = PLACEMENT[ref]
-    text = text.replace('(layer "F.Cu")', f'(layer "F.Cu")\n  (uuid "{object_uuid(ref)}")\n  (at {x} {y} {rotation})', 1)
+    sx, sy = sheet(x, y)
+    text = text.replace('(layer "F.Cu")', f'(layer "F.Cu")\n  (uuid "{object_uuid(ref)}")\n  (at {sx} {sy} {rotation})', 1)
     text = re.sub(r'\(property "Reference" "[^"]*"', f'(property "Reference" "{ref}"', text, count=1)
     text = re.sub(r'\(property "Value" "[^"]*"', f'(property "Value" "{VALUES[ref]}"', text, count=1)
     if ref in REFERENCE_POSITIONS:
@@ -209,6 +217,7 @@ def check_routes(pads):
 def segments(net_name, layer, width, points, index):
     result = ""
     for segment_index, (start, end) in enumerate(zip(points, points[1:])):
+        start, end = sheet(*start), sheet(*end)
         result += (
             f'  (segment (start {start[0]} {start[1]}) (end {end[0]} {end[1]}) '
             f'(width {width}) (layer "{layer}") (net {NET_IDS[net_name]}) '
@@ -261,16 +270,18 @@ def build_board():
     for index, route in enumerate(ROUTES):
         board += segments(*route, index)
     for index, (net_name, x, y) in enumerate(VIAS):
+        x, y = sheet(x, y)
         board += (
             f'  (via (at {x} {y}) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") '
             f'(net {NET_IDS[net_name]}) (uuid "{object_uuid(f"via-{index}")}"))\n'
         )
 
     board += (
-        f'  (gr_rect (start 0 0) (end {BOARD_W} {BOARD_H}) (stroke (width 0.1) (type default)) '
+        f'  (gr_rect (start {ORIGIN[0]} {ORIGIN[1]}) (end {ORIGIN[0] + BOARD_W} {ORIGIN[1] + BOARD_H}) (stroke (width 0.1) (type default)) '
         f'(fill none) (layer "Edge.Cuts") (uuid "{object_uuid("board-outline")}"))\n'
     )
     for index, (text, x, y, rotation, size, layer) in enumerate(SILK_TEXTS):
+        x, y = sheet(x, y)
         mirror = " (justify mirror)" if layer.startswith("B.") else ""
         board += (
             f'  (gr_text "{text}" (at {x} {y} {rotation}) (layer "{layer}") '
