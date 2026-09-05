@@ -1,7 +1,7 @@
 (kicad_sch (version 20231120) (generator "hoermann-schematic") (generator_version "1")
   (uuid "e66b684a-6636-533a-be8b-ed542ebf4527")
   (paper "A4")
-  (title_block (title "Hörmann HCP2 ESP32-C3 Adapter") (date "2026-09-05") (rev "0d17945") (company "Thies Gerken"))
+  (title_block (title "Hörmann HCP2 ESP32-C3 Adapter") (date "2026-09-05") (rev "1b34439") (company "Thies Gerken"))
   (lib_symbols
     (symbol "HCP:J1" (pin_names (offset 1.016)) (exclude_from_sim no) (in_bom yes) (on_board yes)
       (property "Reference" "J1" (at 0 10.16 0) (effects (font (size 1.27 1.27))))
@@ -285,7 +285,7 @@
   (no_connect (at 226.06 115.57) (uuid "8290b925-5734-54c6-80fe-62881810d1c6"))
   (no_connect (at 226.06 118.11) (uuid "891a69da-8738-57e9-a924-fa79bbc6da81"))
   (no_connect (at 226.06 120.65) (uuid "5c5390e5-33b5-5753-9211-29eaedda4223"))
-  (text "HCP2 bus, 6P6C. Pin order per ESPHome, verify pin 1 on the delivered jack." (exclude_from_sim no) (at 25.4 128.27 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "bb2daab0-4ef1-5695-8fe8-4ff01289f173"))
+  (text "HCP2 bus, 6P6C. Contact numbering per ESPHome HCP documentation." (exclude_from_sim no) (at 25.4 128.27 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "bb2daab0-4ef1-5695-8fe8-4ff01289f173"))
   (text "Adjust PS1 to 5.0 V before connecting U1. Open JP1 whenever USB is plugged into U1." (exclude_from_sim no) (at 99.06 45.72 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "3d6e70e8-8009-510f-8539-722e206ba2fd"))
   (text "U2 is powered from 3V3 so its RX output stays at ESP32 logic level." (exclude_from_sim no) (at 99.06 132.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "133f6e85-46d7-5514-8e19-7122e28f4e0c"))
   (sheet_instances (path "/" (page "1")))
