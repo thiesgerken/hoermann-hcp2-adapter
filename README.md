@@ -71,7 +71,7 @@ uv run python hardware/kicad/pcb.py
 
 Der Generator liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus und rendert das PNG. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
 
-Platine: zweilagig, 63 × 42 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
+Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
 
 | Ref. | Footprint | Lage |
 |---|---|---|
