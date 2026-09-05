@@ -2,7 +2,7 @@
   (version 20230409)
   (generator "skidl")
   (generator_version "2.3.0")
-  (uuid 59cad21e-6a34-4a87-ab14-fe19f7f951f9)
+  (uuid a35db754-4ccf-47c2-b339-0bbc1bfc557f)
   (paper "A4")
   (title_block
     (title "Hörmann HCP2 ESP32-C3 Adapter")
@@ -962,7 +962,7 @@
       (uuid ff4a128b-c55c-5fc1-977e-87fcc836dffc))
     (instances
       (project "SKiDL-Generated"
-        (path "/59cad21e-6a34-4a87-ab14-fe19f7f951f9"
+        (path "/a35db754-4ccf-47c2-b339-0bbc1bfc557f"
           (reference "J1")
           (unit 1)))))
   (symbol
@@ -1015,7 +1015,7 @@
       (uuid ebbf7902-28cc-5fd5-8b9f-721285a18849))
     (instances
       (project "SKiDL-Generated"
-        (path "/59cad21e-6a34-4a87-ab14-fe19f7f951f9"
+        (path "/a35db754-4ccf-47c2-b339-0bbc1bfc557f"
           (reference "PS1")
           (unit 1)))))
   (symbol
@@ -1064,7 +1064,7 @@
       (uuid 711604ee-1fd4-5b65-8de9-b954045b6548))
     (instances
       (project "SKiDL-Generated"
-        (path "/59cad21e-6a34-4a87-ab14-fe19f7f951f9"
+        (path "/a35db754-4ccf-47c2-b339-0bbc1bfc557f"
           (reference "JP1")
           (unit 1)))))
   (symbol
@@ -1141,7 +1141,7 @@
       (uuid 7e47ea6f-446e-5c08-976b-d82c8ebba7a2))
     (instances
       (project "SKiDL-Generated"
-        (path "/59cad21e-6a34-4a87-ab14-fe19f7f951f9"
+        (path "/a35db754-4ccf-47c2-b339-0bbc1bfc557f"
           (reference "U1")
           (unit 1)))))
   (symbol
@@ -1200,7 +1200,7 @@
       (uuid 975748af-dea2-5bdf-854e-6a0173f91187))
     (instances
       (project "SKiDL-Generated"
-        (path "/59cad21e-6a34-4a87-ab14-fe19f7f951f9"
+        (path "/a35db754-4ccf-47c2-b339-0bbc1bfc557f"
           (reference "U2")
           (unit 1)))))
   (global_label "HCP_GND"
@@ -1210,7 +1210,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 58a412c2-1663-5d58-a3d5-08e67a4d54d4))
+    (uuid 308b8f07-a786-5a73-9591-502e1a6e86af))
   (global_label "HCP_GND"
     (shape bidirectional)
     (at 69.92 102.46 180)
@@ -1218,7 +1218,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 5085d294-49ab-5df7-ac87-0526364a6485))
+    (uuid 7c57b012-b266-5002-9e46-6604e8540d54))
   (global_label "HCP_B_MINUS"
     (shape bidirectional)
     (at 69.92 105.00 180)
@@ -1226,7 +1226,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 5fc777b9-aa57-5a9a-94ce-ef9df4b33719))
+    (uuid 1902ba91-5515-5b84-9312-216eaeac9079))
   (global_label "HCP_A_PLUS"
     (shape bidirectional)
     (at 69.92 107.54 180)
@@ -1234,7 +1234,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 5094278d-3211-58c7-a83a-e83b611657e0))
+    (uuid cf515846-1b07-5a43-8c3d-4cfc03c9635b))
   (global_label "HCP_25V"
     (shape bidirectional)
     (at 69.92 110.08 180)
@@ -1242,7 +1242,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 2fd3fd79-3375-55ab-90d3-dbefc4cbf2bb))
+    (uuid dfc9b1c2-ddd7-5682-bc8e-c291340bde5e))
   (global_label "HCP_25V"
     (shape bidirectional)
     (at 69.92 112.62 180)
@@ -1250,7 +1250,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid d533053e-96cc-5864-8699-2666611504e8))
+    (uuid 51666afa-5e3e-5dcf-8a35-998decfde8a0))
   (global_label "HCP_25V"
     (shape bidirectional)
     (at 99.92 57.46 180)
@@ -1266,7 +1266,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 2da7095e-0fd5-5331-97f9-72d51923b3e4))
+    (uuid 26e811cd-34be-58d6-a3e1-5c0e12603ad3))
   (global_label "BUCK_5V"
     (shape bidirectional)
     (at 99.92 62.54 180)
@@ -1298,7 +1298,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 2dec9768-3ce7-5a23-95c4-a46f5b56b94b))
+    (uuid a76126fb-1a65-52a1-bcb3-0ba0926443ff))
   (global_label "ESP_5V"
     (shape bidirectional)
     (at 144.92 97.38 180)
@@ -1314,7 +1314,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid a5b02c4d-b139-5aa6-ba72-6ac762caf54b))
+    (uuid e700e419-c70a-511f-80b4-dda740b14a34))
   (global_label "ESP_3V3"
     (shape bidirectional)
     (at 144.92 102.46 180)
@@ -1346,7 +1346,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid da779223-7c71-5926-b6b9-c93637603293))
+    (uuid 031bd6a1-e3cf-5e76-a780-5ab39bbdc5e4))
   (global_label "UART_TX_GPIO21"
     (shape bidirectional)
     (at 104.92 99.92 180)
@@ -1370,7 +1370,7 @@
       (font
         (size 0.25 0.25))
       (justify right))
-    (uuid 9ef2871a-9734-5f6a-bb68-7999cb2c81bb))
+    (uuid 8ac2eecc-4563-5fec-99db-93d156584acf))
   (global_label "HCP_A_PLUS"
     (shape bidirectional)
     (at 104.92 107.54 180)
@@ -1410,7 +1410,7 @@
       (font
         (size 1.27 1.27))
       (justify right))
-    (uuid 2dec9768-3ce7-5a23-95c4-a46f5b56b94b))
+    (uuid a76126fb-1a65-52a1-bcb3-0ba0926443ff))
   (global_label "HCP_25V"
     (shape bidirectional)
     (at 45.92 57.46 180)
@@ -1418,7 +1418,7 @@
       (font
         (size 1.27 1.27))
       (justify right))
-    (uuid 2fd3fd79-3375-55ab-90d3-dbefc4cbf2bb))
+    (uuid dfc9b1c2-ddd7-5682-bc8e-c291340bde5e))
   (global_label "HCP_A_PLUS"
     (shape bidirectional)
     (at 41.92 107.54 180)
@@ -1426,7 +1426,7 @@
       (font
         (size 1.27 1.27))
       (justify right))
-    (uuid 5094278d-3211-58c7-a83a-e83b611657e0))
+    (uuid cf515846-1b07-5a43-8c3d-4cfc03c9635b))
   (global_label "HCP_B_MINUS"
     (shape bidirectional)
     (at 37.92 105.00 180)
@@ -1434,7 +1434,7 @@
       (font
         (size 1.27 1.27))
       (justify right))
-    (uuid 5fc777b9-aa57-5a9a-94ce-ef9df4b33719))
+    (uuid 1902ba91-5515-5b84-9312-216eaeac9079))
   (global_label "HCP_GND"
     (shape bidirectional)
     (at 33.92 60.00 180)
@@ -1442,7 +1442,7 @@
       (font
         (size 1.27 1.27))
       (justify right))
-    (uuid 58a412c2-1663-5d58-a3d5-08e67a4d54d4))
+    (uuid 308b8f07-a786-5a73-9591-502e1a6e86af))
   (global_label "UART_RX_GPIO20"
     (shape bidirectional)
     (at 64.92 102.46 180)

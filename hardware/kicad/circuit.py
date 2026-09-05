@@ -4,6 +4,7 @@ import shutil
 import subprocess
 import uuid
 from pathlib import Path
+from design import EXPECTED_CONNECTIONS
 
 OUTPUT_DIR = Path(__file__).parent
 LIBRARY_DIR = OUTPUT_DIR / "libraries"
@@ -374,15 +375,15 @@ def connected_pin_ids(net):
 
 
 expected_topology = {
-    hcp_gnd: {"J1.1", "J1.2", "PS1.2", "PS1.4", "U1.3", "U2.4"},
-    hcp_25v: {"J1.5", "J1.6", "PS1.1"},
-    hcp_a: {"J1.4", "U2.5"},
-    hcp_b: {"J1.3", "U2.6"},
-    buck_5v: {"PS1.3", "JP1.1"},
-    esp_5v: {"JP1.2", "U1.1"},
-    esp_3v3: {"U1.5", "U2.1"},
-    uart_tx: {"U1.16", "U2.2"},
-    uart_rx: {"U1.14", "U2.3"},
+    hcp_gnd: EXPECTED_CONNECTIONS["HCP_GND"],
+    hcp_25v: EXPECTED_CONNECTIONS["HCP_25V"],
+    hcp_a: EXPECTED_CONNECTIONS["HCP_A_PLUS"],
+    hcp_b: EXPECTED_CONNECTIONS["HCP_B_MINUS"],
+    buck_5v: EXPECTED_CONNECTIONS["BUCK_5V"],
+    esp_5v: EXPECTED_CONNECTIONS["ESP_5V"],
+    esp_3v3: EXPECTED_CONNECTIONS["ESP_3V3"],
+    uart_tx: EXPECTED_CONNECTIONS["UART_TX_GPIO21"],
+    uart_rx: EXPECTED_CONNECTIONS["UART_RX_GPIO20"],
 }
 
 for net, expected_pins in expected_topology.items():

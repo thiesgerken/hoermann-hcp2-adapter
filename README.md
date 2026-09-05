@@ -4,7 +4,7 @@ Planungsprojekt für einen ESPHome-Adapter am HCP2-Bus eines Hörmann Serie-4-To
 
 ## Status
 
-Ein erster, ausführbarer Schaltplanentwurf liegt vor. Er enthält noch keine freigegebenen Footprints und kein PCB-Layout. Mechanische Prüfungen und die Schutzbeschaltung stehen noch aus.
+Ein ausführbarer Schaltplan und ein vollständig gerouteter, vorläufiger PCB-Entwurf liegen vor. Die PCB-Footprints sind Platzhalter auf Basis der Händlerangaben und ausdrücklich nicht zur Fertigung freigegeben. Mechanische Prüfungen und die Schutzbeschaltung stehen noch aus.
 
 ## Ziel
 
@@ -50,9 +50,27 @@ Erzeugung:
 uv run python hardware/kicad/circuit.py
 ```
 
-Die Quelle prüft die erwartete Topologie, führt den SKiDL-ERC aus und rendert anschließend mit `kicad-cli` das PDF. Dafür muss KiCad installiert sein. Footprints bleiben absichtlich unzugewiesen, bis die gelieferten Bauteile vermessen sind. Es existiert noch kein ausgearbeitetes PCB-Layout. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
+Die Quelle prüft die erwartete Topologie, führt den SKiDL-ERC aus und rendert anschließend mit `kicad-cli` das PDF. Dafür muss KiCad installiert sein. Der Schaltplan enthält noch keine freigegebenen Fertigungsfootprints. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
 
 Der erzeugte Schaltplan platziert den ESP32 zentral, ordnet Versorgung und Busmodule räumlich darum an und zeichnet blaue, beschriftete Verbindungslinien. Die elektrischen Netze bleiben über kleine Labels direkt an den Pins definiert und werden zusätzlich gegen die erwartete Pin-Topologie geprüft.
+
+## Vorläufiger PCB-Entwurf
+
+- Generator: [`hardware/kicad/pcb.py`](hardware/kicad/pcb.py)
+- gemeinsames Netzmodell: [`hardware/kicad/design.py`](hardware/kicad/design.py)
+- KiCad-Projekt: [`hardware/kicad/hoermann-hcp-adapter.kicad_pro`](hardware/kicad/hoermann-hcp-adapter.kicad_pro)
+- editierbares PCB: [`hardware/kicad/hoermann-hcp-adapter.kicad_pcb`](hardware/kicad/hoermann-hcp-adapter.kicad_pcb)
+- gerenderte Oberseite: [`hardware/kicad/hoermann-hcp-adapter-pcb.png`](hardware/kicad/hoermann-hcp-adapter-pcb.png)
+
+Erzeugung:
+
+```sh
+uv run python hardware/kicad/pcb.py
+```
+
+Der Entwurf verwendet eine zweilagige Platine mit 100 × 70 mm, vier M3-Bohrungen, 0,35-mm-Signalleitungen und 0,8-mm-Versorgungsleitungen. Alle neun Netze sind geroutet. Der KiCad-DRC meldet keine Fehler und keine offenen Verbindungen. Die verbleibenden neun Warnungen betreffen ausschließlich die absichtlich lokalen, noch nicht freigegebenen Footprint-Platzhalter.
+
+Dieser Stand darf nicht gefertigt werden. Insbesondere J1 verwendet bis zur Vermessung nur eine generische 1×6-Lochreihe. Die Padabstände von PS1 und U2 sowie der Reihenabstand von U1 sind ebenfalls am gelieferten Exemplar zu bestätigen. Der Warntext `PROVISIONAL - VERIFY ALL FOOTPRINTS` steht deshalb direkt auf dem Silkscreen.
 
 ## Feste HCP2-Rahmenbedingungen
 

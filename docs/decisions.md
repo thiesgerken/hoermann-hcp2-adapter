@@ -11,5 +11,6 @@
 | D-007 | 2026-09-05 | vorläufig beschlossen | Das RS485-Modul wird aus 3,3 V des ESP32-C3 Super Mini versorgt. | Dies vermeidet ein mögliches 5-V-Signal am ESP32-RX. Funktion und Stromreserve werden am gelieferten Aufbau geprüft. |
 | D-008 | 2026-09-05 | festgestellt | Der erste Aufbau ist nicht vollständig galvanisch getrennt. | Der nicht isolierte LM2596 verbindet die Versorgungsmassen. Das RS485-Modul trennt nur den Signalpfad. |
 | D-009 | 2026-09-05 | beschlossen | Der erste Schaltplan wird jetzt aus SKiDL erzeugt, obwohl die Footprints noch offen sind. | Die elektrische Topologie ist bekannt. Ungeprüfte Maße werden nicht benötigt, solange keine Fertigungsfootprints zugewiesen werden. |
+| D-010 | 2026-09-05 | vorläufig beschlossen | Ein vollständig gerouteter PCB-Entwurf wird mit klar gekennzeichneten Platzhalter-Footprints erzeugt. | Damit können Boardgröße, Platzierung und Routing früh geprüft werden. Fertigungsfreigabe erfolgt erst nach Vermessung aller Kaufteile und Festlegung der Schutzbeschaltung. |
 
 Neue Entscheidungen erhalten eine fortlaufende ID. Änderungen werden als neuer Eintrag dokumentiert, damit die ursprüngliche Begründung erhalten bleibt.

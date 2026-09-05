@@ -3,4 +3,7 @@
 __pycache__/
 ~*.lck
 *-erc.rpt
+*.kicad_prl
+*.kicad_pcb-bak
+*.kicad_sch-bak
 *.pyc
