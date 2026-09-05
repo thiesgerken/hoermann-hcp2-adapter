@@ -12,7 +12,7 @@ import sys
 import uuid
 from pathlib import Path
 
-from design import EXPECTED_CONNECTIONS
+from design import EXPECTED_CONNECTIONS, git_version
 
 SOURCE_DIR = Path(__file__).parent
 LIBRARY_DIR = SOURCE_DIR / "HCP.pretty"
@@ -23,6 +23,9 @@ FP_LIB_TABLE_PATH = OUTPUT_DIR / "fp-lib-table"
 PREVIEW_TOP_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb-top.png"
 PREVIEW_BOTTOM_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb-bottom.png"
 PDF_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.pdf"
+GERBER_DIR = OUTPUT_DIR / "gerbers"
+GERBER_ZIP = OUTPUT_DIR / "hoermann-hcp-adapter-gerbers.zip"
+VERSION = git_version()
 DRC_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-drc.json"
 
 BOARD_W, BOARD_H = 65.0, 44.5
@@ -100,7 +103,7 @@ VIAS = (
     ("HCP_A_PLUS", 7.47, 39.08),
 )
 SILK_TEXTS = (
-    ("Hörmann v1.0", 8.1, 20.5, 0, 0.8, "F.SilkS"),
+    (f"Hörmann {VERSION}", 8.1, 20.5, 0, 0.8, "F.SilkS"),
     ("VERIFY FOOTPRINTS", 8.1, 21.7, 0, 0.8, "F.SilkS"),
     ("VERIFY J1 PIN1", 8.1, 22.9, 0, 0.8, "F.SilkS"),
     ("1", 13.0, 16.77, 0, 0.8, "F.SilkS"),
@@ -110,7 +113,7 @@ SILK_TEXTS = (
     ("DISCONNECT", 62.4, 19.6, 90, 0.8, "F.SilkS"),
     ("FOR USB", 63.6, 19.6, 90, 0.8, "F.SilkS"),
     ("ANT", 40.9, 34.0, 90, 0.8, "F.SilkS"),
-    ("Hörmann HCP2 Adapter v1.0", 25.0, 30.5, 0, 1.5, "B.SilkS"),
+    (f"Hörmann HCP2 Adapter {VERSION}", 25.0, 30.5, 0, 1.5, "B.SilkS"),
     ("(C) 2026 Thies Gerken", 25.0, 33.5, 0, 1.2, "B.SilkS"),
 )
 
@@ -329,8 +332,28 @@ def render_previews():
     )
 
 
+def export_gerbers():
+    shutil.rmtree(GERBER_DIR, ignore_errors=True)
+    GERBER_DIR.mkdir()
+    subprocess.run(
+        [kicad_cli(), "pcb", "export", "gerbers", "--output", str(GERBER_DIR),
+         "--layers", "F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,B.SilkS,Edge.Cuts",
+         "--subtract-soldermask", str(BOARD_PATH)],
+        check=True,
+    )
+    subprocess.run(
+        [kicad_cli(), "pcb", "export", "drill", "--output", str(GERBER_DIR), "--format", "excellon",
+         "--excellon-separate-th", "--generate-map", "--map-format", "gerberx2", str(BOARD_PATH)],
+        check=True,
+    )
+    GERBER_ZIP.unlink(missing_ok=True)
+    shutil.make_archive(str(GERBER_ZIP.with_suffix("")), "zip", GERBER_DIR)
+    shutil.rmtree(GERBER_DIR)
+
+
 if __name__ == "__main__":
     write_project()
     build_board()
     run_drc()
     render_previews()
+    export_gerbers()

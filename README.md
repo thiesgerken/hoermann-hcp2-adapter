@@ -63,6 +63,7 @@ Der Generator schreibt den Schaltplan mit eigenen Symbolen, Drähten und Netzlab
 - gerenderte Oberseite: [`hardware/pcb/generated/hoermann-hcp-adapter-pcb-top.png`](hardware/pcb/generated/hoermann-hcp-adapter-pcb-top.png)
 - gerenderte Unterseite: [`hardware/pcb/generated/hoermann-hcp-adapter-pcb-bottom.png`](hardware/pcb/generated/hoermann-hcp-adapter-pcb-bottom.png)
 - Lagen-PDF (F.Cu, B.Cu, Silkscreen, Kontur): [`hardware/pcb/generated/hoermann-hcp-adapter-pcb.pdf`](hardware/pcb/generated/hoermann-hcp-adapter-pcb.pdf)
+- Gerber und Bohrdaten: [`hardware/pcb/generated/hoermann-hcp-adapter-gerbers.zip`](hardware/pcb/generated/hoermann-hcp-adapter-gerbers.zip)
 
 Erzeugung:
 
@@ -70,7 +71,9 @@ Erzeugung:
 uv run python hardware/pcb/pcb.py
 ```
 
-Der Generator schreibt KiCad-Projekt und `fp-lib-table` nach `generated/`, liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus und rendert beide Seiten als PNG sowie die Lagen als PDF. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
+Der Generator schreibt KiCad-Projekt und `fp-lib-table` nach `generated/`, liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus, rendert beide Seiten als PNG und die Lagen als PDF und packt Gerber- und Excellon-Dateien in ein Zip.
+
+Silkscreen und Schaltplan-Titelblock tragen den kurzen Git-Hash von `HEAD`, mit Suffix `-dirty`, wenn Quellen außerhalb von `generated/` ungespeicherte Änderungen haben. Für Fertigungsdaten deshalb zuerst die Quellen committen, dann beide Generatoren laufen lassen und die Ausgaben in einem Folgecommit ablegen. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
 
 Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
 

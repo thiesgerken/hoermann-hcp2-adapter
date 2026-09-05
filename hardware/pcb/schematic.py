@@ -12,7 +12,7 @@ import sys
 import uuid
 from pathlib import Path
 
-from design import EXPECTED_CONNECTIONS
+from design import EXPECTED_CONNECTIONS, git_version
 
 SOURCE_DIR = Path(__file__).parent
 OUTPUT_DIR = SOURCE_DIR / "generated"
@@ -304,7 +304,7 @@ def build_schematic():
     text = (
         '(kicad_sch (version 20231120) (generator "hoermann-schematic") (generator_version "1")\n'
         f'  (uuid "{ROOT_UUID}")\n  (paper "A4")\n'
-        '  (title_block (title "Hörmann HCP2 ESP32-C3 Adapter") (date "2026-09-05") (rev "1.0") '
+        f'  (title_block (title "Hörmann HCP2 ESP32-C3 Adapter") (date "2026-09-05") (rev "{git_version()}") '
         '(company "Thies Gerken"))\n'
         "  (lib_symbols\n"
     )
