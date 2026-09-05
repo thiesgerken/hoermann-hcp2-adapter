@@ -22,8 +22,7 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 
 ### Schaltung
 
-- [ ] D-005 entscheiden: Verpol-, Überspannungs- und ESD-Schutz am HCP-Eingang. Aktuell gibt es keinen.
-- [ ] Transceiver-Typ auf U2 ablesen. Nur als Input für D-005: ein fehlertoleranter Typ (±70 V Busfestigkeit) überlebt 25 V auf A/B durch ein gedrehtes Kabel, ein MAX3485-Typ nicht.
+- [ ] D-005 entscheiden: Überspannungs- und ESD-Schutz am HCP-Eingang, zum Beispiel TVS SMBJ30A parallel zum 25-V-Eingang. Verpolungsschutz entfällt (D-014).
 
 ## Vor der ersten Inbetriebnahme
 
