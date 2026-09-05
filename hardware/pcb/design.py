@@ -19,6 +19,6 @@ def git_version():
     root = Path(__file__).resolve().parent
     run = lambda *args: subprocess.run(["git", *args], cwd=root, capture_output=True, text=True, check=True).stdout
     version = run("rev-parse", "--short", "HEAD").strip()
-    if run("status", "--porcelain", "--", ".", ":!hardware/pcb/generated").strip():
+    if run("status", "--porcelain", "--", ".", ":!generated").strip():
         version += "-dirty"
     return version
