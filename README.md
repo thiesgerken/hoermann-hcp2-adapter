@@ -19,7 +19,7 @@ Der geplante Signalweg ist:
 
 ```text
 HCP2 6P6C
-  +25 V / GND -> Schutz -> LM2596 -> 5 V -> BUS_PWR -> ESP32-C3
+  +25 V / GND -> LM2596 -> 5 V -> BUS_PWR -> ESP32-C3
   A+ / B-     -> RS485-Busseite | Isolation | TTL-Seite <-> ESP32-UART
 ```
 
