@@ -46,22 +46,23 @@ FOOTPRINTS = {
 }
 
 # (x, y, rotation). J1 opening faces the top edge, PS1 IN side towards J1, U2 bus side
-# on the left edge under J1, U1 with USB towards U2 and the antenna at the right edge.
-# Roughly 2 mm between module outlines and 1.5 mm to the board edge.
+# on the left edge under J1, U1 with its USB end flush with the right board edge so a
+# cable can be plugged in while mounted. Roughly 2 mm between module outlines and
+# 1.5 mm to the board edge elsewhere.
 PLACEMENT = {
     "J1": (11.28, 16.77, 180),
     "PS1": (38.45, 12.25, 0),
     "JP1": (63.0, 8.0, 0),
     "U2": (19.5, 34.0, 180),
-    "U1": (52.26, 34.0, 90),
-    "H1": (52.26, 37.5, 0),
+    "U1": (53.4, 34.0, 270),
+    "H1": (52.5, 31.5, 0),
 }
 REFERENCE_POSITIONS = {
     "J1": (8.1, 19.3),
     "PS1": (38.45, 19.2),
     "JP1": (63.0, 4.7),
     "U2": (19.5, 27.5),
-    "U1": (55.2, 30.5),
+    "U1": (56.5, 29.5),
 }
 VALUES = {
     "J1": "HCP2 6P6C",
@@ -79,28 +80,22 @@ ROUTES = (
     ("HCP_25V", "F.Cu", POWER, ((6.2, 11.5), (6.2, 3.1), (18.0, 3.1))),
     ("HCP_GND", "F.Cu", SIGNAL, ((10.01, 14.23), (11.28, 15.5), (11.28, 16.77))),
     ("HCP_GND", "F.Cu", POWER, ((11.28, 16.77), (11.28, 21.4), (18.0, 21.4), (18.0, 23.9), (58.9, 23.9), (58.9, 21.4))),
-    ("HCP_GND", "F.Cu", POWER, ((45.91, 23.9), (45.91, 26.38))),
-    ("HCP_GND", "F.Cu", SIGNAL, ((45.91, 26.38), (45.91, 30.19), (36.5, 30.19))),
+    ("HCP_GND", "F.Cu", SIGNAL, ((58.9, 23.9), (63.8, 23.9), (63.8, 43.2), (59.75, 43.2), (59.75, 41.62))),
+    ("HCP_GND", "F.Cu", SIGNAL, ((39.5, 23.9), (39.5, 30.19), (36.5, 30.19))),
     ("BUCK_5V", "F.Cu", POWER, ((58.9, 3.1), (63.0, 7.2), (63.0, 8.0))),
-    ("ESP_5V", "B.Cu", POWER, ((63.0, 10.54), (63.0, 24.6), (43.37, 24.6), (43.37, 26.38))),
-    ("ESP_3V3", "F.Cu", SIGNAL, ((48.45, 26.38), (48.45, 31.5))),
-    ("ESP_3V3", "B.Cu", SIGNAL, ((48.45, 31.5), (48.45, 34.0))),
-    ("ESP_3V3", "F.Cu", SIGNAL, ((48.45, 34.0), (48.45, 37.81), (36.5, 37.81))),
-    ("UART_RX_GPIO20", "F.Cu", SIGNAL, ((58.61, 41.62), (58.61, 32.73), (36.5, 32.73))),
-    ("UART_TX_GPIO21", "B.Cu", SIGNAL, ((61.15, 41.62), (61.15, 38.5), (57.92, 35.27), (38.5, 35.27))),
+    ("ESP_5V", "B.Cu", POWER, ((63.0, 10.54), (63.0, 11.5), (64.0, 12.5), (64.0, 41.62), (62.29, 41.62))),
+    ("ESP_3V3", "F.Cu", SIGNAL, ((57.21, 41.62), (57.21, 37.81), (36.5, 37.81))),
+    ("UART_RX_GPIO20", "F.Cu", SIGNAL, ((47.05, 26.38), (47.05, 32.73), (36.5, 32.73))),
+    ("UART_TX_GPIO21", "B.Cu", SIGNAL, ((44.51, 26.38), (44.51, 35.27), (38.5, 35.27))),
     ("UART_TX_GPIO21", "F.Cu", SIGNAL, ((38.5, 35.27), (36.5, 35.27))),
     ("HCP_B_MINUS", "F.Cu", SIGNAL, ((8.74, 16.77), (8.74, 22.5), (5.1, 26.14), (5.1, 32.5), (3.6, 34.0), (2.5, 34.0))),
     ("HCP_A_PLUS", "B.Cu", SIGNAL, ((7.47, 14.23), (7.47, 39.08))),
     ("HCP_A_PLUS", "F.Cu", SIGNAL, ((7.47, 39.08), (2.5, 39.08))),
 )
 VIAS = (
-    ("ESP_3V3", 48.45, 31.5),
-    ("ESP_3V3", 48.45, 34.0),
     ("UART_TX_GPIO21", 38.5, 35.27),
     ("HCP_A_PLUS", 7.47, 39.08),
 )
-# (text, x, y, rotation, size, layer). Back-side texts are mirrored so they read
-# correctly when looking at the bottom of the board.
 SILK_TEXTS = (
     ("Hörmann v1.0", 8.1, 20.5, 0, 0.8, "F.SilkS"),
     ("VERIFY FOOTPRINTS", 8.1, 21.7, 0, 0.8, "F.SilkS"),
@@ -111,8 +106,7 @@ SILK_TEXTS = (
     ("PWR", 63.0, 14.1, 0, 0.8, "F.SilkS"),
     ("DISCONNECT", 62.4, 19.6, 90, 0.8, "F.SilkS"),
     ("FOR USB", 63.6, 19.6, 90, 0.8, "F.SilkS"),
-    ("USB", 41.7, 34.0, 90, 0.8, "F.SilkS"),
-    ("ANT", 64.45, 34.0, 90, 0.8, "F.SilkS"),
+    ("ANT", 40.9, 34.0, 90, 0.8, "F.SilkS"),
     ("Hörmann HCP2 Adapter v1.0", 25.0, 30.5, 0, 1.5, "B.SilkS"),
     ("(C) 2026 Thies Gerken", 25.0, 33.5, 0, 1.2, "B.SilkS"),
 )
