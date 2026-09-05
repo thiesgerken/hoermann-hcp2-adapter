@@ -62,6 +62,8 @@ Der erzeugte Schaltplan platziert den ESP32 zentral, ordnet Versorgung und Busmo
 - KiCad-Projekt: [`hardware/kicad/hoermann-hcp-adapter.kicad_pro`](hardware/kicad/hoermann-hcp-adapter.kicad_pro)
 - editierbares PCB: [`hardware/kicad/hoermann-hcp-adapter.kicad_pcb`](hardware/kicad/hoermann-hcp-adapter.kicad_pcb)
 - gerenderte Oberseite: [`hardware/kicad/hoermann-hcp-adapter-pcb.png`](hardware/kicad/hoermann-hcp-adapter-pcb.png)
+- gerenderte Unterseite: [`hardware/kicad/hoermann-hcp-adapter-pcb-bottom.png`](hardware/kicad/hoermann-hcp-adapter-pcb-bottom.png)
+- Lagen-PDF (F.Cu, B.Cu, Silkscreen, Kontur): [`hardware/kicad/hoermann-hcp-adapter-pcb.pdf`](hardware/kicad/hoermann-hcp-adapter-pcb.pdf)
 
 Erzeugung:
 
@@ -69,7 +71,7 @@ Erzeugung:
 uv run python hardware/kicad/pcb.py
 ```
 
-Der Generator liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus und rendert das PNG. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
+Der Generator liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus und rendert beide Seiten als PNG sowie die Lagen als PDF. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
 
 Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
 

@@ -17,7 +17,9 @@ from design import EXPECTED_CONNECTIONS
 OUTPUT_DIR = Path(__file__).parent
 LIBRARY_DIR = OUTPUT_DIR / "HCP.pretty"
 BOARD_PATH = OUTPUT_DIR / "hoermann-hcp-adapter.kicad_pcb"
-PREVIEW_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.png"
+PREVIEW_TOP_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.png"
+PREVIEW_BOTTOM_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb-bottom.png"
+PDF_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.pdf"
 DRC_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-drc.json"
 
 BOARD_W, BOARD_H = 65.0, 44.5
@@ -94,16 +96,22 @@ VIAS = (
     ("UART_TX_GPIO21", 38.5, 35.27),
     ("HCP_A_PLUS", 7.47, 39.08),
 )
+# (text, x, y, rotation, size, layer). Back-side texts are mirrored so they read
+# correctly when looking at the bottom of the board.
 SILK_TEXTS = (
-    ("HCP2-ESP32 v0.1", 8.1, 20.5, 0, 0.8),
-    ("VERIFY FOOTPRINTS", 8.1, 21.7, 0, 0.8),
-    ("VERIFY J1 PIN1", 8.1, 22.9, 0, 0.8),
-    ("1", 13.0, 16.77, 0, 0.8),
-    ("6", 3.3, 14.23, 0, 0.8),
-    ("BUS", 63.0, 13.2, 0, 0.8),
-    ("PWR", 63.0, 14.3, 0, 0.8),
-    ("USB", 41.7, 34.0, 90, 0.8),
-    ("ANT", 64.45, 34.0, 90, 0.8),
+    ("Hörmann v1.0", 8.1, 20.5, 0, 0.8, "F.SilkS"),
+    ("VERIFY FOOTPRINTS", 8.1, 21.7, 0, 0.8, "F.SilkS"),
+    ("VERIFY J1 PIN1", 8.1, 22.9, 0, 0.8, "F.SilkS"),
+    ("1", 13.0, 16.77, 0, 0.8, "F.SilkS"),
+    ("6", 3.3, 14.23, 0, 0.8, "F.SilkS"),
+    ("BUS", 63.0, 13.0, 0, 0.8, "F.SilkS"),
+    ("PWR", 63.0, 14.1, 0, 0.8, "F.SilkS"),
+    ("DISCONNECT", 62.4, 19.6, 90, 0.8, "F.SilkS"),
+    ("FOR USB", 63.6, 19.6, 90, 0.8, "F.SilkS"),
+    ("USB", 41.7, 34.0, 90, 0.8, "F.SilkS"),
+    ("ANT", 64.45, 34.0, 90, 0.8, "F.SilkS"),
+    ("Hörmann HCP2 Adapter v1.0", 25.0, 30.5, 0, 1.5, "B.SilkS"),
+    ("(C) 2026 Thies Gerken", 25.0, 33.5, 0, 1.2, "B.SilkS"),
 )
 
 
@@ -251,11 +259,12 @@ def build_board():
         f'  (gr_rect (start 0 0) (end {BOARD_W} {BOARD_H}) (stroke (width 0.1) (type default)) '
         f'(fill none) (layer "Edge.Cuts") (uuid "{object_uuid("board-outline")}"))\n'
     )
-    for index, (text, x, y, rotation, size) in enumerate(SILK_TEXTS):
+    for index, (text, x, y, rotation, size, layer) in enumerate(SILK_TEXTS):
+        mirror = " (justify mirror)" if layer.startswith("B.") else ""
         board += (
-            f'  (gr_text "{text}" (at {x} {y} {rotation}) (layer "F.SilkS") '
+            f'  (gr_text "{text}" (at {x} {y} {rotation}) (layer "{layer}") '
             f'(uuid "{object_uuid(f"text-{index}")}") '
-            f"(effects (font (size {size} {size}) (thickness 0.15))))\n"
+            f"(effects (font (size {size} {size}) (thickness 0.15)){mirror}))\n"
         )
     board += "  (embedded_fonts no)\n)\n"
     BOARD_PATH.write_text(board)
@@ -283,10 +292,17 @@ def run_drc():
         raise SystemExit(f"DRC failed with {len(problems)} error(s)")
 
 
-def render_preview():
+def render_previews():
+    for side, path in (("top", PREVIEW_TOP_PATH), ("bottom", PREVIEW_BOTTOM_PATH)):
+        subprocess.run(
+            [kicad_cli(), "pcb", "render", "--output", str(path), "--width", "1600",
+             "--height", "1100", "--side", side, "--quality", "high", str(BOARD_PATH)],
+            check=True,
+        )
     subprocess.run(
-        [kicad_cli(), "pcb", "render", "--output", str(PREVIEW_PATH), "--width", "1600",
-         "--height", "1100", "--side", "top", "--quality", "high", str(BOARD_PATH)],
+        [kicad_cli(), "pcb", "export", "pdf", "--output", str(PDF_PATH),
+         "--layers", "F.Cu,B.Cu,F.SilkS,B.SilkS,Edge.Cuts", "--mode-multipage",
+         "--include-border-title", str(BOARD_PATH)],
         check=True,
     )
 
@@ -294,4 +310,4 @@ def render_preview():
 if __name__ == "__main__":
     build_board()
     run_drc()
-    render_preview()
+    render_previews()
