@@ -27,6 +27,7 @@ Der LM2596 ist nicht galvanisch getrennt. Deshalb teilt der Gesamtadapter trotz 
 
 ## Dokumentation
 
+- [Offene Punkte](TODO.md)
 - [Bauteile und Beschaffungsstatus](docs/components.md)
 - [Gekaufte Module und Hilfsteile](docs/purchased-modules.md)
 - [Ausgewählte 6P6C-Buchse](docs/connector-rj12.md)
@@ -88,12 +89,7 @@ Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitunge
 
 Befestigung: die beiden PS1-Löcher und H1. Eigene Eckbohrungen entfallen, weil sie nur Fläche kosten.
 
-Dieser Stand darf nicht gefertigt werden. Vor der Freigabe am gelieferten Teil zu prüfen:
-
-- J1: Zapfenabstand und Gehäusebreite der 6P6C-Variante (12 mm laut Zeichnung einer baugleichen Buchse, die 8P8C-Zeichnung des Händlers zeigt 15 mm). Pin 1 liegt in Draufsicht links, wie in der Händlerzeichnung, und ist im Silkscreen markiert.
-- PS1: Pad- und Lochpositionen (aus Händlerfoto gemessen, Lochabstand 30,7 × 16,8 mm laut Händlerzeichnung).
-- U2: Padpositionen und Pinreihenfolge beider Seiten (aus Händlerfoto gemessen, 2,54 mm TTL, 5,08 mm Bus, jeweils zentriert).
-- U1: Reihenabstand 15,24 mm laut Bauformunterlage, Pinseite laut Produktfoto. USB ist im eingebauten Zustand steckbar, vorher JP1 ziehen.
+Dieser Stand darf nicht gefertigt werden. Die offenen Prüfungen stehen in [TODO.md](TODO.md).
 
 ## Feste HCP2-Rahmenbedingungen
 

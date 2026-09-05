@@ -23,7 +23,6 @@
   (fp_text user "OUT-" (at 20.45 11.15 0) (layer "F.Fab") (uuid "51e6915b-41f6-5ea8-9053-203265355e40") (effects (font (size 0.7 0.7) (thickness 0.10))))
   (pad "" np_thru_hole circle (at -15.35 -8.4) (size 3.2 3.2) (drill 3.2) (layers "*.Cu" "*.Mask") (uuid "bf4b9b8b-de1e-50c2-831d-b272516882b5"))
   (pad "" np_thru_hole circle (at 15.35 8.4) (size 3.2 3.2) (drill 3.2) (layers "*.Cu" "*.Mask") (uuid "035a716e-45e6-5c30-aa90-233966b22401"))
-  (fp_text user "VERIFY PAD/HOLE POS" (at 0 4.5 0) (layer "F.Fab") (uuid "0cdaea0c-723a-5bb8-9735-b82bc92bfcf9") (effects (font (size 0.8 0.8) (thickness 0.12))))
   (fp_text user "${REFERENCE}" (at 0 0 0) (layer "F.Fab") (uuid "3c53408a-2a33-59b4-9821-ba91448b53d5") (effects (font (size 0.8 0.8) (thickness 0.12))))
   (embedded_fonts no)
 )

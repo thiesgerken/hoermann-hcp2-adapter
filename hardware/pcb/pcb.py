@@ -103,7 +103,6 @@ VIAS = (
 )
 SILK_TEXTS = (
     (f"Hörmann {VERSION}", 9.0, 16.0, 0, 0.8, "F.SilkS"),
-    ("VERIFY FOOTPRINTS", 9.0, 17.2, 0, 0.8, "F.SilkS"),
     ("1", 6.45, 12.6, 0, 0.8, "F.SilkS"),
     ("BUS", 63.0, 13.0, 0, 0.8, "F.SilkS"),
     ("PWR", 63.0, 14.1, 0, 0.8, "F.SilkS"),

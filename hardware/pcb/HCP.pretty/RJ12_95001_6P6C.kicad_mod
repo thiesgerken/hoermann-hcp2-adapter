@@ -26,7 +26,6 @@
   (fp_rect (start -6.1 0) (end 6.1 13.0) (stroke (width 0.1) (type default)) (fill none) (layer "F.Fab") (uuid "65d110af-bdeb-56ae-95fe-93f5a9194f4a"))
   (fp_rect (start -6.35 -0.25) (end 6.35 13.25) (stroke (width 0.05) (type default)) (fill none) (layer "F.CrtYd") (uuid "88d9afac-f5ae-54b9-bc53-e3bbe917d56c"))
   (fp_text user "PCB EDGE" (at 0 1.2 0) (layer "F.Fab") (uuid "7e4f719c-e0f2-5c70-96f3-7c69d5cbcc28") (effects (font (size 0.6 0.6) (thickness 0.10))))
-  (fp_text user "VERIFY 6P6C DIMS" (at 0 3.5 0) (layer "F.Fab") (uuid "6defae29-9659-57ca-84b3-336d5a0036e5") (effects (font (size 0.6 0.6) (thickness 0.10))))
   (fp_text user "${REFERENCE}" (at 0 7.0 0) (layer "F.Fab") (uuid "055b8b4c-b274-5591-b277-16ad8d4a5d72") (effects (font (size 0.8 0.8) (thickness 0.12))))
   (embedded_fonts no)
 )
