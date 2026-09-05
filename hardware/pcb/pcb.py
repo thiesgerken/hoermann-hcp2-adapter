@@ -49,6 +49,9 @@ FOOTPRINTS = {
     "U1": "ESP32-C3_SuperMini",
     "U2": "RS485_Isolated_34x18",
     "H1": "MountingHole_3.2mm_NoCourtyard",
+    "H2": "MountingHole_3.2mm_NoCourtyard",
+    "H3": "MountingHole_3.2mm_NoCourtyard",
+    "H4": "MountingHole_3.2mm_NoCourtyard",
 }
 
 # (x, y, rotation). J1 opening faces the top edge, PS1 IN side towards J1, U2 bus side
@@ -61,12 +64,17 @@ PLACEMENT = {
     "JP1": (63.0, 8.0, 0),
     "U2": (19.5, 34.0, 180),
     "U1": (53.4, 34.0, 270),
-    "H1": (52.5, 31.5, 0),
+    # M3 enclosure holes in the free spots: below J1, beside JP1, between U2 and U1,
+    # and under the socketed U1 where the screw head fits beneath the module.
+    "H1": (3.5, 16.5, 0),
+    "H2": (62.2, 3.5, 0),
+    "H3": (39.9, 40.5, 0),
+    "H4": (61.0, 34.0, 0),
 }
 REFERENCE_POSITIONS = {
     "J1": (9.0, 14.6),
     "PS1": (38.45, 19.2),
-    "JP1": (63.0, 4.7),
+    "JP1": (63.0, 13.1),
     "U2": (19.5, 27.5),
     "U1": (56.5, 29.5),
 }
@@ -77,6 +85,9 @@ VALUES = {
     "U1": "ESP32-C3 Super Mini",
     "U2": "Isolated RS485",
     "H1": "M3",
+    "H2": "M3",
+    "H3": "M3",
+    "H4": "M3",
 }
 
 # Points are absolute board coordinates. Pad centres are computed from the footprints
@@ -89,25 +100,23 @@ ROUTES = (
     ("HCP_GND", "F.Cu", POWER, ((18.0, 21.4), (18.0, 23.9), (58.9, 23.9), (58.9, 21.4))),
     ("HCP_GND", "F.Cu", SIGNAL, ((58.9, 23.9), (63.8, 23.9), (63.8, 43.2), (59.75, 43.2), (59.75, 41.62))),
     ("HCP_GND", "F.Cu", SIGNAL, ((39.5, 23.9), (39.5, 30.19), (36.5, 30.19))),
-    ("BUCK_5V", "F.Cu", POWER, ((58.9, 3.1), (63.0, 7.2), (63.0, 8.0))),
+    ("BUCK_5V", "F.Cu", POWER, ((58.9, 3.1), (58.9, 6.2), (60.7, 8.0), (63.0, 8.0))),
     ("ESP_5V", "B.Cu", POWER, ((63.0, 10.54), (63.0, 11.5), (64.0, 12.5), (64.0, 41.62), (62.29, 41.62))),
     ("ESP_3V3", "F.Cu", SIGNAL, ((57.21, 41.62), (57.21, 37.81), (36.5, 37.81))),
     ("UART_RX_GPIO20", "F.Cu", SIGNAL, ((47.05, 26.38), (47.05, 32.73), (36.5, 32.73))),
     ("UART_TX_GPIO21", "B.Cu", SIGNAL, ((44.51, 26.38), (44.51, 35.27), (38.5, 35.27))),
     ("UART_TX_GPIO21", "F.Cu", SIGNAL, ((38.5, 35.27), (36.5, 35.27))),
-    ("HCP_B_MINUS", "F.Cu", SIGNAL, ((8.49, 8.3), (8.49, 6.8), (5.0, 6.8), (5.0, 32.5), (3.6, 34.0), (2.5, 34.0))),
-    ("HCP_A_PLUS", "F.Cu", SIGNAL, ((9.51, 10.84), (9.51, 14.0), (7.0, 14.0), (7.0, 39.08), (2.5, 39.08))),
+    ("HCP_B_MINUS", "F.Cu", SIGNAL, ((8.49, 8.3), (8.49, 6.8), (5.0, 6.8), (5.0, 12.5), (6.0, 13.5), (6.0, 32.5), (4.5, 34.0), (2.5, 34.0))),
+    ("HCP_A_PLUS", "F.Cu", SIGNAL, ((9.51, 10.84), (9.51, 14.0), (8.0, 14.0), (8.0, 39.08), (2.5, 39.08))),
 )
 VIAS = (
     ("UART_TX_GPIO21", 38.5, 35.27),
 )
 SILK_TEXTS = (
-    (f"Hörmann {VERSION}", 9.0, 16.0, 0, 0.8, "F.SilkS"),
+    (f"Hörmann {VERSION}", 10.6, 16.0, 0, 0.8, "F.SilkS"),
     ("1", 6.45, 12.6, 0, 0.8, "F.SilkS"),
-    ("BUS", 63.0, 13.0, 0, 0.8, "F.SilkS"),
-    ("PWR", 63.0, 14.1, 0, 0.8, "F.SilkS"),
-    ("DISCONNECT", 62.4, 19.6, 90, 0.8, "F.SilkS"),
-    ("FOR USB", 63.6, 19.6, 90, 0.8, "F.SilkS"),
+    ("DISCONNECT", 62.4, 19.2, 90, 0.8, "F.SilkS"),
+    ("FOR USB", 63.6, 19.2, 90, 0.8, "F.SilkS"),
     ("ANT", 40.9, 34.0, 90, 0.8, "F.SilkS"),
     (f"Hörmann HCP2 Adapter {VERSION}", 25.0, 30.5, 0, 1.5, "B.SilkS"),
     ("(C) 2026 Thies Gerken", 25.0, 33.5, 0, 1.2, "B.SilkS"),
@@ -159,6 +168,8 @@ def place_footprint(ref):
     text = (LIBRARY_DIR / f"{name}.kicad_mod").read_text()
     text = re.sub(r'^\s*\((version|generator|generator_version) [^\n]*\n', "", text, flags=re.MULTILINE)
     text = text.replace(f'(footprint "{name}"', f'(footprint "HCP:{name}"', 1)
+    # The same library footprint is placed several times, so its item uuids must be made unique.
+    text = re.sub(r'\(uuid "([^"]+)"\)', lambda m: f'(uuid "{object_uuid(f"{ref}-{m.group(1)}")}")', text)
     x, y, rotation = PLACEMENT[ref]
     sx, sy = sheet(x, y)
     text = text.replace('(layer "F.Cu")', f'(layer "F.Cu")\n  (uuid "{object_uuid(ref)}")\n  (at {sx} {sy} {rotation})', 1)
