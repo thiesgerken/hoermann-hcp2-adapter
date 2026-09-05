@@ -4,7 +4,7 @@ Planungsprojekt für einen ESPHome-Adapter am HCP2-Bus eines Hörmann Serie-4-To
 
 ## Status
 
-Ein ausführbarer Schaltplan und ein vollständig gerouteter, vorläufiger PCB-Entwurf liegen vor. Die PCB-Footprints sind Platzhalter auf Basis der Händlerangaben und ausdrücklich nicht zur Fertigung freigegeben. Mechanische Prüfungen und die Schutzbeschaltung stehen noch aus.
+Ein ausführbarer Schaltplan und ein vollständig gerouteter, vorläufiger PCB-Entwurf mit echten Modul-Footprints liegen vor. Die Footprint-Geometrie stammt aus Händlerfotos und -zeichnungen und ist erst nach Vermessung der gelieferten Teile zur Fertigung freigegeben. Die Schutzbeschaltung steht noch aus.
 
 ## Ziel
 
@@ -58,6 +58,7 @@ Der erzeugte Schaltplan platziert den ESP32 zentral, ordnet Versorgung und Busmo
 
 - Generator: [`hardware/kicad/pcb.py`](hardware/kicad/pcb.py)
 - gemeinsames Netzmodell: [`hardware/kicad/design.py`](hardware/kicad/design.py)
+- Projekt-Footprints: [`hardware/kicad/HCP.pretty/`](hardware/kicad/HCP.pretty/)
 - KiCad-Projekt: [`hardware/kicad/hoermann-hcp-adapter.kicad_pro`](hardware/kicad/hoermann-hcp-adapter.kicad_pro)
 - editierbares PCB: [`hardware/kicad/hoermann-hcp-adapter.kicad_pcb`](hardware/kicad/hoermann-hcp-adapter.kicad_pcb)
 - gerenderte Oberseite: [`hardware/kicad/hoermann-hcp-adapter-pcb.png`](hardware/kicad/hoermann-hcp-adapter-pcb.png)
@@ -68,9 +69,27 @@ Erzeugung:
 uv run python hardware/kicad/pcb.py
 ```
 
-Der Entwurf verwendet eine zweilagige Platine mit 100 × 70 mm, vier M3-Bohrungen, 0,35-mm-Signalleitungen und 0,8-mm-Versorgungsleitungen. Alle neun Netze sind geroutet. Der KiCad-DRC meldet keine Fehler und keine offenen Verbindungen. Die verbleibenden neun Warnungen betreffen ausschließlich die absichtlich lokalen, noch nicht freigegebenen Footprint-Platzhalter.
+Der Generator liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus und rendert das PNG. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
 
-Dieser Stand darf nicht gefertigt werden. Insbesondere J1 verwendet bis zur Vermessung nur eine generische 1×6-Lochreihe. Die Padabstände von PS1 und U2 sowie der Reihenabstand von U1 sind ebenfalls am gelieferten Exemplar zu bestätigen. Der Warntext `PROVISIONAL - VERIFY ALL FOOTPRINTS` steht deshalb direkt auf dem Silkscreen.
+Platine: zweilagig, 63 × 42 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
+
+| Ref. | Footprint | Lage |
+|---|---|---|
+| J1 | `RJ12_Amphenol_54601-x06_Horizontal` (KiCad-Bibliothek, Lochbild des 95001-Typs) | oben links, Stecköffnung an der oberen Platinenkante |
+| PS1 | `LM2596_HW-411`, 43,5 × 21,5 mm, Eckpads, zwei 3,2-mm-Löcher deckungsgleich mit den Modullöchern | oben rechts, IN-Seite zu J1 |
+| U2 | `RS485_Isolated_34x18`, SMD-Pads für die Halblöcher | unten links, Busseite an der linken Kante |
+| U1 | `ESP32-C3_SuperMini`, 2 × 8 Pins, Reihenabstand 15,24 mm | unten rechts, USB zu U2, Antenne an der rechten Kante |
+| JP1 | `PinHeader_1x02_P2.54mm_Vertical` | rechts neben PS1 |
+| H1 | 3,2-mm-Loch ohne Courtyard | unter U1, zwischen den Steckerleisten |
+
+Befestigung: die beiden PS1-Löcher und H1. Eigene Eckbohrungen entfallen, weil sie nur Fläche kosten.
+
+Dieser Stand darf nicht gefertigt werden. Vor der Freigabe am gelieferten Teil zu prüfen:
+
+- J1: Kontaktfolge und Pin 1. Eine gespiegelte Zählung würde +25 V und GND vertauschen. Die Silkscreen-Markierungen `1` und `6` zeigen die im Layout angenommene Zählung.
+- PS1: Pad- und Lochpositionen (aus Händlerfoto gemessen, Lochabstand 30,7 × 16,8 mm laut Händlerzeichnung).
+- U2: Padpositionen und Pinreihenfolge beider Seiten (aus Händlerfoto gemessen, 2,54 mm TTL, 5,08 mm Bus, jeweils zentriert).
+- U1: Reihenabstand 15,24 mm laut Bauformunterlage, Pinseite laut Produktfoto. Die USB-Buchse zeigt zu U2 und ist im eingebauten Zustand nicht nutzbar.
 
 ## Feste HCP2-Rahmenbedingungen
 

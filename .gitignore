@@ -7,3 +7,4 @@ __pycache__/
 *.kicad_pcb-bak
 *.kicad_sch-bak
 *.pyc
+*-drc.json

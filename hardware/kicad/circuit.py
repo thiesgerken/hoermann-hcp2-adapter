@@ -251,8 +251,8 @@ def layout_schematic(schematic_path, expected_connections):
     schematic_path.write_text(schematic)
 
 
-def connector(symbol, reference, value, tag):
-    return Part(symbol, symbol, tool=KICAD10, ref=reference, value=value, tag=tag)
+def connector(symbol, reference, value, tag, footprint):
+    return Part(symbol, symbol, tool=KICAD10, ref=reference, value=value, tag=tag, footprint=footprint)
 
 
 def configure_pin(part, number, name, function):
@@ -261,17 +261,12 @@ def configure_pin(part, number, name, function):
     pin.func = function
 
 
-def leave_footprint_unassigned(part):
-    part.footprint = ":"
-
-
-skidl.empty_footprint_handler = leave_footprint_unassigned
-
 j1 = connector(
     "Conn_01x06",
     "J1",
     "HCP2 6P6C unshielded, AliExpress 1005003078110991",
     "hcp-connector-j1",
+    "HCP:RJ12_Amphenol_54601-x06_Horizontal",
 )
 for number, name, function in (
     (1, "GND", Pin.funcs.PWROUT),
@@ -288,6 +283,7 @@ ps1 = connector(
     "PS1",
     "LM2596 HW-411, adjust to 5.0 V",
     "buck-module-ps1",
+    "HCP:LM2596_HW-411",
 )
 for number, name, function in (
     (1, "IN+", Pin.funcs.PWRIN),
@@ -297,7 +293,9 @@ for number, name, function in (
 ):
     configure_pin(ps1, number, name, function)
 
-jp1 = connector("Conn_01x02", "JP1", "BUS_PWR", "bus-power-jumper-jp1")
+jp1 = connector(
+    "Conn_01x02", "JP1", "BUS_PWR", "bus-power-jumper-jp1", "HCP:PinHeader_1x02_P2.54mm_Vertical"
+)
 configure_pin(jp1, 1, "BUCK_5V", Pin.funcs.PWRIN)
 configure_pin(jp1, 2, "ESP_5V", Pin.funcs.PWROUT)
 
@@ -306,8 +304,10 @@ u1 = connector(
     "U1",
     "ESP32-C3 Super Mini",
     "controller-u1",
+    "HCP:ESP32-C3_SuperMini",
 )
-# Odd pins are the left header and even pins are the right header, both from USB end downward.
+# Odd pins are the 5V/GND/3V3 header, even pins the GPIO5..GPIO21 header, both numbered from
+# the USB end. Seen from the component side with USB up, the odd header is on the right.
 esp32_pins = (
     (1, "5V", Pin.funcs.PWRIN),
     (3, "GND", Pin.funcs.PWRIN),
@@ -334,6 +334,7 @@ u2 = connector(
     "U2",
     "Isolated auto-direction RS485, onboard 120R",
     "rs485-module-u2",
+    "HCP:RS485_Isolated_34x18",
 )
 for number, name, function in (
     (1, "VIN", Pin.funcs.PWRIN),

@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "circuit.py")
-    (date "09/05/2026 08:52 PM")
+    (date "09/05/2026 10:05 PM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -46,12 +46,12 @@
       (ref "J1")
       (value "HCP2 6P6C unshielded, AliExpress 1005003078110991")
       (description "Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint ":")
+      (footprint "HCP:RJ12_Amphenol_54601-x06_Horizontal")
       (fields
         (field
           (name "Description") "Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") ":")
+          (name "Footprint") "HCP:RJ12_Amphenol_54601-x06_Horizontal")
         (field
           (name "Datasheet"))
         (field
@@ -70,12 +70,12 @@
       (ref "JP1")
       (value "BUS_PWR")
       (description "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint ":")
+      (footprint "HCP:PinHeader_1x02_P2.54mm_Vertical")
       (fields
         (field
           (name "Description") "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") ":")
+          (name "Footprint") "HCP:PinHeader_1x02_P2.54mm_Vertical")
         (field
           (name "Datasheet"))
         (field
@@ -94,12 +94,12 @@
       (ref "PS1")
       (value "LM2596 HW-411, adjust to 5.0 V")
       (description "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint ":")
+      (footprint "HCP:LM2596_HW-411")
       (fields
         (field
           (name "Description") "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") ":")
+          (name "Footprint") "HCP:LM2596_HW-411")
         (field
           (name "Datasheet"))
         (field
@@ -118,12 +118,12 @@
       (ref "U1")
       (value "ESP32-C3 Super Mini")
       (description "Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint ":")
+      (footprint "HCP:ESP32-C3_SuperMini")
       (fields
         (field
           (name "Description") "Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") ":")
+          (name "Footprint") "HCP:ESP32-C3_SuperMini")
         (field
           (name "Datasheet"))
         (field
@@ -142,12 +142,12 @@
       (ref "U2")
       (value "Isolated auto-direction RS485, onboard 120R")
       (description "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
-      (footprint ":")
+      (footprint "HCP:RS485_Isolated_34x18")
       (fields
         (field
           (name "Description") "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)")
         (field
-          (name "Footprint") ":")
+          (name "Footprint") "HCP:RS485_Isolated_34x18")
         (field
           (name "Datasheet"))
         (field
