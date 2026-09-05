@@ -91,6 +91,15 @@ Befestigung im Gehäuse über H1 bis H4. Die beiden PS1-Löcher liegen zusätzli
 
 Dieser Stand darf nicht gefertigt werden. Die offenen Prüfungen stehen in [TODO.md](TODO.md).
 
+## Aufbau
+
+Vor dem Bestücken jeder Platine:
+
+1. LM2596-Modul (PS1) lose an etwa 25 V anschließen, ohne Last.
+2. Ausgang mit dem Trimmer `103` auf 5,0 V einstellen. Der Trimmer bleibt auf der Platine erreichbar, aber ein falsch eingestellter Wandler darf nie am ESP32 hängen.
+3. Ausgang beim Ein- und Ausschalten messen, es darf kein Überschwingen über 5,5 V geben.
+4. Erst dann PS1 einlöten. JP1 bleibt offen, bis der Rest bestückt ist.
+
 ## Feste HCP2-Rahmenbedingungen
 
 Laut ESPHome gilt für unterstützte Hörmann Serie-4-Antriebe:
