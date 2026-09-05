@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "circuit.py")
-    (date "09/05/2026 08:24 PM")
+    (date "09/05/2026 08:36 PM")
     (tool "SKiDL (2.3.0)")
     (sheet
       (number 1)
@@ -57,7 +57,7 @@
         (field
           (name "SKiDL Tag") "hcp-connector-j1")
         (field
-          (name "SKiDL Line") "circuit.py:136"))
+          (name "SKiDL Line") "circuit.py:254"))
       (libsource
         (lib "Conn_01x06")
         (part "Conn_01x06"))
@@ -81,7 +81,7 @@
         (field
           (name "SKiDL Tag") "bus-power-jumper-jp1")
         (field
-          (name "SKiDL Line") "circuit.py:136"))
+          (name "SKiDL Line") "circuit.py:254"))
       (libsource
         (lib "Conn_01x02")
         (part "Conn_01x02"))
@@ -105,7 +105,7 @@
         (field
           (name "SKiDL Tag") "buck-module-ps1")
         (field
-          (name "SKiDL Line") "circuit.py:136"))
+          (name "SKiDL Line") "circuit.py:254"))
       (libsource
         (lib "Conn_01x04")
         (part "Conn_01x04"))
@@ -129,7 +129,7 @@
         (field
           (name "SKiDL Tag") "controller-u1")
         (field
-          (name "SKiDL Line") "circuit.py:136"))
+          (name "SKiDL Line") "circuit.py:254"))
       (libsource
         (lib "Conn_02x08_Odd_Even")
         (part "Conn_02x08_Odd_Even"))
@@ -153,7 +153,7 @@
         (field
           (name "SKiDL Tag") "rs485-module-u2")
         (field
-          (name "SKiDL Line") "circuit.py:136"))
+          (name "SKiDL Line") "circuit.py:254"))
       (libsource
         (lib "Conn_01x07")
         (part "Conn_01x07"))

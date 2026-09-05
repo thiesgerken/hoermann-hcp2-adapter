@@ -52,7 +52,7 @@ uv run python hardware/kicad/circuit.py
 
 Die Quelle prüft die erwartete Topologie, führt den SKiDL-ERC aus und rendert anschließend mit `kicad-cli` das PDF. Dafür muss KiCad installiert sein. Footprints bleiben absichtlich unzugewiesen, bis die gelieferten Bauteile vermessen sind. Es existiert noch kein ausgearbeitetes PCB-Layout. Die noch offene Verpol-, Überspannungs- und ESD-Schutzbeschaltung ist nicht stillschweigend durch Annahmen ersetzt worden.
 
-Der erzeugte Schaltplan zeichnet für jedes Netz eine sichtbare, beschriftete Leitung zwischen allen angeschlossenen Pins. Die Netzliste wird zusätzlich gegen die erwartete Pin-Topologie geprüft.
+Der erzeugte Schaltplan platziert den ESP32 zentral, ordnet Versorgung und Busmodule räumlich darum an und zeichnet blaue, beschriftete Verbindungslinien. Die elektrischen Netze bleiben über kleine Labels direkt an den Pins definiert und werden zusätzlich gegen die erwartete Pin-Topologie geprüft.
 
 ## Feste HCP2-Rahmenbedingungen
 

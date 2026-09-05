@@ -50,45 +50,150 @@ GLOBAL_LABEL_PATTERN = re.compile(
     r"    \(uuid [^)]+\)\)",
     re.DOTALL,
 )
+SYMBOL_INSTANCE_START = re.compile(r"^  \(symbol\n    \(lib_id ", re.MULTILINE)
+POSITION_PATTERN = re.compile(r"\(at (-?[0-9.]+) (-?[0-9.]+)( [^)]+)\)")
+MODULE_POSITIONS = {
+    "J1": (75.0, 105.0),
+    "PS1": (105.0, 60.0),
+    "JP1": (145.0, 60.0),
+    "U1": (150.0, 105.0),
+    "U2": (110.0, 105.0),
+}
 
 
-def replace_pin_labels_with_wired_buses(schematic_path, expected_pin_counts):
+def sexp_block(text, start):
+    depth = 0
+    quoted = False
+    escaped = False
+    for index in range(start, len(text)):
+        character = text[index]
+        if escaped:
+            escaped = False
+        elif quoted and character == "\\":
+            escaped = True
+        elif character == '"':
+            quoted = not quoted
+        elif not quoted and character == "(":
+            depth += 1
+        elif not quoted and character == ")":
+            depth -= 1
+            if depth == 0:
+                return text[start : index + 1], index + 1
+    raise RuntimeError("Unterminated S-expression in generated KiCad schematic")
+
+
+def shift_positions(block, offset):
+    offset_x, offset_y = offset
+    return POSITION_PATTERN.sub(
+        lambda match: (
+            f"(at {float(match.group(1)) + offset_x:.2f} "
+            f"{float(match.group(2)) + offset_y:.2f}{match.group(3)})"
+        ),
+        block,
+    )
+
+
+def layout_schematic(schematic_path, expected_connections):
     schematic = schematic_path.read_text()
+    symbols = {}
+    replacements = []
+    for match in SYMBOL_INSTANCE_START.finditer(schematic):
+        start = match.start() + 2
+        block, end = sexp_block(schematic, start)
+        reference = re.search(r'\(reference "([^"]+)"\)', block)
+        position = re.search(r"^    \(at ([0-9.]+) ([0-9.]+) [^)]+\)", block, re.MULTILINE)
+        if not reference or not position:
+            raise RuntimeError("Cannot locate symbol reference or position")
+        ref = reference.group(1)
+        origin = (float(position.group(1)), float(position.group(2)))
+        symbols[ref] = origin
+        target = MODULE_POSITIONS.get(ref)
+        if target:
+            offset = (target[0] - origin[0], target[1] - origin[1])
+            replacements.append((start, end, shift_positions(block, offset)))
+
+    if set(symbols) != set(MODULE_POSITIONS):
+        raise RuntimeError(
+            f"Generated symbols differ from layout: expected {sorted(MODULE_POSITIONS)}, "
+            f"got {sorted(symbols)}"
+        )
+
+    offsets = {
+        ref: (target[0] - symbols[ref][0], target[1] - symbols[ref][1])
+        for ref, target in MODULE_POSITIONS.items()
+    }
+    for start, end, replacement in reversed(replacements):
+        schematic = schematic[:start] + replacement + schematic[end:]
+
+    assignments = {}
+    replacements = []
+    for match in GLOBAL_LABEL_PATTERN.finditer(schematic):
+        label = match.group(0)
+        position = POSITION_PATTERN.search(label)
+        if not position:
+            raise RuntimeError(f"Cannot locate label position for {match.group('name')}")
+        point = (float(position.group(1)), float(position.group(2)))
+        ref = min(
+            symbols,
+            key=lambda candidate: (
+                (point[0] - symbols[candidate][0]) ** 2
+                + (point[1] - symbols[candidate][1]) ** 2
+            ),
+        )
+        distance = (
+            (point[0] - symbols[ref][0]) ** 2
+            + (point[1] - symbols[ref][1]) ** 2
+        ) ** 0.5
+        if distance > 15:
+            raise RuntimeError(f"Cannot associate {match.group('name')} label with a symbol")
+        assignments.setdefault(match.group("name"), []).append(ref)
+        replacements.append(
+            (match.start(), match.end(), shift_positions(label, offsets[ref]))
+        )
+
+    expected_assignments = {
+        net_name: sorted(pin_id.split(".", 1)[0] for pin_id in pin_ids)
+        for net_name, pin_ids in expected_connections.items()
+    }
+    actual_assignments = {
+        net_name: sorted(refs) for net_name, refs in assignments.items()
+    }
+    if actual_assignments != expected_assignments:
+        raise RuntimeError(
+            f"Generated labels differ from topology: expected {expected_assignments}, "
+            f"got {actual_assignments}"
+        )
+    for start, end, replacement in reversed(replacements):
+        schematic = schematic[:start] + replacement + schematic[end:]
+
     labels_by_net = {}
     for match in GLOBAL_LABEL_PATTERN.finditer(schematic):
         label = match.group(0)
-        position = re.search(r"\(at ([0-9.]+) ([0-9.]+) [^)]+\)", label)
-        if not position:
-            raise RuntimeError(f"Cannot locate label position for {match.group('name')}")
+        position = POSITION_PATTERN.search(label)
         labels_by_net.setdefault(match.group("name"), []).append(
             (label, float(position.group(1)), float(position.group(2)))
         )
 
-    actual_pin_counts = {name: len(labels) for name, labels in labels_by_net.items()}
-    if actual_pin_counts != expected_pin_counts:
-        raise RuntimeError(
-            f"Generated labels differ from topology: expected {expected_pin_counts}, "
-            f"got {actual_pin_counts}"
-        )
-
-    def wire(start, end, net_name, index):
-        wire_uuid = uuid.uuid5(
+    def graphic_connection(start, end, net_name, index):
+        connection_uuid = uuid.uuid5(
             uuid.NAMESPACE_URL,
             f"hoermann:{net_name}:{index}:{start}:{end}",
         )
         return (
-            "  (wire\n"
+            "  (polyline\n"
             "    (pts\n"
             f"      (xy {start[0]:.2f} {start[1]:.2f})\n"
             f"      (xy {end[0]:.2f} {end[1]:.2f}))\n"
             "    (stroke\n"
             "      (width 0)\n"
             "      (type default))\n"
-            f"    (uuid {wire_uuid}))\n"
+            "    (fill\n"
+            "      (type none))\n"
+            f"    (uuid {connection_uuid}))\n"
         )
 
     moved_labels = []
-    wires = []
+    connections = []
     for net_index, (net_name, labels) in enumerate(sorted(labels_by_net.items())):
         points = [(x, y) for _, x, y in labels]
         routing_x = min(x for x, _ in points) - 12 - net_index * 4
@@ -104,11 +209,18 @@ def replace_pin_labels_with_wired_buses(schematic_path, expected_pin_counts):
 
         segment_index = 0
         for point in points:
-            wires.append(wire(point, (routing_x, point[1]), net_name, segment_index))
+            connections.append(
+                graphic_connection(
+                    point,
+                    (routing_x, point[1]),
+                    net_name,
+                    segment_index,
+                )
+            )
             segment_index += 1
         for start_y, end_y in zip(routing_ys, routing_ys[1:]):
-            wires.append(
-                wire(
+            connections.append(
+                graphic_connection(
                     (routing_x, start_y),
                     (routing_x, end_y),
                     net_name,
@@ -117,16 +229,22 @@ def replace_pin_labels_with_wired_buses(schematic_path, expected_pin_counts):
             )
             segment_index += 1
 
-    # SKiDL emits one label directly on every connected pin. Replacing those
-    # labels with one labelled bus per net makes the same topology visible.
-    schematic = GLOBAL_LABEL_PATTERN.sub("", schematic).rstrip()
+    # Labels at each pin remain the electrical source of truth. Crossing visible
+    # guides are graphics so their geometry cannot accidentally merge two nets.
+    schematic = GLOBAL_LABEL_PATTERN.sub(
+        lambda match: match.group(0).replace(
+            "(size 1.27 1.27)",
+            "(size 0.25 0.25)",
+        ),
+        schematic,
+    ).rstrip()
     if not schematic.endswith(")"):
         raise RuntimeError("Generated KiCad schematic has an unexpected structure")
     schematic = (
         schematic[:-1]
         + "\n"
         + "".join(moved_labels)
-        + "".join(wires)
+        + "".join(connections)
         + ")\n"
     )
     schematic_path.write_text(schematic)
@@ -287,8 +405,8 @@ generate_schematic(
     auto_stub=False,
     tool=KICAD10,
 )
-replace_pin_labels_with_wired_buses(
+layout_schematic(
     schematic_path,
-    {net.name: len(expected_pins) for net, expected_pins in expected_topology.items()},
+    {net.name: expected_pins for net, expected_pins in expected_topology.items()},
 )
 render_pdf(schematic_path)
