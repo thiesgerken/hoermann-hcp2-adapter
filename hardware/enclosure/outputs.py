@@ -48,8 +48,13 @@ def write_preview(path, opaque, translucent):
     export_stl(Compound(children=[shape for shape, _ in opaque.values()]), f"{path}.stl")
     mesher = Mesher()
     for name, (shape, color) in {**opaque, **translucent}.items():
-        shape.color = color
-        mesher.add_shape(shape, part_number=name)
+        # Mesher schreibt die Solids eines Parts einzeln und liest Farbe und Name
+        # von jedem Solid, nicht vom Part
+        solids = shape.solids()  # jeder Aufruf liefert neue Wrapper, also einmal holen
+        for solid in solids:
+            solid.color = color
+            solid.label = name
+        mesher.add_shape(solids, part_number=name)
     mesher.write(f"{path}.3mf")
 
 
