@@ -101,6 +101,8 @@ Vor dem Bestücken jeder Platine:
 3. Ausgang beim Ein- und Ausschalten messen, es darf kein Überschwingen über 5,5 V geben.
 4. Erst dann PS1 einlöten. JP1 bleibt offen, bis der Rest bestückt ist.
 
+U1 wird nicht direkt aufgelötet, sondern auf zwei 1×8-Buchsenleisten gesteckt. Das Befestigungsloch H4 liegt unter dem Modul zwischen den Leisten, der Schraubenkopf passt nur unter ein gesockeltes Modul. Reihenfolge: Buchsenleisten löten, Platine im Gehäuse verschrauben, danach den ESP32 einstecken.
+
 ## Feste HCP2-Rahmenbedingungen
 
 Laut ESPHome gilt für unterstützte Hörmann Serie-4-Antriebe:
