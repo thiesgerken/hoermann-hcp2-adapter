@@ -34,11 +34,21 @@ Die allgemeinen Galeriebilder zeigen verschiedene Varianten. Sie dürfen nicht a
 
 ## Footprint
 
-`HCP:RJ12_95001_6P6C` in `hardware/pcb/HCP.pretty/` folgt der 95001-Familie: Frontfläche bündig mit der Platinenkante, zwei Zapfen Ø2,4 mm im vorläufigen Abstand 12 mm, 6 mm hinter der Kante. Die Kontaktstifte stehen in zwei Reihen 8,3 und 10,84 mm hinter der Kante, 1,02 mm versetzt, Pin 1 in Draufsicht links in der hinteren Reihe, Pin 2 rechts daneben in der vorderen. Diese Reihenzuordnung stammt aus dem 6P6C-Layout; die 8P8C-Zeichnung hat sie umgekehrt. Die 8P8C-Zeichnung des gewählten Händlers nennt für ihre abweichende Variante 15 mm Zapfenabstand und ist kein Maßnachweis für die ausgewählte 6P6C-Buchse. Alle Maße müssen vor der Fertigung am gelieferten Teil bestätigt werden.
+`HCP:RJ12_95001_6P6C` in `hardware/pcb/HCP.pretty/`: Frontfläche bündig mit der Platinenkante, zwei Zapfen Ø2,4 mm im Abstand 12 mm, 6 mm hinter der Kante, Kontaktstifte in zwei Reihen 8,3 und 10,84 mm hinter der Kante mit 1,02 mm Versatz. Zapfen und Reihenmaße stammen aus den Zeichnungen der Buchsenfamilie ([6P6C eines anderen Anbieters](../hardware/reference/aliexpress-1005008379850389/mechanical-drawing.webp), [8P8C dieses Anbieters](../hardware/reference/aliexpress-1005003078110991/drawing-8p8c-variant.png)).
 
-## Pinzählung
+Pinbelegung in Draufsicht (Kante oben): Pin 1 rechts in der hinteren Reihe, Pin 2 links daneben in der vorderen Reihe, weiter abwechselnd bis Pin 6 links vorn. Der Silkscreen markiert Pin 1.
 
-Norm (TIA/FCC) für Modularstecker: Rastnase unten, Kontakte oben zum Betrachter, Kabel zum Betrachter, dann Pin 1 links. Daraus folgt für die Buchse: in die Öffnung geschaut mit Kerbe unten liegt Kontakt 1 links. Die Händlerzeichnung der 8P8C-Variante zeigt genau das um 180° gedreht (Kerbe oben, PIN1 rechts) und in der Draufsicht mit Kante oben Pin 1 links. Der Footprint übernimmt diese Draufsicht unverändert, HCP-Kontakt k liegt auf Pad k. Voraussetzung ist die Kerbe oben (weg von der Platine). Das zeigen beide Zeichnungen (Schlitz oben, Federn unten) und das Produktfoto: die oben sichtbaren Federhaken sind die Umbiegungen am hinteren Kamm, die Kontaktstelle liegt vorn nahe der Platine. Bei einer Buchse mit Kerbe unten wäre die Zählung gespiegelt. Die HCP-Belegung von ESPHome benutzt dieselbe Normzählung; eine Spiegelung würde GND und +25 V vertauschen und wäre in keinem der veröffentlichten Aufbauten lauffähig.
+## Fallstrick: Rastnase unten
+
+Die Zeichnungen der Familie zeigen Buchsen mit Rastnasen-Schlitz oben und Kontaktfedern unten. Das Produktfoto der gekauften 6P6C zeigt das Gegenteil: Federn an der oberen Wand der Öffnung, Schlitz zur Platine. Die gekaufte Buchse ist also „latch down". Das spiegelt die Kontaktfolge in der Draufsicht:
+
+- Norm (TIA/FCC): Stecker mit Rastnase unten, Kontakte oben zum Betrachter, Kabel zum Betrachter, Pin 1 links. In eine Buchse mit Schlitz unten geschaut liegt Kontakt 1 daher links.
+- Wer von vorn in die Buchse schaut, hat rechts, was in der Draufsicht links liegt. Bei Schlitz unten liegt Kontakt 1 in der Draufsicht also **rechts**.
+- Bei einer Buchse mit Schlitz oben (wie in den Zeichnungen) wäre es umgekehrt: Kontakt 1 in der Draufsicht links.
+
+Die Reihenzuordnung stammt aus dem Foto: der in der Frontansicht linke Stift sitzt in der hinteren Reihe. Vorausgesetzt ist, dass jede Kontaktfeder gerade nach hinten auf ihren eigenen Stift führt (keine Kreuzung im Gehäuse), was bei dieser Bauform der Fall ist.
+
+Vor der Bestellung am Muster bestätigen: Schlitz zur Platine, Stift von Kontakt 1 (Draufsicht rechts hinten) mit dem Multimeter zur Feder durchmessen. Bei einem Muster mit Schlitz oben in `RJ12_95001_6P6C.kicad_mod` die Pinnummern spiegeln (1↔6, 2↔5, 3↔4) und die Reihen prüfen.
 
 ## Elektrische HCP2-Belegung
 
