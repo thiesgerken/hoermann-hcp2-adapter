@@ -15,17 +15,9 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 
 ### Übrige Footprints
 
-- [ ] PS1 LM2596 HW-411: Eckpads (Soll ±20,45 × ±9,15 mm um die Mitte) und Löcher (Soll ±15,35 × ±8,4 mm, Ø3) am Modul nachmessen. Werte stammen aus einem Händlerfoto.
-- [ ] U2 RS485-Modul: Padpositionen (TTL 2,54 mm, Bus 5,08 mm, jeweils zentriert) und Pinreihenfolge beider Seiten am Modul prüfen. Werte stammen aus einem Händlerfoto.
-- [ ] U1 ESP32-C3 Super Mini: Reihenabstand 15,24 mm und Pinseite (5V/GND/3V3 rechts bei USB oben, Bauteilseite) am Board prüfen.
-- [ ] Papiertest 1:1 für alle vier Module.
-
-### Befestigungslöcher
-
-Gefunden von `hardware/enclosure/test_case.py`, das die Sockel gegen die Lötstellen aus den Footprints rechnet.
-
-- [ ] H2 (62,2 / 3,5) liegt 3,3 mm neben PS1-Pad 3. Kein Sockel mit Gewindeeinsatz passt dorthin (Ø7,2 wäre das Minimum). Entweder H2 auf etwa (62,5 / 8,0) und dafür JP1 samt `BUCK_5V`/`ESP_5V`-Routing und Silkscreen nach unten schieben, oder H2 streichen und die Ecke auf der Leiste im Gehäuse liegen lassen. Das Gehäuse geht bis dahin vom Streichen aus.
-- [ ] H3 (39,9 / 40,5) liegt 4,7 mm neben einem U1-Stift, reicht nur für Ø7,2-Sockel. Auf x = 38,9 schieben (U2-Courtyard endet bei 36,75, keine Leiterbahn im Weg), dann kann `standoff_wall` im Gehäuse zurück auf 2,0.
+- [x] PS1 LM2596 HW-411: Platine 43,4 × 21,2, Eckpads 39,4 × 17,5 mm am Modul gemessen und übernommen. Löcher 30,7 × 16,8 laut Händlerzeichnung.
+- [x] U2 RS485-Modul: Platinenmaß und Padbild stimmen mit dem Modul überein.
+- [x] U1 ESP32-C3 Super Mini: Reihenabstand und Pinseite am Board bestätigt.
 
 ## Weitere Aufgaben
 
