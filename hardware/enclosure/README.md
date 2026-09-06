@@ -7,7 +7,7 @@ Muster der Ventilsteuerungs-Gehäuse im `cad`-Repo, deren
 
 Zwei Teile: `bottom.stl` (Wanne) und `top.stl` (Deckel mit Hex-Lüftungsmuster),
 verschraubt mit vier M3 in Ruthex-Gewindeeinsätzen in den Ecksäulen. Die Platine
-sitzt auf drei Sockeln mit Einsätzen (H1, H3, H4) und liegt an der Buchsenkante auf
+sitzt auf den drei Sockeln unter H1, H3 und H4 und liegt an der Buchsenkante auf
 einer Leiste. Nicht wasserdicht, deshalb ohne Nut und Wulst.
 **87.8 × 54.3 × 34.0 mm** außen, 83 × 49.5 × 28.8 mm innen.
 
@@ -73,11 +73,12 @@ USB-C von U1 zeigt nach +X (ohne Öffnung).
 | Wand, Boden | 2.4 mm (6 × 0.4 Extrusionsbreite) |
 | Deckel | 2.8 mm |
 | Platine | 65 × 44.5 × 1.6, Lochbild aus `pcb.py`, Ø3.2 |
-| Sockel | 3 × Ø7.2 × 7.2 mm unter H1, H3, H4; Ø4.0 × 6.7 Sackloch für Ruthex M3, 1 mm Fußkehle |
-| Leiste | an der +Y-Wand von Säule zu Säule, 3.5 mm tief (1.5 mm unter der Platinenkante), bis Platinenunterkante |
+| Sockel | 3 × Ø8 × 7.2 mm unter H1, H3, H4; Ø4.0 × 6.7 Sackloch für Ruthex M3, 1 mm Fußkehle |
+| Leiste | an der +Y-Wand von Säule zu Säule, unterbrochen vor der Buchse; 3.5 mm tief (1.5 mm unter der Platinenkante), bis Platinenunterkante |
 | Luft um die Platine | 9 mm seitlich (±X), 2 mm zur Buchse (+Y), 3 mm (−Y) |
 | Bauhöhe über Platine | 16 mm reserviert, 4 mm Luft zum Deckel |
-| Steckeröffnung | 14.2 × 15 mm, r2, ab Platinenoberseite, mittig vor J1 |
+| Buchse J1 | 13.2 × 18 mm aus dem Footprint, 11.65 hoch laut Händlerzeichnung, Rastnase zur Platine |
+| Steckeröffnung | 15.2 × 16.65 mm, r2, von 3 mm unter bis 2 mm über der Buchse, mittig vor J1 |
 | Lüftung | Sechsecke SW 4 mm, 1.6 mm Steg, 2 mm Rand zum Wandrand und zu den Senkungen |
 | Deckelschrauben | 4 × M3, Ø3.4 Durchgang, Ø6 × 2 Senkung |
 
@@ -97,13 +98,17 @@ bleiben; kommerzielle Kleingehäuse liegen bei 2 bis 2.5 mm. Die Ecksäulen schn
 (`BUS_PWR` trennen bevor USB dran kommt) liegt sowieso innen. Ein USB-Ausschnitt
 wäre eine Zeile in `build_bottom()`, wenn er doch gebraucht wird.
 
-**Drei Sockel statt vier.** Unter H2 passt kein Sockel mit Einsatz: PS1-Pad 3 liegt
-3.3 mm neben dem Loch, der kleinste zulässige Sockel (Ø7.2) hätte 3.6 mm Radius und
-stünde auf der Lötstelle. Die Ecke liegt stattdessen auf der Leiste an der +Y-Wand,
-die gleichzeitig die Buchsenkante gegen das Einstecken abstützt. H3 ist mit 4.7 mm
-zum nächsten U1-Stift ebenfalls knapp, deshalb Ø7.2 statt Ø8 (Wand 1.6 = Ruthex-
-Minimum). Beides wäre auf der Platine billiger zu lösen, siehe [TODO](../../TODO.md).
-`test_case.py` rechnet die Abstände Sockel/Lötstelle aus den Footprints nach.
+**Drei Sockel und eine Leiste.** Die Platine hat nur drei Befestigungslöcher: in der
+rechten oberen Ecke war neben den PS1-Pads kein Platz für einen Ø8-Sockel, die Ecke
+liegt stattdessen auf der Leiste an der +Y-Wand. Ein Sockel trägt die Platine auf
+seiner Stirnfläche, also darf dort keine Lötstelle liegen; `test_case.py` rechnet das
+für jedes Loch aus den Pads der Footprints nach (Sockelradius plus Padradius plus
+0.25 mm). Die erste Fassung der Platine hatte zwei Löcher, die das nicht erfüllten.
+
+**Öffnung reicht unter die Platine.** Die Buchse hat die Rastnase zur Platine, der
+Hebel des Steckers läuft also unter dem Steckerkörper nach außen und braucht vor der
+Buchsenfront Platz nach unten. Die Leiste ist dort unterbrochen; die Platinenkante
+stützt an der Stelle der Sockel H1 direkt daneben.
 
 **Sockel 7.2 mm hoch** wegen der Einsatzlänge, nicht wegen der Lötstellen (2 mm).
 Wie bei der Ventilsteuerung: die Bohrung muss im Sockel bleiben, der Boden ist zu dünn.
@@ -119,12 +124,12 @@ vollflächig aufliegt und die Schraubensenkungen Fleisch behalten.
 
 - Modulhöhen messen: LM2596 mit Elkos auf seinen Stiften, gesockelter ESP32 mit
   USB-C, Buchse J1. Größter Wert plus Luft gegen `parts_height` halten.
-- Buchse J1 messen (Breite, Höhe, Tiefe ab Front) und `jack_*` anpassen; die
-  Öffnung ist auf 12.2 × 13.3 ausgelegt.
-- 6P6C-Stecker probeweise durch die Öffnung stecken: Rastnase muss erreichbar sein,
-  der Stecker steht rechnerisch 12 mm aus der Wand.
-- Bleibt H2 ohne Sockel, die Platinenecke rechts oben nach dem Einbau auf Spiel
-  prüfen; sie liegt nur auf der Leiste.
+- Buchsenhöhe am Muster prüfen (11.65 laut Zeichnung, `jack_height`).
+- 6P6C-Stecker probeweise durch die Öffnung stecken: die Buchse ist 18 mm tief, der
+  Stecker steht damit kaum aus der 4.4 mm Wand plus Luft heraus. Der Rasthebel muss
+  von unten erreichbar sein, dafür ist die Öffnung 3 mm unter die Buchse gezogen.
+- Platinenecke rechts oben nach dem Einbau auf Spiel prüfen; sie liegt nur auf
+  der Leiste.
 - PETG oder PLA ist egal, es steht innen an der Garagenwand.
 
 ## Dateien

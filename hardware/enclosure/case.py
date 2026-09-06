@@ -56,13 +56,11 @@ import pcb  # noqa: E402
 
 pcb_length, pcb_width = pcb.BOARD_W, pcb.BOARD_H
 pcb_thickness = 1.6
-# H1..H4: die Referenzen mit Befestigungsloch-Footprint
-pcb_hole_refs = [ref for ref, fp in pcb.FOOTPRINTS.items() if fp.startswith("MountingHole")]
-# Nur unter diesen Löchern steht ein Sockel. H2 fehlt: PS1-Pad 3 liegt 3.3 mm
-# neben dem Loch, da passt kein Sockel mit Gewindeeinsatz mehr hin (Ø7.2 wäre
-# das Minimum). Die Platinenecke liegt stattdessen auf der Leiste an der +Y-Wand.
-# Vorschlag für die Platine steht in TODO.md.
-standoff_refs = ["H1", "H3", "H4"]
+# Die Referenzen mit Befestigungsloch-Footprint; unter jedem steht ein Sockel.
+# Die Platine hat drei davon: in der rechten oberen Ecke war neben den PS1-Pads
+# kein Platz für einen Sockel, die Ecke liegt auf der Leiste an der +Y-Wand.
+# test_case.py prüft, dass um jedes Loch genug lötfreie Unterseite ist.
+standoff_refs = [ref for ref, fp in pcb.FOOTPRINTS.items() if fp.startswith("MountingHole")]
 
 # Bauhöhe über der Platinenoberseite, die das Gehäuse freihält. Das höchste
 # Bauteil ist laut Händlerangaben der LM2596 mit seinen Elkos (~13 mm) auf
@@ -78,11 +76,8 @@ solder_tail_height = 2
 Heatset = namedtuple("Heatset", "hole_diameter length min_wall")
 heatset_m3 = Heatset(4.0, 5.7, 1.6)
 
-# Datenblatt-Minimum statt der 2.0 der Ventilsteuerung: H3 liegt nur 4.7 mm neben
-# einem U1-Stift, ein Ø8-Sockel stünde auf dessen Lötstelle. Zurück auf 2.0, wenn
-# H3 auf der Platine nach links rückt.
-standoff_wall = 1.6
-column_wall = 2.0  # Ecksäulen haben den Platz
+standoff_wall = 2.0  # über dem Ruthex-Minimum 1.6, siehe test_case.py
+column_wall = 2.0
 # Höher als die Bohrung tief ist, damit die ganz im Sockel bleibt. Die Platine
 # braucht nur solder_tail_height darunter; die Einsatzlänge gibt das Maß vor.
 standoff_height = 7.2
@@ -142,6 +137,7 @@ pcb_y = case_width / 2 - spacing_top - pcb_width / 2
 # die Platine; die nächsten Lötstellen (PS1) liegen 3.1 mm hinter der Kante.
 ledge_under = 1.5
 ledge_depth = spacing_top + ledge_under
+ledge_gap_side = 0.4  # Abstand der Leistenenden zur Steckeröffnung
 
 
 def kicad(x, y):
@@ -149,14 +145,15 @@ def kicad(x, y):
     return pcb_x + x - pcb_length / 2, pcb_y - (y - pcb_width / 2)
 
 
-# Öffnung für den 6P6C-Stecker in der +Y-Wand, mittig vor J1. Breiter und höher
-# als die Buchse, damit deren Front die Öffnung füllt und die Rastnase Platz hat.
-# UNGEPRÜFT: 95001-Buchsen sind etwa 12.2 breit und 13.3 hoch; Stecker 9.65 breit.
-jack_width, jack_depth, jack_height = 12.2, 13.0, 13.3
-jack_x = kicad(*pcb.PLACEMENT["J1"][:2])[0]
-jack_hole_width = jack_width + 2  # 1 mm Luft je Seite
-jack_hole_height = 15  # ab Platinenoberseite, deckt Buchse plus Toleranz
-jack_hole_z = pcb_top + jack_hole_height / 2
+# Öffnung für den 6P6C-Stecker in der +Y-Wand, mittig vor J1. Grundfläche der
+# Buchse kommt aus dem Footprint (weiter unten), die Höhe aus der Händlerzeichnung
+# der gekauften Buchse (hardware/reference/.../drawing-6p6c.webp, "53-6p6c").
+# Die Rastnase zeigt zur Platine: der Hebel des Steckers läuft unter dem
+# Steckerkörper nach außen und braucht unter der Buchsenfront Platz.
+jack_height = 11.65  # Körper über der Platine, laut Zeichnung
+jack_hole_side = 1.0  # Luft je Seite neben der Buchse
+jack_hole_above = 2.0  # über der Buchse
+jack_hole_below = 3.0  # unter der Buchsenfront, für den Rasthebel
 jack_hole_fillet = 2.0
 
 # --- Deckel -----------------------------------------------------------------
@@ -200,7 +197,7 @@ through = 3 * wall_thickness  # großzügige Länge für Schnitte quer durch ein
 # UNGEPRÜFT: alle Höhen und die Lage der Aufbauten, aus Händlerbildern geschätzt.
 Module = namedtuple("Module", "body_z0 body_height features")
 modules = {
-    # Buchsenkörper, Front bündig mit der Platinenkante
+    # Buchsenkörper (13.2 × 18 laut Footprint), Front bündig mit der Platinenkante
     "J1": Module(0, jack_height, []),
     # Modulplatine steht auf ihren Stiften; Elkos (100 µF/50 V, 220 µF/35 V) sind
     # das Höchste im Gehäuse, dann Drossel, Regler mit Kühlfahne, Trimmer
@@ -227,10 +224,11 @@ modules = {
 }
 module_bodies = {"JP1": (0, 1.27, 2.54, 5.08)}  # (x, y, dx, dy) wo der Footprint keins liefert
 
-# 6P6C-Stecker, steckt in J1 und ragt durch die Wandöffnung nach außen. Rastnase
-# gedrückt gedacht (8 mm hoch), mittig in der Buchsenhöhe.
+# 6P6C-Stecker, steckt bis zur Buchsenrückwand in J1 und ragt durch die
+# Wandöffnung. Rastnase gedrückt gedacht (8 mm hoch), mittig in der Buchsenhöhe.
+# UNGEPRÜFT: wie weit der Körper wirklich aus der Wand steht, zeigt erst der
+# Probedruck; bei 18 mm tiefer Buchse und 4.4 mm Wand plus Luft ist es wenig.
 plug_width, plug_height, plug_length = 9.65, 8.0, 21.0
-plug_outside = plug_length - jack_depth + spacing_top + wall_thickness  # Überstand außen
 
 
 def footprint_text(ref):
@@ -238,13 +236,27 @@ def footprint_text(ref):
 
 
 def footprint_body(ref):
-    """(x, y, dx, dy) des ersten F.Fab-Rechtecks, in Footprint-Koordinaten."""
+    """(x, y, dx, dy) der F.Fab-Zeichnung, in Footprint-Koordinaten: Bounding Box
+    aller Linien und Rechtecke auf der Lage. KiCad-Bibliotheks-Footprints zeichnen
+    den Umriss aus Linien, die eigenen aus einem Rechteck; beides landet hier."""
     if ref in module_bodies:
         return module_bodies[ref]
-    m = re.search(r'\(fp_rect \(start (-?[\d.]+) (-?[\d.]+)\) \(end (-?[\d.]+) (-?[\d.]+)\)[^\n]*\(layer "F.Fab"\)',
-                  footprint_text(ref))
-    x0, y0, x1, y1 = map(float, m.groups())
-    return (x0 + x1) / 2, (y0 + y1) / 2, abs(x1 - x0), abs(y1 - y0)
+    xs, ys = [], []
+    text = " ".join(footprint_text(ref).split())  # KiCad 8 bricht Primitive über mehrere Zeilen
+    for m in re.finditer(r'\(fp_(?:line|rect) \(start (-?[\d.]+) (-?[\d.]+)\) \(end (-?[\d.]+) (-?[\d.]+)\).*?\(layer "([^"]+)"\)', text):
+        if m.group(5) == "F.Fab":
+            xs += [float(m.group(1)), float(m.group(3))]
+            ys += [float(m.group(2)), float(m.group(4))]
+    assert xs, f"{ref}: keine F.Fab-Zeichnung im Footprint"
+    return (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2, max(xs) - min(xs), max(ys) - min(ys)
+
+
+def module_extent(ref):
+    """(xmin, xmax, ymin, ymax) des Modulkörpers in Gehäuse-XY."""
+    bx, by, bdx, bdy = footprint_body(ref)
+    cx, cy = placed(ref, bx, by)
+    dx, dy = placed_size(ref, bdx, bdy)
+    return cx - dx / 2, cx + dx / 2, cy - dy / 2, cy + dy / 2
 
 
 def footprint_drills(ref):
@@ -273,6 +285,17 @@ def placed_size(ref, dx, dy):
 
 def standoff_positions():
     return [placed(ref, 0, 0) for ref in standoff_refs]
+
+
+# Buchse J1 in Gehäusekoordinaten; die Front liegt an der +Y-Platinenkante
+_j1 = module_extent("J1")
+jack_x = (_j1[0] + _j1[1]) / 2
+jack_width = _j1[1] - _j1[0]
+jack_depth = _j1[3] - _j1[2]
+jack_back_y = _j1[2]
+jack_hole_width = jack_width + 2 * jack_hole_side
+jack_hole_height = jack_hole_below + jack_height + jack_hole_above
+jack_hole_z = pcb_top - jack_hole_below + jack_hole_height / 2
 
 
 def edges_in_box(part, lo, hi):
@@ -339,9 +362,12 @@ def build_bottom():
         # Auflageleiste an der +Y-Wand, in die Wand hinein und bis in die Achsen
         # der Ecksäulen verlängert, damit sie in die Säulen übergeht. Nicht weiter:
         # ein Kasten bis zur Innenkante träte am Eckradius durch die Außenhaut.
-        with Locations((0, case_width / 2 - ledge_depth, floor_top)):
-            Box(2 * lid_screw_x, ledge_depth + wall_thickness / 2, standoff_height,
-                align=(Align.CENTER, Align.MIN, Align.MIN))
+        # Vor der Buchse bleibt sie weg: die Steckeröffnung reicht unter die
+        # Platine, und dort stützt ohnehin der Sockel H1 direkt daneben.
+        ledge_gap = jack_hole_width + 2 * ledge_gap_side
+        for x0, x1 in ((-lid_screw_x, jack_x - ledge_gap / 2), (jack_x + ledge_gap / 2, lid_screw_x)):
+            with Locations((x0, case_width / 2 - ledge_depth, floor_top)):
+                Box(x1 - x0, ledge_depth + wall_thickness / 2, standoff_height, align=(Align.MIN, Align.MIN, Align.MIN))
 
         # Steckeröffnung in der +Y-Wand
         with Locations((jack_x, case_width / 2, jack_hole_z)):
@@ -434,7 +460,6 @@ def build_mockups():
         mockups[f"{ref} {pcb.VALUES[ref]}"] = part.part
 
     # Stecker: von der Buchsenrückwand aus nach +Y durch die Wand
-    jack_back_y = placed("J1", 0, jack_depth)[1]
     with BuildPart() as plug:
         with Locations((jack_x, jack_back_y, pcb_top + jack_height / 2)):
             Box(plug_width, plug_length, plug_height, align=(Align.CENTER, Align.MIN, Align.CENTER))

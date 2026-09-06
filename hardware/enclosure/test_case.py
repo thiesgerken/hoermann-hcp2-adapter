@@ -92,11 +92,12 @@ def test_jack_hole():
     assert case.jack_hole_width > case.jack_width
     assert case.jack_hole_height > case.jack_height
     assert case.jack_hole_fillet < min(case.jack_hole_width, case.jack_hole_height) / 2
-    # Zwischen Platinenoberseite und Rand
-    assert case.jack_hole_z - case.jack_hole_height / 2 >= case.pcb_top - 1e-6
+    # Unterkante über dem Boden, Oberkante unter dem Rand
+    assert case.jack_hole_z - case.jack_hole_height / 2 > case.floor_top + 2
     assert case.jack_hole_z + case.jack_hole_height / 2 < case.rim - 2
-    # Stecker ragt außen heraus, sonst kommt man nicht mehr an die Rastnase
-    assert case.plug_outside >= 5, f"Stecker nur {case.plug_outside:.1f} mm außen"
+    # Buchsenfront an der Platinenkante, Öffnung mittig davor
+    assert approx(case._j1[3], case.pcb_y + case.pcb_width / 2), "J1-Front liegt nicht an der Platinenkante"
+    assert abs(case.jack_x) + case.jack_hole_width / 2 < case.lid_screw_x - case.column_diameter / 2, "Öffnung läuft in die Ecksäule"
 
 
 def test_lid_screws():
