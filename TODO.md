@@ -8,6 +8,7 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 
 - [ ] Maße prüfen. Soll: Gehäuse 12,2 breit, 13,0 tief ab Front; Zapfen Ø2,4 im Abstand 12,0, 6,0 hinter der Front; erste Stiftreihe 2,3 hinter den Zapfen, Reihenabstand 2,54, Stiftversatz 1,02, Stift Ø0,9.
 - [ ] Vor dem Bestücken: nur J1 einlöten, Kabel zum Antrieb stecken, +25 V zwischen den Pads 5/6 (rechts) und 1/2 (links) messen. Stimmt die Polung, stimmt auch die Zählung von A+/B-.
+- [ ] Lage der Rastnasen-Kerbe prüfen: laut Zeichnung oben, weg von der Platine. Bei Kerbe unten ist die Kontaktfolge in der Draufsicht gespiegelt und die Pinnummern im Footprint müssen getauscht werden (1↔6, 2↔5, 3↔4).
 - [ ] Papiertest: `hardware/pcb/generated/hcp-pcb.pdf` 1:1 drucken, Buchse aufstecken.
 - [ ] Bei Abweichung: Buchse mit Datenblatt nehmen, etwa Amphenol 54601-906LF (`Connector_RJ:RJ12_Amphenol_54601-x06_Horizontal`), Footprint in `HCP.pretty` tauschen, J1-Routing in `pcb.py` anpassen.
 

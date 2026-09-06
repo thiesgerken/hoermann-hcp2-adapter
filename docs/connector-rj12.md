@@ -38,7 +38,7 @@ Die allgemeinen Galeriebilder zeigen verschiedene Varianten. Sie dürfen nicht a
 
 ## Pinzählung
 
-Norm (TIA/FCC) für Modularstecker: Rastnase unten, Kontakte oben zum Betrachter, Kabel zum Betrachter, dann Pin 1 links. Daraus folgt für die Buchse: in die Öffnung geschaut mit Kerbe unten liegt Kontakt 1 links. Die Händlerzeichnung der 8P8C-Variante zeigt genau das um 180° gedreht (Kerbe oben, PIN1 rechts) und in der Draufsicht mit Kante oben Pin 1 links. Der Footprint übernimmt diese Draufsicht unverändert, HCP-Kontakt k liegt auf Pad k. Die HCP-Belegung von ESPHome benutzt dieselbe Normzählung; eine Spiegelung würde GND und +25 V vertauschen und wäre in keinem der veröffentlichten Aufbauten lauffähig.
+Norm (TIA/FCC) für Modularstecker: Rastnase unten, Kontakte oben zum Betrachter, Kabel zum Betrachter, dann Pin 1 links. Daraus folgt für die Buchse: in die Öffnung geschaut mit Kerbe unten liegt Kontakt 1 links. Die Händlerzeichnung der 8P8C-Variante zeigt genau das um 180° gedreht (Kerbe oben, PIN1 rechts) und in der Draufsicht mit Kante oben Pin 1 links. Der Footprint übernimmt diese Draufsicht unverändert, HCP-Kontakt k liegt auf Pad k. Voraussetzung ist die Kerbe oben (weg von der Platine) wie in der Zeichnung; bei einer Buchse mit Kerbe unten wäre die Zählung gespiegelt. Die HCP-Belegung von ESPHome benutzt dieselbe Normzählung; eine Spiegelung würde GND und +25 V vertauschen und wäre in keinem der veröffentlichten Aufbauten lauffähig.
 
 ## Elektrische HCP2-Belegung
 
