@@ -22,8 +22,7 @@ Entwurf in [`hardware/enclosure/`](hardware/enclosure/README.md). Modulhöhen si
 
 - [ ] Modulhöhen am Teil messen und in `modules` eintragen: LM2596 mit Elkos auf seinen Stiften, gesockelter ESP32 mit USB-C, Buchse J1. Größter Wert gegen `parts_height` (16 mm) halten.
 - [ ] Buchse J1: Höhe und Lage der Rastnase (oben oder unten) notieren, `jack_height` anpassen. Die Öffnung ist auf 13,3 hoch ausgelegt; Breite und Tiefe kommen aus dem J1-Abschnitt oben.
-- [ ] Sockel unter H2: zur Zeit ausgelassen, weil PS1-Pad OUT+ 2,85 mm neben dem Loch liegt und der kleinste Sockel mit Einsatz (Ø7,2) 3,85 bräuchte. Entweder H2 auf der Platine verschieben (etwa auf (62,5 / 8,0), dann JP1 samt Routing nach unten) und in `standoff_refs` aufnehmen, oder H2 streichen; die Ecke liegt dann wie jetzt auf der Leiste.
-- [ ] H3 liegt 3,89 mm vom Lötstellenrand eines U1-Pins, der Ø7,2-Sockel braucht 3,85. Entweder H3 auf x = 38,9 schieben (U2-Courtyard endet bei 36,75, keine Leiterbahn im Weg) und `standoff_wall` zurück auf 2,0, oder die 0,3 mm bewusst akzeptieren und in der Gehäuse-README festhalten.
+- [ ] H3 liegt jetzt auf x = 38,9 und H2 ist gestrichen. In `case.py` `standoff_wall` auf 2,0 zurücksetzen und den Kommentar zu H2 anpassen.
 - [ ] Probedruck der Wanne, 6P6C-Stecker durch die Öffnung stecken: Rastnase erreichbar, Stecker steht rechnerisch 12 mm aus der Wand.
 - [ ] Entscheiden, ob USB-C von U1 eine Öffnung in der +X-Wand bekommt. Zur Zeit nicht, Flashen nur mit abgenommenem Deckel.
 - [ ] Wandbefestigung der Box (Laschen oder Bodenlöcher) festlegen, aktuell keine.

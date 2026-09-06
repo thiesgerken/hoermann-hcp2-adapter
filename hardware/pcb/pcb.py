@@ -49,7 +49,6 @@ FOOTPRINTS = {
     "U1": "ESP32-C3_SuperMini",
     "U2": "RS485_Isolated_34x18",
     "H1": "MountingHole_3.2mm_NoCourtyard",
-    "H2": "MountingHole_3.2mm_NoCourtyard",
     "H3": "MountingHole_3.2mm_NoCourtyard",
     "H4": "MountingHole_3.2mm_NoCourtyard",
 }
@@ -64,11 +63,12 @@ PLACEMENT = {
     "JP1": (63.4, 8.0, 0),
     "U2": (19.5, 34.0, 180),
     "U1": (53.4, 34.0, 270),
-    # M3 enclosure holes in the free spots: below J1, beside JP1, between U2 and U1,
-    # and under the socketed U1 where the screw head fits beneath the module.
+    # M3 enclosure holes in the free spots: below J1, between U2 and U1, and under the
+    # socketed U1 where the screw head fits beneath the module. Each needs 3.6 mm of
+    # solder-free underside around it for the enclosure standoffs; the top-right corner
+    # has no room for that and rests on the enclosure ledge instead.
     "H1": (3.5, 21.5, 0),
-    "H2": (62.2, 3.5, 0),
-    "H3": (39.9, 40.5, 0),
+    "H3": (38.9, 40.5, 0),
     "H4": (61.0, 34.0, 0),
 }
 REFERENCE_POSITIONS = {
@@ -85,7 +85,6 @@ VALUES = {
     "U1": "ESP32-C3 Super Mini",
     "U2": "Isolated RS485",
     "H1": "M3",
-    "H2": "M3",
     "H3": "M3",
     "H4": "M3",
 }

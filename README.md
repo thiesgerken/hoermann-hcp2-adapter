@@ -86,9 +86,9 @@ Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitunge
 | U2 | `RS485_Isolated_34x18`, SMD-Pads für die Halblöcher | unten links, Busseite an der linken Kante |
 | U1 | `ESP32-C3_SuperMini`, 2 × 8 Pins, Reihenabstand 15,24 mm | unten rechts, USB-Ende bündig mit der rechten Kante, Antenne zu U2 |
 | JP1 | `PinHeader_1x02_P2.54mm_Vertical` | rechts neben PS1 |
-| H1 bis H4 | 3,2-mm-Löcher für M3 ohne Courtyard | (3,5 / 21,5), (62,2 / 3,5), (39,9 / 40,5), (61,0 / 34,0) mm von der linken oberen Ecke; H4 liegt unter dem gesockelten U1, der Schraubenkopf passt zwischen die Steckerleisten |
+| H1, H3, H4 | 3,2-mm-Löcher für M3 ohne Courtyard | (3,5 / 21,5), (38,9 / 40,5), (61,0 / 34,0) mm von der linken oberen Ecke; H4 liegt unter dem gesockelten U1, der Schraubenkopf passt zwischen die Steckerleisten. Um jedes Loch sind 3,6 mm Unterseite lötstellenfrei für die Gehäusesockel; die rechte obere Ecke liegt im Gehäuse auf einer Leiste |
 
-Befestigung im Gehäuse über H1 bis H4. Die beiden PS1-Löcher liegen zusätzlich deckungsgleich auf der Trägerplatine.
+Befestigung im Gehäuse über H1, H3 und H4. Die beiden PS1-Löcher liegen zusätzlich deckungsgleich auf der Trägerplatine.
 
 Dieser Stand darf nicht gefertigt werden. Die offenen Prüfungen stehen in [TODO.md](TODO.md).
 
