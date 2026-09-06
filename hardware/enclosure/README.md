@@ -9,7 +9,7 @@ Zwei Teile: `bottom.stl` (Wanne) und `top.stl` (Deckel mit Hex-Lüftungsmuster),
 verschraubt mit vier M3 in Ruthex-Gewindeeinsätzen in den Ecksäulen. Die Platine
 sitzt auf drei Sockeln mit Einsätzen (H1, H3, H4) und liegt an der Buchsenkante auf
 einer Leiste. Nicht wasserdicht, deshalb ohne Nut und Wulst.
-**89.4 × 55.9 × 36.6 mm** außen, 83 × 49.5 × 29.8 mm innen.
+**87.8 × 54.3 × 34.0 mm** außen, 83 × 49.5 × 28.8 mm innen.
 
 Platinenmaße, Lochbild und Modullagen liest `case.py` direkt aus
 [`../pcb/pcb.py`](../pcb/pcb.py) und den Footprints in `HCP.pretty`; von Hand
@@ -67,13 +67,13 @@ USB-C von U1 zeigt nach +X (ohne Öffnung).
 
 | | |
 |---|---|
-| Wand, Boden | 3.2 mm (8 × 0.4 Extrusionsbreite) |
-| Deckel | 3.6 mm |
+| Wand, Boden | 2.4 mm (6 × 0.4 Extrusionsbreite) |
+| Deckel | 2.8 mm |
 | Platine | 65 × 44.5 × 1.6, Lochbild aus `pcb.py`, Ø3.2 |
 | Sockel | 3 × Ø7.2 × 7.2 mm unter H1, H3, H4; Ø4.0 × 6.7 Sackloch für Ruthex M3, 1 mm Fußkehle |
 | Leiste | an der +Y-Wand, 3.5 mm tief (1.5 mm unter der Platinenkante), bis Platinenunterkante |
 | Luft um die Platine | 9 mm seitlich (±X), 2 mm zur Buchse (+Y), 3 mm (−Y) |
-| Bauhöhe über Platine | 16 mm reserviert, 5 mm Luft zum Deckel |
+| Bauhöhe über Platine | 16 mm reserviert, 4 mm Luft zum Deckel |
 | Steckeröffnung | 14.2 × 15 mm, r2, ab Platinenoberseite, mittig vor J1 |
 | Lüftung | Sechsecke SW 4 mm, 1.6 mm Steg, 2 mm Rand zum Wandrand und zu den Senkungen |
 | Deckelschrauben | 4 × M3, Ø3.4 Durchgang, Ø6 × 2 Senkung |
@@ -84,6 +84,11 @@ USB-C von U1 zeigt nach +X (ohne Öffnung).
 alle vier Ecken bestückt, also muss die Säule neben der Platinenkante stehen statt
 über ihrer Ecke. Wer die Box schmaler will, verlegt die Deckelschrauben oder
 kürzt `column_reach` über einen kleineren `corner_radius`.
+
+**Wände 2.4 statt 3.2.** Die Ventilsteuerung brauchte 3.2 für eine gedichtete
+115 × 158-Box im Freien. Hier ist die Box klein, steht innen und nichts muss plan
+bleiben; kommerzielle Kleingehäuse liegen bei 2 bis 2.5 mm. Die Ecksäulen schneiden
+2 mm in die Wand, bleiben also gerade noch innerhalb der Außenkontur.
 
 **Nur eine Öffnung.** USB-C bleibt innen: zum Flashen kommt der Deckel ab, und JP1
 (`BUS_PWR` trennen bevor USB dran kommt) liegt sowieso innen. Ein USB-Ausschnitt
@@ -114,7 +119,7 @@ vollflächig aufliegt und die Schraubensenkungen Fleisch behalten.
 - Buchse J1 messen (Breite, Höhe, Tiefe ab Front) und `jack_*` anpassen; die
   Öffnung ist auf 12.2 × 13.3 ausgelegt.
 - 6P6C-Stecker probeweise durch die Öffnung stecken: Rastnase muss erreichbar sein,
-  der Stecker steht rechnerisch 13 mm aus der Wand.
+  der Stecker steht rechnerisch 12 mm aus der Wand.
 - Bleibt H2 ohne Sockel, die Platinenecke rechts oben nach dem Einbau auf Spiel
   prüfen; sie liegt nur auf der Leiste.
 - PETG oder PLA ist egal, es steht innen an der Garagenwand.

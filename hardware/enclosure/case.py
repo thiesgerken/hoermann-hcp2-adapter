@@ -69,7 +69,7 @@ standoff_refs = ["H1", "H3", "H4"]
 # Stiften, dicht gefolgt vom gesockelten ESP32 mit USB-C-Buchse.
 # UNGEPRÜFT: alle Modulhöhen stammen aus Händlerbildern, siehe Mockups unten.
 parts_height = 16
-headroom = 5  # Luft zwischen höchstem Bauteil und Deckel
+headroom = 4  # Luft zwischen höchstem Bauteil und Deckel
 # Lötstellen und Stiftenden unter der Platine, deutlich unter standoff_height
 solder_tail_height = 2
 
@@ -103,9 +103,11 @@ column_diameter = heatset_m3.hole_diameter + 2 * column_wall  # Ecksäulen für 
 
 # --- Gehäuse ----------------------------------------------------------------
 
-# Wandstärken als Vielfache der Extrusionsbreite (0.4), siehe cad/best-practice.md
-wall_thickness = 3.2  # 8 Bahnen, gilt auch für den Boden
-lid_thickness = 3.6  # 9 Bahnen; das Hex-Muster nimmt dem Deckel Steifigkeit
+# Wandstärken als Vielfache der Extrusionsbreite (0.4), siehe cad/best-practice.md.
+# Dünner als bei der Ventilsteuerung: kleine Box, innen, keine Dichtfläche, die
+# plan bleiben muss.
+wall_thickness = 2.4  # 6 Bahnen, gilt auch für den Boden
+lid_thickness = 2.8  # 7 Bahnen; das Hex-Muster nimmt Steifigkeit, die Senkung braucht 0.8 Rest
 corner_radius = 6
 
 # Seitlich so viel Luft, dass die Ecksäulen an den Platinenecken vorbeilaufen:
