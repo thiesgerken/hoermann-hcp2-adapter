@@ -81,12 +81,12 @@ Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitunge
 
 | Ref. | Footprint | Lage |
 |---|---|---|
-| J1 | `RJ12_95001_6P6C`, Lochbild der 95001-Familie aus den Händlerzeichnungen (Zapfen Ø2,4 im Abstand 12 mm, Stifte 1,02 mm versetzt in Reihen 8,3 und 10,84 mm hinter der Kante; Rastnase unten, Pin 1 rechts hinten in Draufsicht, siehe Fallstrick in `docs/connector-rj12.md`) | oben links, Frontfläche bündig mit der oberen Platinenkante |
+| J1 | `RJ12_Amphenol_54601-x06_Horizontal` (KiCad-Bibliothek, Geometrie laut Händlerzeichnung der gekauften Buchse: Zapfen Ø3,2 im Abstand 10,16 mm, Stifte 1,27 mm versetzt; Rastnase unten, Pin 1 rechts hinten in Draufsicht, siehe `docs/connector-rj12.md`) | oben links, Frontfläche bündig mit der oberen Platinenkante |
 | PS1 | `LM2596_HW-411`, 43,4 × 21,2 mm, Eckpads 39,4 × 17,5 mm (am Modul gemessen), zwei 3,2-mm-Löcher deckungsgleich mit den Modullöchern | oben rechts, IN-Seite zu J1 |
 | U2 | `RS485_Isolated_34x18`, SMD-Pads für die Halblöcher | unten links, Busseite an der linken Kante |
 | U1 | `ESP32-C3_SuperMini`, 2 × 8 Pins, Reihenabstand 15,24 mm | unten rechts, USB-Ende bündig mit der rechten Kante, Antenne zu U2 |
 | JP1 | `PinHeader_1x02_P2.54mm_Vertical` | rechts neben PS1 |
-| H1 bis H4 | 3,2-mm-Löcher für M3 ohne Courtyard | (3,5 / 16,5), (62,2 / 3,5), (39,9 / 40,5), (61,0 / 34,0) mm von der linken oberen Ecke; H4 liegt unter dem gesockelten U1, der Schraubenkopf passt zwischen die Steckerleisten |
+| H1 bis H4 | 3,2-mm-Löcher für M3 ohne Courtyard | (3,5 / 21,5), (62,2 / 3,5), (39,9 / 40,5), (61,0 / 34,0) mm von der linken oberen Ecke; H4 liegt unter dem gesockelten U1, der Schraubenkopf passt zwischen die Steckerleisten |
 
 Befestigung im Gehäuse über H1 bis H4. Die beiden PS1-Löcher liegen zusätzlich deckungsgleich auf der Trägerplatine.
 

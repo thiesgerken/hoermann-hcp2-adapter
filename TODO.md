@@ -2,16 +2,14 @@
 
 Offene Punkte. Erledigtes wird gelöscht, die Historie steht in Git.
 
-## Platine bestellen: blockiert durch J1
+## Platine bestellen: J1 am Muster bestätigen
 
-Footprint `RJ12_95001_6P6C`: Maße aus Familienzeichnungen, Ausrichtung (Rastnase unten, Pin 1 rechts hinten in Draufsicht) aus dem Produktfoto. Details und Fallstrick in `docs/connector-rj12.md`. Sobald das Muster da ist:
+Footprint `RJ12_Amphenol_54601-x06_Horizontal`, Maße aus der Händlerzeichnung der gekauften Buchse, Ausrichtung (Rastnase unten, Pin 1 rechts hinten in Draufsicht) aus Zeichnung und Foto. Fallstrick in `docs/connector-rj12.md`. Sobald das Muster da ist:
 
-- [ ] Maße prüfen. Soll: Gehäuse 12,2 breit, 13,0 tief ab Front; Zapfen Ø2,4 im Abstand 12,0, 6,0 hinter der Front; erste Stiftreihe 2,3 hinter den Zapfen, Reihenabstand 2,54, Stiftversatz 1,02, Stift Ø0,9.
+- [ ] Papiertest: `hardware/pcb/generated/hcp-pcb.pdf` 1:1 drucken, Buchse aufstecken (Zapfen Ø3,2 im Abstand 10,16, Stifte 1,27 versetzt).
 - [ ] Rastnasen-Schlitz zur Platine (unten). Falls oben: Pinnummern im Footprint spiegeln.
 - [ ] Stift von Kontakt 1 durchmessen: in Draufsicht rechts, hintere Reihe. Kontakt 1 ist bei Schlitz unten von vorn gesehen links.
-- [ ] Papiertest: `hardware/pcb/generated/hcp-pcb.pdf` 1:1 drucken, Buchse aufstecken.
 - [ ] Vor dem Bestücken: nur J1 einlöten, Kabel zum Antrieb stecken, +25 V zwischen den Pads 5/6 (links) und 1/2 (rechts) messen.
-- [ ] Bei Abweichung: Buchse mit Datenblatt nehmen, etwa Amphenol 54601-906LF (`Connector_RJ:RJ12_Amphenol_54601-x06_Horizontal`), Footprint in `HCP.pretty` tauschen, J1-Routing in `pcb.py` anpassen.
 
 ## Inbetriebnahme
 

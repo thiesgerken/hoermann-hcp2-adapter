@@ -34,21 +34,21 @@ Die allgemeinen Galeriebilder zeigen verschiedene Varianten. Sie dürfen nicht a
 
 ## Footprint
 
-`HCP:RJ12_95001_6P6C` in `hardware/pcb/HCP.pretty/`: Frontfläche bündig mit der Platinenkante, zwei Zapfen Ø2,4 mm im Abstand 12 mm, 6 mm hinter der Kante, Kontaktstifte in zwei Reihen 8,3 und 10,84 mm hinter der Kante mit 1,02 mm Versatz. Zapfen und Reihenmaße stammen aus den Zeichnungen der Buchsenfamilie ([6P6C eines anderen Anbieters](../hardware/reference/aliexpress-1005008379850389/mechanical-drawing.webp), [8P8C dieses Anbieters](../hardware/reference/aliexpress-1005003078110991/drawing-8p8c-variant.png)).
+`HCP:RJ12_Amphenol_54601-x06_Horizontal` (Kopie aus der KiCad-Bibliothek in `hardware/pcb/HCP.pretty/`). Die [Händlerzeichnung der gekauften 6P6C („53-6p6c")](../hardware/reference/aliexpress-1005003078110991/drawing-6p6c.webp) hat exakt die Geometrie des Amphenol 54601: Gehäuse 13,2 × 18 mm, Zapfen Ø3,2 im Abstand 10,16 mm und 8,89 mm hinter den Stiftreihen, Stifte 1,27 mm versetzt in zwei Reihen mit 2,54 mm Abstand, Ø0,9. Die Frontfläche liegt bündig mit der Platinenkante, die Stiftreihen 14,23 und 16,77 mm dahinter.
 
 Pinbelegung in Draufsicht (Kante oben): Pin 1 rechts in der hinteren Reihe, Pin 2 links daneben in der vorderen Reihe, weiter abwechselnd bis Pin 6 links vorn. Der Silkscreen markiert Pin 1.
 
 ## Fallstrick: Rastnase unten
 
-Die Zeichnungen der Familie zeigen Buchsen mit Rastnasen-Schlitz oben und Kontaktfedern unten. Das Produktfoto der gekauften 6P6C zeigt das Gegenteil: Federn an der oberen Wand der Öffnung, Schlitz zur Platine. Die gekaufte Buchse ist also „latch down". Das spiegelt die Kontaktfolge in der Draufsicht:
+Die Zeichnungen der 95001-Familie ([6P6C eines anderen Anbieters](../hardware/reference/aliexpress-1005008379850389/mechanical-drawing.webp), [8P8C dieses Anbieters](../hardware/reference/aliexpress-1005003078110991/drawing-8p8c-variant.png)) zeigen Buchsen mit Rastnasen-Schlitz oben, Kontaktfedern unten und 1,02-mm-Stiftraster. Die gekaufte 6P6C ist eine andere Bauform: Schlitz zur Platine, Federn an der oberen Wand (Zeichnung „53-6p6c" und Produktfoto), 1,27-mm-Raster. Der Schlitz unten spiegelt die Kontaktfolge in der Draufsicht:
 
 - Norm (TIA/FCC): Stecker mit Rastnase unten, Kontakte oben zum Betrachter, Kabel zum Betrachter, Pin 1 links. In eine Buchse mit Schlitz unten geschaut liegt Kontakt 1 daher links.
 - Wer von vorn in die Buchse schaut, hat rechts, was in der Draufsicht links liegt. Bei Schlitz unten liegt Kontakt 1 in der Draufsicht also **rechts**.
-- Bei einer Buchse mit Schlitz oben (wie in den Zeichnungen) wäre es umgekehrt: Kontakt 1 in der Draufsicht links.
+- Bei einer Buchse mit Schlitz oben wäre es umgekehrt: Kontakt 1 in der Draufsicht links.
 
-Die Reihenzuordnung stammt aus dem Foto: der in der Frontansicht linke Stift sitzt in der hinteren Reihe. Vorausgesetzt ist, dass jede Kontaktfeder gerade nach hinten auf ihren eigenen Stift führt (keine Kreuzung im Gehäuse), was bei dieser Bauform der Fall ist.
+Der KiCad-Footprint des Amphenol 54601 („tab down") nummeriert genau so; um 180° gedreht liegt Pin 1 rechts hinten. Vorausgesetzt ist, dass jede Kontaktfeder gerade nach hinten auf ihren eigenen Stift führt, was bei dieser Bauform der Fall ist.
 
-Vor der Bestellung am Muster bestätigen: Schlitz zur Platine, Stift von Kontakt 1 (Draufsicht rechts hinten) mit dem Multimeter zur Feder durchmessen. Bei einem Muster mit Schlitz oben in `RJ12_95001_6P6C.kicad_mod` die Pinnummern spiegeln (1↔6, 2↔5, 3↔4) und die Reihen prüfen.
+Am Muster bestätigen: Schlitz zur Platine, Stift von Kontakt 1 (Draufsicht rechts hinten) mit dem Multimeter zur Feder durchmessen.
 
 ## Elektrische HCP2-Belegung
 

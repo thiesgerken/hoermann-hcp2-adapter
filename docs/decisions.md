@@ -16,5 +16,6 @@
 | D-012 | 2026-09-05 | beschlossen | Schaltplan und PCB werden ohne SKiDL direkt als KiCad-Dateien aus `design.py` erzeugt. ERC, DRC und Netzliste laufen über `kicad-cli`. | Der SKiDL-Umweg brauchte Regex-Nachbearbeitung für ein lesbares Layout. Die direkte Erzeugung ist kürzer und ergibt einen sauberen Plan. |
 | D-013 | 2026-09-05 | beschlossen | J1 bekommt einen eigenen Footprint `RJ12_95001_6P6C` nach den Händlerzeichnungen statt des Amphenol-54601-Footprints. | Die 95001-Familie hat 1,02-mm-Stiftversatz und Zapfen im Abstand der Gehäusebreite, der Amphenol-Footprint 1,27 mm und 10,16 mm. Beide sind nicht austauschbar. |
 | D-014 | 2026-09-05 | beschlossen | Kein Verpolungsschutz am 25-V-Eingang. | Verpolung ist nur mit gekreuztem Telefonkabel möglich. Das Kabel wird vor dem Anschluss geprüft, es wird ausschließlich 1:1-Kabel verwendet. |
+| D-015 | 2026-09-06 | beschlossen | J1 verwendet wieder den KiCad-Footprint des Amphenol 54601, um 180° gedreht. | Die Händlerzeichnung der gekauften 6P6C (Typ 53-6p6c) hat exakt dessen Geometrie: 13,2 x 18 mm, Zapfen 3,2 mm bei 10,16 mm, Stifte 1,27 mm versetzt, Rastnase unten. Ersetzt D-013. |
 
 Neue Entscheidungen erhalten eine fortlaufende ID. Änderungen werden als neuer Eintrag dokumentiert, damit die ursprüngliche Begründung erhalten bleibt.
