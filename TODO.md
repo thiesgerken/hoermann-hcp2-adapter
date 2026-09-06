@@ -30,7 +30,7 @@ Gefunden von `hardware/enclosure/test_case.py`, das die Sockel gegen die Lötste
 ## Weitere Aufgaben
 
 - [ ] Widerstand zwischen A und B am stromlosen U2 messen (integrierter 120-Ohm-Abschluss).
-- [ ] ESPHome-Konfiguration mit `hcp` Komponente, UART auf GPIO21/GPIO20, 57600 8E1.
+- [ ] ESPHome-Konfiguration mit `hcp` Komponente, UART auf GPIO21/GPIO20, 57600 8E1. Logger auf `hardware_uart: USB_SERIAL_JTAG` legen, sonst geht der Boot-Log über UART0 auf den RS485-Bus.
 
 ## Gehäuse
 
