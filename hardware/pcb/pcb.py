@@ -113,7 +113,7 @@ VIAS = (
     ("UART_TX_GPIO21", 38.5, 35.27),
 )
 SILK_TEXTS = (
-    (f"Hörmann {VERSION}", 10.6, 16.0, 0, 0.8, "F.SilkS"),
+    (f"Hörmann HCP2 Adapter {VERSION}   (C) 2026 Thies Gerken", 40.0, 24.0, 0, 0.8, "F.SilkS"),
     ("1", 6.45, 12.6, 0, 0.8, "F.SilkS"),
     ("DISCONNECT", 62.4, 19.2, 90, 0.8, "F.SilkS"),
     ("FOR USB", 63.6, 19.2, 90, 0.8, "F.SilkS"),
