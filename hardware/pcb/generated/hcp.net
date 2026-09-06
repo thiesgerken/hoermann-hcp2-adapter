@@ -1,8 +1,8 @@
 (export
 	(version "E")
 	(design
-		(source "/Users/tgerken/Privat/Projekte/hoermann/hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch")
-		(date "2026-09-06T08:39:28")
+		(source "/Users/tgerken/Privat/Projekte/hoermann/hardware/pcb/generated/hcp.kicad_sch")
+		(date "2026-09-06T08:40:20")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -11,9 +11,9 @@
 			(title_block
 				(title "Hörmann HCP2 ESP32-C3 Adapter")
 				(company "Thies Gerken")
-				(rev "cabe87e")
+				(rev "afc2ea8")
 				(date "2026-09-05")
-				(source "hoermann-hcp-adapter.kicad_sch")
+				(source "hcp.kicad_sch")
 				(comment
 					(number "1")
 					(value "")
@@ -75,11 +75,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hoermann-hcp-adapter")
+				(value "hcp")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hoermann-hcp-adapter.kicad_sch")
+				(value "hcp.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -133,11 +133,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hoermann-hcp-adapter")
+				(value "hcp")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hoermann-hcp-adapter.kicad_sch")
+				(value "hcp.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -179,11 +179,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hoermann-hcp-adapter")
+				(value "hcp")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hoermann-hcp-adapter.kicad_sch")
+				(value "hcp.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -231,11 +231,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hoermann-hcp-adapter")
+				(value "hcp")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hoermann-hcp-adapter.kicad_sch")
+				(value "hcp.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -319,11 +319,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hoermann-hcp-adapter")
+				(value "hcp")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hoermann-hcp-adapter.kicad_sch")
+				(value "hcp.kicad_sch")
 			)
 			(sheetpath
 				(names "/")

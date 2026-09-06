@@ -467,7 +467,7 @@
   (segment (start 124.0 107.08) (end 118.5 107.08) (width 0.5) (layer "F.Cu") (net 3) (uuid "7ae62eab-9c7c-5f03-a910-5f490c8ce3cb"))
   (via (at 154.5 103.27) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net 8) (uuid "73760be1-116e-59c7-9ed5-d0515bead84c"))
   (gr_rect (start 116.0 68.0) (end 181.0 112.5) (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (uuid "d983de5e-6d11-5176-89a2-dc17fc98f290"))
-  (gr_text "Hörmann HCP2 Adapter cabe87e" (at 145.5 92.0 0) (layer "F.SilkS") (uuid "db2da043-ed62-5e26-a032-13cafd2cc851") (effects (font (size 0.8 0.8) (thickness 0.15))))
+  (gr_text "Hörmann HCP2 Adapter afc2ea8" (at 145.5 92.0 0) (layer "F.SilkS") (uuid "db2da043-ed62-5e26-a032-13cafd2cc851") (effects (font (size 0.8 0.8) (thickness 0.15))))
   (gr_text "(C) 2026" (at 126.6 84.0 0) (layer "F.SilkS") (uuid "dacfafa4-4f92-5a41-b1f2-778af65d31be") (effects (font (size 0.8 0.8) (thickness 0.15))))
   (gr_text "Thies Gerken" (at 126.6 85.4 0) (layer "F.SilkS") (uuid "6f4cb148-24a3-5607-ad5c-47479eceedae") (effects (font (size 0.8 0.8) (thickness 0.15))))
   (gr_text "1" (at 122.45 80.6 0) (layer "F.SilkS") (uuid "7518ccfa-c10e-5886-ae46-e533115f4787") (effects (font (size 0.8 0.8) (thickness 0.15))))
