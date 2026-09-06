@@ -28,6 +28,7 @@ Der LM2596 ist nicht galvanisch getrennt. Deshalb teilt der Gesamtadapter trotz 
 ## Dokumentation
 
 - [Offene Punkte](TODO.md)
+- [Gehäuse](hardware/enclosure/README.md)
 - [Bauteile und Beschaffungsstatus](docs/components.md)
 - [Gekaufte Module und Hilfsteile](docs/purchased-modules.md)
 - [Ausgewählte 6P6C-Buchse](docs/connector-rj12.md)
@@ -36,7 +37,7 @@ Der LM2596 ist nicht galvanisch getrennt. Deshalb teilt der Gesamtadapter trotz 
 - [Entscheidungsprotokoll](docs/decisions.md)
 - [Lokales Händlerarchiv](hardware/reference/README.md)
 
-IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbücher liegen unter `hardware/manuals/hoermann/`. Archivierte Händlerseiten, Produktbeschreibungen und Bilder liegen unter `hardware/reference/`. Schaltplan- und PCB-Generator sowie Footprints liegen unter `hardware/pcb/`, alle daraus erzeugten KiCad-Dateien unter `hardware/pcb/generated/`.
+IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbücher liegen unter `hardware/manuals/hoermann/`. Archivierte Händlerseiten, Produktbeschreibungen und Bilder liegen unter `hardware/reference/`. Schaltplan- und PCB-Generator sowie Footprints liegen unter `hardware/pcb/`, alle daraus erzeugten KiCad-Dateien unter `hardware/pcb/generated/`. Das gedruckte Gehäuse (build123d) liegt unter `hardware/enclosure/`.
 
 ## Schaltplan
 

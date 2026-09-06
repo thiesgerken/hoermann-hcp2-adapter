@@ -2,4 +2,11 @@
 name = "hoermann"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "build123d>=0.11.1",
+]
+
+[dependency-groups]
+dev = [
+    "ocp-vscode>=4.0.1",
+]
