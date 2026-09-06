@@ -19,6 +19,8 @@ in Gehäusekoordinaten um, damit die Zahlen aus pcb.py direkt verwendbar bleiben
 """
 
 import math
+import re
+import sys
 from collections import namedtuple
 from pathlib import Path
 
@@ -43,14 +45,24 @@ from build123d import (
 
 from outputs import write_outputs
 
-# --- Platine ----------------------------------------------------------------
-# Alles aus hardware/pcb/pcb.py und den Footprints in HCP.pretty. Die Platine ist
-# noch nicht gefertigt; ändert sich dort etwas, ändert es sich hier mit.
+# Platinenmaße, Lochbild und Modulpositionen kommen direkt aus dem PCB-Generator,
+# die Modulumrisse aus dessen Footprints. Eine Layoutänderung dort landet so ohne
+# Abschreiben hier.
+PCB_DIR = Path(__file__).resolve().parent.parent / "pcb"
+sys.path.insert(0, str(PCB_DIR))
+import pcb  # noqa: E402
 
-pcb_length, pcb_width, pcb_thickness = 65.0, 44.5, 1.6
-# H1..H4 in KiCad-Koordinaten (von der linken oberen Ecke), Ø3.2 für M3
-pcb_holes = [(3.5, 16.5), (62.2, 3.5), (39.9, 40.5), (61.0, 34.0)]
-pcb_hole_diameter = 3.2
+# --- Platine ----------------------------------------------------------------
+
+pcb_length, pcb_width = pcb.BOARD_W, pcb.BOARD_H
+pcb_thickness = 1.6
+# H1..H4: die Referenzen mit Befestigungsloch-Footprint
+pcb_hole_refs = [ref for ref, fp in pcb.FOOTPRINTS.items() if fp.startswith("MountingHole")]
+# Nur unter diesen Löchern steht ein Sockel. H2 fehlt: PS1-Pad 3 liegt 3.3 mm
+# neben dem Loch, da passt kein Sockel mit Gewindeeinsatz mehr hin (Ø7.2 wäre
+# das Minimum). Die Platinenecke liegt stattdessen auf der Leiste an der +Y-Wand.
+# Vorschlag für die Platine steht in TODO.md.
+standoff_refs = ["H1", "H3", "H4"]
 
 # Bauhöhe über der Platinenoberseite, die das Gehäuse freihält. Das höchste
 # Bauteil ist laut Händlerangaben der LM2596 mit seinen Elkos (~13 mm) auf
@@ -66,7 +78,11 @@ solder_tail_height = 2
 Heatset = namedtuple("Heatset", "hole_diameter length min_wall")
 heatset_m3 = Heatset(4.0, 5.7, 1.6)
 
-standoff_wall = 2.0
+# Datenblatt-Minimum statt der 2.0 der Ventilsteuerung: H3 liegt nur 4.7 mm neben
+# einem U1-Stift, ein Ø8-Sockel stünde auf dessen Lötstelle. Zurück auf 2.0, wenn
+# H3 auf der Platine nach links rückt.
+standoff_wall = 1.6
+column_wall = 2.0  # Ecksäulen haben den Platz
 # Höher als die Bohrung tief ist, damit die ganz im Sockel bleibt. Die Platine
 # braucht nur solder_tail_height darunter; die Einsatzlänge gibt das Maß vor.
 standoff_height = 7.2
@@ -83,7 +99,7 @@ def standoff_diameter(insert):
     return insert.hole_diameter + 2 * standoff_wall
 
 
-column_diameter = standoff_diameter(heatset_m3)  # Ecksäulen für den Deckel
+column_diameter = heatset_m3.hole_diameter + 2 * column_wall  # Ecksäulen für den Deckel
 
 # --- Gehäuse ----------------------------------------------------------------
 
@@ -119,6 +135,13 @@ pcb_x = 0.0
 pcb_y = case_width / 2 - spacing_top - pcb_width / 2
 
 
+# Leiste unter der +Y-Platinenkante, von Säule zu Säule: trägt die Ecke ohne
+# Sockel (H2) und die Buchse gegen das Einstecken. Greift ledge_under weit unter
+# die Platine; die nächsten Lötstellen (PS1) liegen 3.1 mm hinter der Kante.
+ledge_under = 1.5
+ledge_depth = spacing_top + ledge_under
+
+
 def kicad(x, y):
     """KiCad-Platinenkoordinaten (links oben, y nach unten) -> Gehäuse-XY."""
     return pcb_x + x - pcb_length / 2, pcb_y - (y - pcb_width / 2)
@@ -128,7 +151,7 @@ def kicad(x, y):
 # als die Buchse, damit deren Front die Öffnung füllt und die Rastnase Platz hat.
 # UNGEPRÜFT: 95001-Buchsen sind etwa 12.2 breit und 13.3 hoch; Stecker 9.65 breit.
 jack_width, jack_depth, jack_height = 12.2, 13.0, 13.3
-jack_x = kicad(9.0, 0.0)[0]
+jack_x = kicad(*pcb.PLACEMENT["J1"][:2])[0]
 jack_hole_width = jack_width + 2  # 1 mm Luft je Seite
 jack_hole_height = 15  # ab Platinenoberseite, deckt Buchse plus Toleranz
 jack_hole_z = pcb_top + jack_hole_height / 2
@@ -165,23 +188,89 @@ vent_margin = 2.0
 through = 3 * wall_thickness  # großzügige Länge für Schnitte quer durch eine Wand
 
 # --- Grobmodelle der Hardware -----------------------------------------------
-# Nur für den Viewer und die Einbauprobe im Test, nicht für die STLs. Grundflächen
-# aus den Footprints (F.Fab), Höhen aus Händlerangaben. (KiCad-Mitte x, y, Größe
-# dx, dy nach Drehung, Höhe über der Platinenoberseite.)
-# UNGEPRÜFT: Höhen. PS1 sitzt auf seinen Stiften ~2 mm über der Platine, U1 ist
-# gesockelt (Buchsenleiste 8.5 + Platine 1.6 + USB-C 3.5).
-module_features = {
-    "J1 6P6C": (9.0, 6.5, jack_width, jack_depth, jack_height),
-    "PS1 LM2596": (38.45, 12.25, 43.5, 21.5, 15),
-    "U2 RS485": (19.5, 34.0, 34.0, 18.0, 9),
-    "U1 ESP32-C3": (53.4, 34.0, 22.52, 18.0, 14),
-    "JP1": (63.0, 9.27, 2.54, 5.08, 9),
+# Nur für den Viewer und die Einbauprobe im Test, nicht für die STLs. Umriss und
+# Lage jedes Moduls kommen aus dem F.Fab-Rechteck seines Footprints und aus
+# pcb.PLACEMENT; hier stehen nur die Höhen und was über der Platine darauf sitzt.
+#
+# Aufbauten in Footprint-Koordinaten (KiCad: y nach unten, vor der Drehung) als
+# (x, y, dx, dy, z0, h): Mitte, Grundfläche, Unterkante über der Platine, Höhe.
+# dx = None heißt Zylinder mit Durchmesser dy.
+# UNGEPRÜFT: alle Höhen und die Lage der Aufbauten, aus Händlerbildern geschätzt.
+Module = namedtuple("Module", "body_z0 body_height features")
+modules = {
+    # Buchsenkörper, Front bündig mit der Platinenkante
+    "J1": Module(0, jack_height, []),
+    # Modulplatine steht auf ihren Stiften; Elkos (100 µF/50 V, 220 µF/35 V) sind
+    # das Höchste im Gehäuse, dann Drossel, Regler mit Kühlfahne, Trimmer
+    "PS1": Module(2, 1.6, [
+        (-13, 3, None, 8.5, 3.6, 11),
+        (13, 3, None, 8.5, 3.6, 11),
+        (0, 2, 12, 12, 3.6, 7),
+        (5, -6, 10, 5, 3.6, 8),
+        (-13, -6, 5, 10, 3.6, 6),
+    ]),
+    # Castellated, liegt flach auf; Bestückung als Block
+    "U2": Module(0, 1.6, [(0, 0, 30, 14, 1.6, 7)]),
+    # Gesockelt: Buchsenleisten 8.5 mm, darauf die Platine, darauf USB-C (am -y-Ende
+    # laut Footprint), Antenne am +y-Ende
+    "U1": Module(8.5, 1.6, [
+        (-7.62, 0, 2.54, 20.32, 0, 8.5),
+        (7.62, 0, 2.54, 20.32, 0, 8.5),
+        (0, -9.6, 9, 7.3, 10.1, 3.2),
+        (0, 10.3, 7, 2, 10.1, 1),
+        (0, 0, 6, 6, 10.1, 1),
+    ]),
+    # Stiftleiste mit Jumper, Footprint hat kein F.Fab-Rechteck, darum eigener Körper
+    "JP1": Module(0, 9, []),
 }
+module_bodies = {"JP1": (0, 1.27, 2.54, 5.08)}  # (x, y, dx, dy) wo der Footprint keins liefert
 
 # 6P6C-Stecker, steckt in J1 und ragt durch die Wandöffnung nach außen. Rastnase
 # gedrückt gedacht (8 mm hoch), mittig in der Buchsenhöhe.
 plug_width, plug_height, plug_length = 9.65, 8.0, 21.0
 plug_outside = plug_length - jack_depth + spacing_top + wall_thickness  # Überstand außen
+
+
+def footprint_text(ref):
+    return (pcb.LIBRARY_DIR / f"{pcb.FOOTPRINTS[ref]}.kicad_mod").read_text()
+
+
+def footprint_body(ref):
+    """(x, y, dx, dy) des ersten F.Fab-Rechtecks, in Footprint-Koordinaten."""
+    if ref in module_bodies:
+        return module_bodies[ref]
+    m = re.search(r'\(fp_rect \(start (-?[\d.]+) (-?[\d.]+)\) \(end (-?[\d.]+) (-?[\d.]+)\)[^\n]*\(layer "F.Fab"\)',
+                  footprint_text(ref))
+    x0, y0, x1, y1 = map(float, m.groups())
+    return (x0 + x1) / 2, (y0 + y1) / 2, abs(x1 - x0), abs(y1 - y0)
+
+
+def footprint_drills(ref):
+    """[(x, y, drill, pad, plated)] aller Bohrungen des Footprints. `pad` ist die
+    Padgröße, also der Platz, den die Lötstelle unter der Platine einnimmt."""
+    return [
+        (float(x), float(y), float(d), max(float(sx), float(sy)), kind == "thru_hole")
+        for kind, x, y, sx, sy, d in re.findall(
+            r'\(pad "[^"]*" (thru_hole|np_thru_hole) \w+\s*\(at (-?[\d.]+) (-?[\d.]+)[^)]*\)\s*'
+            r'\(size ([\d.]+) ([\d.]+)\)\s*\(drill ([\d.]+)',
+            footprint_text(ref),
+        )
+    ]
+
+
+def placed(ref, x, y):
+    """Footprint-Koordinaten -> Gehäuse-XY, mit Drehung und Lage aus pcb.PLACEMENT."""
+    px, py, rotation = pcb.PLACEMENT[ref]
+    dx, dy = pcb.rotate(x, y, rotation)
+    return kicad(px + dx, py + dy)
+
+
+def placed_size(ref, dx, dy):
+    return (dy, dx) if pcb.PLACEMENT[ref][2] % 180 else (dx, dy)
+
+
+def standoff_positions():
+    return [placed(ref, 0, 0) for ref in standoff_refs]
 
 
 def edges_in_box(part, lo, hi):
@@ -192,10 +281,6 @@ def edges_in_box(part, lo, hi):
         .filter_by_position(Axis.Y, lo[1], hi[1])
         .filter_by_position(Axis.Z, lo[2], hi[2])
     )
-
-
-def standoff_positions():
-    return [kicad(x, y) for x, y in pcb_holes]
 
 
 def build_bottom():
@@ -248,6 +333,11 @@ def build_bottom():
                 align=(Align.CENTER, Align.CENTER, Align.MAX),
                 mode=Mode.SUBTRACT,
             )
+
+        # Auflageleiste an der +Y-Wand, in die Wand hinein verlängert
+        with Locations((0, case_width / 2 - ledge_depth, floor_top)):
+            Box(case_length - 2 * column_reach, ledge_depth + wall_thickness / 2, standoff_height,
+                align=(Align.CENTER, Align.MIN, Align.MIN))
 
         # Steckeröffnung in der +Y-Wand
         with Locations((jack_x, case_width / 2, jack_hole_z)):
@@ -312,26 +402,35 @@ def build_top():
 
 def build_mockups():
     base = Align.CENTER, Align.CENTER, Align.MIN
-    with BuildPart() as pcb:
+    with BuildPart() as board:
         with Locations((pcb_x, pcb_y, pcb_bottom)):
             Box(pcb_length, pcb_width, pcb_thickness, align=base)
-        with Locations(*[(x, y, pcb_bottom) for x, y in standoff_positions()]):
-            Cylinder(pcb_hole_diameter / 2, pcb_thickness, align=base, mode=Mode.SUBTRACT)
-        # Lötstellen und Stiftenden unter der Platine, pauschal als Platte
-        with Locations((pcb_x, pcb_y, pcb_bottom - solder_tail_height)):
-            Box(pcb_length - 2 * standoff_diameter(heatset_m3), pcb_width - 2 * standoff_diameter(heatset_m3),
-                solder_tail_height, align=base)
+        for ref in pcb.FOOTPRINTS:
+            for x, y, drill, pad, plated in footprint_drills(ref):
+                cx, cy = placed(ref, x, y)
+                with Locations((cx, cy, pcb_bottom)):
+                    Cylinder(drill / 2, pcb_thickness, align=base, mode=Mode.SUBTRACT)
+                if plated:
+                    # Lötstelle unter der Platine, so groß wie das Pad; dort muss
+                    # der Sockel Platz lassen
+                    with Locations((cx, cy, pcb_bottom - solder_tail_height)):
+                        Cylinder(pad / 2, solder_tail_height, align=base)
 
-    mockups = {"pcb": pcb.part}
-    for name, (kx, ky, dx, dy, h) in module_features.items():
-        x, y = kicad(kx, ky)
-        with BuildPart() as module:
-            with Locations((x, y, pcb_top)):
-                Box(dx, dy, h, align=base)
-        mockups[name] = module.part
+    mockups = {"pcb": board.part}
+    for ref, module in modules.items():
+        bx, by, bdx, bdy = footprint_body(ref)
+        with BuildPart() as part:
+            for x, y, dx, dy, z0, h in [(bx, by, bdx, bdy, module.body_z0, module.body_height), *module.features]:
+                cx, cy = placed(ref, x, y)
+                with Locations((cx, cy, pcb_top + z0)):
+                    if dx is None:
+                        Cylinder(dy / 2, h, align=base)
+                    else:
+                        Box(*placed_size(ref, dx, dy), h, align=base)
+        mockups[f"{ref} {pcb.VALUES[ref]}"] = part.part
 
     # Stecker: von der Buchsenrückwand aus nach +Y durch die Wand
-    jack_back_y = kicad(9.0, jack_depth)[1]
+    jack_back_y = placed("J1", 0, jack_depth)[1]
     with BuildPart() as plug:
         with Locations((jack_x, jack_back_y, pcb_top + jack_height / 2)):
             Box(plug_width, plug_length, plug_height, align=(Align.CENTER, Align.MIN, Align.CENTER))

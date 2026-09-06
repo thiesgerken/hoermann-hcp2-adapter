@@ -24,4 +24,5 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 
 - [ ] Widerstand zwischen A und B am stromlosen U2 messen (integrierter 120-Ohm-Abschluss).
 - [ ] ESPHome-Konfiguration mit `hcp` Komponente, UART auf GPIO21/GPIO20, 57600 8E1.
+- [ ] Befestigungslöcher gegen das Gehäuse prüfen (aus `hardware/enclosure/test_case.py`): H2 (62,2 / 3,5) liegt 3,3 mm neben PS1-Pad 3, dort passt kein Sockel mit Gewindeeinsatz; H3 (39,9 / 40,5) liegt 4,7 mm neben einem U1-Stift, reicht nur für Ø7,2. Vorschlag: H3 auf x = 38,9; H2 auf (62,5 / 8,0) und dafür JP1 samt `BUCK_5V`/`ESP_5V`-Routing und Silkscreen nach unten schieben, oder H2 streichen und die Ecke auf der Leiste im Gehäuse liegen lassen.
 - [ ] Gehäuse: Entwurf liegt in [`hardware/enclosure/`](hardware/enclosure/README.md), nur mit Öffnung für J1. Vor dem Druck Modulhöhen und Buchsenmaße messen und `parts_height` / `jack_*` nachziehen; USB-C-Ausschnitt nur bei Bedarf.

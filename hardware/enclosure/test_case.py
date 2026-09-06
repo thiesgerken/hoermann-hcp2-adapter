@@ -52,6 +52,24 @@ def test_heatset():
     assert case.heatset_hole_depth(insert) <= case.standoff_height
     assert case.heatset_hole_depth(insert) < case.case_height
     assert case.standoff_height >= case.solder_tail_height + 1
+    assert (case.column_diameter - insert.hole_diameter) / 2 >= insert.min_wall
+
+
+def test_standoffs_clear_solder():
+    """Der Sockel trägt die Platine auf seiner Stirnfläche; keine Lötstelle darf darauf liegen."""
+    pads = [
+        (case.placed(ref, x, y), pad)
+        for ref in case.pcb.FOOTPRINTS
+        for x, y, _, pad, plated in case.footprint_drills(ref)
+        if plated
+    ]
+    for px, py in case.standoff_positions():
+        gap = min(math.dist((px, py), p) - pad / 2 for p, pad in pads) - case.standoff_diameter(case.heatset_m3) / 2
+        assert gap >= 0.25, f"Lötstelle {gap:.2f} mm neben dem Sockel bei ({px:.1f}, {py:.1f})"
+    # Leiste unter der +Y-Kante: nichts Gelötetes im Griffbereich
+    edge = case.pcb_y + case.pcb_width / 2
+    for (x, y), pad in pads:
+        assert edge - (y + pad / 2) >= case.ledge_under + 0.25, f"Lötstelle bei ({x:.1f}, {y:.1f}) unter der Leiste"
 
 
 def test_pcb_clears_columns():
@@ -92,6 +110,7 @@ def test_lid_screws():
 def test_mockups_fit():
     bottom = case.build_bottom()
     mocks = case.build_mockups()
+    assert mocks["pcb"].bounding_box().min.Z > case.floor_top, "Lötstellen im Boden"
     for name, mock in mocks.items():
         overlap = bottom.intersect(mock)
         volume = sum(s.volume for s in overlap.solids()) if overlap is not None else 0.0
@@ -105,7 +124,9 @@ def test_mockups_fit():
             overlap = mocks[a].intersect(mocks[b])
             volume = sum(s.volume for s in overlap.solids()) if overlap is not None else 0.0
             assert volume < 1.0, f"{a} und {b} überlappen"
-    tallest = max(f[4] for f in case.module_features.values())
+    tallest = max(
+        max([m.body_z0 + m.body_height, *(f[4] + f[5] for f in m.features)]) for m in case.modules.values()
+    )
     assert tallest <= case.parts_height, f"{tallest} mm Bauteil über {case.parts_height} mm reserviert"
 
 
@@ -114,6 +135,7 @@ if __name__ == "__main__":
     test_bottom()
     test_top()
     test_heatset()
+    test_standoffs_clear_solder()
     test_pcb_clears_columns()
     test_standoffs_clear_walls_and_columns()
     test_jack_hole()
