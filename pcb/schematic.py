@@ -1,8 +1,8 @@
 """Generate the KiCad schematic from the net model in design.py.
 
-Symbols, wire routes and labels are explicit coordinates on the 1.27 mm grid. The
-script writes generated/hcp.kicad_sch, runs KiCad ERC, exports the
-netlist, checks it against EXPECTED_CONNECTIONS and renders the PDF.
+Symbols, wire routes, and labels use explicit coordinates on the 1.27 mm grid.
+The script writes hcp.kicad_sch beside the generator, runs KiCad ERC, exports
+the netlist, checks it against EXPECTED_CONNECTIONS, and renders the PDF.
 """
 import json
 import re
@@ -15,7 +15,7 @@ from pathlib import Path
 from design import EXPECTED_CONNECTIONS, git_version
 
 SOURCE_DIR = Path(__file__).parent
-OUTPUT_DIR = SOURCE_DIR / "generated"
+OUTPUT_DIR = SOURCE_DIR
 SCHEMATIC_PATH = OUTPUT_DIR / "hcp.kicad_sch"
 NETLIST_PATH = OUTPUT_DIR / "hcp.net"
 PDF_PATH = OUTPUT_DIR / "hcp-schematic.pdf"

@@ -21,9 +21,9 @@ Local copies:
 
 | Document | Local copy | Project relevance |
 |---|---|---|
-| ProMatic 4 installation, operation, and maintenance, 4511178 B0 / 18-2022 / RE | [PDF](../manuals/hoermann/promatic-4-montage-betrieb-wartung-4511178-b0-18-2022.pdf) | BUS activation, BUS scan, safety, and operating instructions |
-| ProMatic 4 functional description and accessories, 4553098 B0 / 21-2022 | [PDF](../manuals/hoermann/promatic-4-funktionen-zubehoer-4553098-b0-21-2022.pdf) | BUS scan, Series 4 accessories, and 350 mA combined limit |
-| HOR1-HCP option relay, TR30A117 / 07.2019 | [PDF](../manuals/hoermann/hor1-hcp-tr30a117-07-2019.pdf) | Series 4, 10 m BUS cable limit, and participant status |
+| ProMatic 4 installation, operation, and maintenance, 4511178 B0 / 18-2022 / RE | [PDF](../manuals/promatic-4-montage-betrieb-wartung-4511178-b0-18-2022.pdf) | BUS activation, BUS scan, safety, and operating instructions |
+| ProMatic 4 functional description and accessories, 4553098 B0 / 21-2022 | [PDF](../manuals/promatic-4-funktionen-zubehoer-4553098-b0-21-2022.pdf) | BUS scan, Series 4 accessories, and 350 mA combined limit |
+| HOR1-HCP option relay, TR30A117 / 07.2019 | [PDF](../manuals/hor1-hcp-tr30a117-07-2019.pdf) | Series 4, 10 m BUS cable limit, and participant status |
 
 Analysis: [Hörmann manual analysis](hoermann-manuals.md)
 

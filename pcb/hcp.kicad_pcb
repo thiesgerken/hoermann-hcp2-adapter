@@ -821,7 +821,7 @@
   (gr_line (start 179.0 80.6) (end 178.4 81.4) (stroke (width 0.2) (type default)) (layer "F.SilkS") (uuid "fe682758-7a2b-5df0-9363-ffc313151cd6"))
   (gr_line (start 179.0 80.6) (end 179.6 81.4) (stroke (width 0.2) (type default)) (layer "F.SilkS") (uuid "b4e32f14-cfbd-55bd-9080-59ce5da2c8f4"))
   (gr_text "Hörmann HCP2" (at 127.4 87.2 0) (layer "F.SilkS") (uuid "db2da043-ed62-5e26-a032-13cafd2cc851") (effects (font (size 0.8 0.8) (thickness 0.15))))
-  (gr_text "Adapter 977c400" (at 127.4 88.6 0) (layer "F.SilkS") (uuid "dacfafa4-4f92-5a41-b1f2-778af65d31be") (effects (font (size 0.8 0.8) (thickness 0.15))))
+  (gr_text "Adapter 609722a" (at 127.4 88.6 0) (layer "F.SilkS") (uuid "dacfafa4-4f92-5a41-b1f2-778af65d31be") (effects (font (size 0.8 0.8) (thickness 0.15))))
   (gr_text "(C) 2026" (at 127.4 90.0 0) (layer "F.SilkS") (uuid "6f4cb148-24a3-5607-ad5c-47479eceedae") (effects (font (size 0.8 0.8) (thickness 0.15))))
   (gr_text "Thies Gerken" (at 127.4 91.4 0) (layer "F.SilkS") (uuid "7518ccfa-c10e-5886-ae46-e533115f4787") (effects (font (size 0.8 0.8) (thickness 0.15))))
   (gr_text "1" (at 129.7 84.77 0) (layer "F.SilkS") (uuid "66d6f0a5-6cb0-525f-b629-43376eee4870") (effects (font (size 0.8 0.8) (thickness 0.15))))

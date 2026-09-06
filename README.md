@@ -13,17 +13,22 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="pcb/generated/hcp-pcb-top.png" alt="Top view of the Hörmann HCP2 adapter PCB"><br><strong>65 × 44.5 mm carrier PCB</strong></td>
-<td width="50%" align="center"><img src="enclosure/preview-top.png" alt="Top enclosure CAD preview"><br><strong>Parametric two-part enclosure</strong></td>
+<td width="34%" align="center"><img src="pcb/hcp-pcb-top.png" alt="Top view of the Hörmann HCP2 adapter PCB"><br><strong>65 × 44.5 mm carrier PCB</strong></td>
+<td width="33%" align="center"><img src="enclosure/preview-top.png" alt="Enclosure lid CAD preview"><br><strong>Ventilated lid</strong></td>
+<td width="33%" align="center"><img src="enclosure/preview-bottom.png" alt="Enclosure tray CAD preview"><br><strong>Fitted electronics tray</strong></td>
 </tr>
 </table>
 
 > [!CAUTION]
 > This is a prototype, not a fabrication-ready design. Module dimensions and the 6P6C jack pinout must be verified against the delivered parts before ordering a PCB or connecting it to an opener. See the [open checks](TODO.md).
+>
+> Use this project entirely at your own risk. I am not responsible for any damage, injury, loss, or other consequence resulting from its use in any way. This independent project is not affiliated with, endorsed by, or sponsored by Hörmann.
 
-## What this project provides
+## About this repository
 
-The value of this project is the hardware around readily available modules:
+This is the documentation repository for how I built my adapter around the [ESPHome Hörmann HCP component](https://esphome.io/components/cover/hoermann_hcp/). It may be useful for other people building one as well.
+
+It includes:
 
 - a fully routed two-layer KiCad carrier PCB with project-specific footprints
 - reproducible Python generators for the schematic, PCB, manufacturing outputs, and renders
@@ -37,27 +42,6 @@ The board connects four purchased assemblies:
 - adjustable LM2596 buck converter for approximately 25 V to 5 V
 - isolated TTL-to-RS485 module with automatic direction control
 - unshielded 6P6C modular jack for the Hörmann HCP2 bus
-
-```mermaid
-flowchart LR
-    HCP["Hörmann HCP2<br/>6P6C jack"]
-
-    subgraph ADAPTER["HCP2 adapter"]
-        direction LR
-        BUCK["LM2596<br/>25 V to 5 V"]
-        JUMPER["BUS_PWR<br/>disconnect"]
-        BUS["RS485<br/>bus side"]
-        ISO{{"galvanic<br/>isolation"}}
-        TTL["RS485<br/>TTL side"]
-        ESP["ESP32-C3<br/>ESPHome"]
-
-        BUCK --> JUMPER --> ESP
-        BUS <--> ISO <--> TTL <--> ESP
-    end
-
-    HCP -->|"+25 V / GND"| BUCK
-    HCP <-->|"A+ / B-"| BUS
-```
 
 The LM2596 is not galvanically isolated. The complete adapter therefore shares the HCP supply ground even though the RS485 signal path is isolated. Full galvanic isolation would require an isolated DC/DC converter.
 
@@ -95,15 +79,15 @@ uv run python pcb/schematic.py
 uv run python pcb/pcb.py
 ```
 
-The generators write editable KiCad files to [`pcb/generated/`](pcb/generated/), run ERC and DRC, render the schematic and both board sides, and package Gerber and Excellon data.
+The generators write editable KiCad files directly to [`pcb/`](pcb/), run ERC and DRC, render the schematic and both board sides, and package Gerber and Excellon data.
 
 Useful outputs:
 
-- [editable schematic](pcb/generated/hcp.kicad_sch)
-- [schematic PDF](pcb/generated/hcp-schematic.pdf)
-- [editable PCB](pcb/generated/hcp.kicad_pcb)
-- [layer PDF](pcb/generated/hcp-pcb.pdf)
-- [Gerber and drill archive](pcb/generated/hcp-gerbers.zip)
+- [editable schematic](pcb/hcp.kicad_sch)
+- [schematic PDF](pcb/hcp-schematic.pdf)
+- [editable PCB](pcb/hcp.kicad_pcb)
+- [layer PDF](pcb/hcp-pcb.pdf)
+- [Gerber and drill archive](pcb/hcp-gerbers.zip)
 
 The title blocks include the short Git hash of `HEAD`. For release artifacts, commit the sources first, regenerate both designs, then commit the generated outputs.
 

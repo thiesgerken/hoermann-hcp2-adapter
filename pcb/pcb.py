@@ -1,7 +1,7 @@
 """Generate the carrier PCB from the footprints in HCP.pretty and the net model in design.py.
 
-Placement and routing are explicit coordinates. Run the file to rebuild the KiCad project
-in generated/, run KiCad DRC on it and render previews.
+Placement and routing use explicit coordinates. Run this file to rebuild the
+KiCad project beside the generator, run DRC, and render previews.
 """
 import json
 import math
@@ -16,7 +16,7 @@ from design import EXPECTED_CONNECTIONS, git_version
 
 SOURCE_DIR = Path(__file__).parent
 LIBRARY_DIR = SOURCE_DIR / "HCP.pretty"
-OUTPUT_DIR = SOURCE_DIR / "generated"
+OUTPUT_DIR = SOURCE_DIR
 BOARD_PATH = OUTPUT_DIR / "hcp.kicad_pcb"
 PROJECT_PATH = OUTPUT_DIR / "hcp.kicad_pro"
 FP_LIB_TABLE_PATH = OUTPUT_DIR / "fp-lib-table"
@@ -254,7 +254,7 @@ def write_project():
     }, indent=2) + "\n")
     FP_LIB_TABLE_PATH.write_text(
         "(fp_lib_table\n  (version 7)\n"
-        '  (lib (name "HCP") (type "KiCad") (uri "${KIPRJMOD}/../HCP.pretty") (options "") (descr "Project footprints"))\n'
+        '  (lib (name "HCP") (type "KiCad") (uri "${KIPRJMOD}/HCP.pretty") (options "") (descr "Project footprints"))\n'
         ")\n"
     )
 

@@ -4,7 +4,7 @@ The manuals supplied with this project remain unchanged under [`reference/manual
 
 ## ProMatic 4 installation, operation, and maintenance
 
-- File: [promatic-4-montage-betrieb-wartung-4511178-b0-18-2022.pdf](../manuals/hoermann/promatic-4-montage-betrieb-wartung-4511178-b0-18-2022.pdf)
+- File: [promatic-4-montage-betrieb-wartung-4511178-b0-18-2022.pdf](../manuals/promatic-4-montage-betrieb-wartung-4511178-b0-18-2022.pdf)
 - Document number: `4511178 B0`
 - Edition: `18-2022 / RE`
 - Language: German
@@ -20,7 +20,7 @@ Relevant sections:
 
 ## ProMatic 4 functional description and accessories
 
-- File: [promatic-4-funktionen-zubehoer-4553098-b0-21-2022.pdf](../manuals/hoermann/promatic-4-funktionen-zubehoer-4553098-b0-21-2022.pdf)
+- File: [promatic-4-funktionen-zubehoer-4553098-b0-21-2022.pdf](../manuals/promatic-4-funktionen-zubehoer-4553098-b0-21-2022.pdf)
 - Document number: `4553098 B0`
 - Edition: `21-2022`
 - Title: Garage door operator, functional description and accessories
@@ -39,7 +39,7 @@ The 350 mA value is a combined accessory limit, not the automatic allowance for 
 
 ## HOR1-HCP option relay
 
-- File: [hor1-hcp-tr30a117-07-2019.pdf](../manuals/hoermann/hor1-hcp-tr30a117-07-2019.pdf)
+- File: [hor1-hcp-tr30a117-07-2019.pdf](../manuals/hor1-hcp-tr30a117-07-2019.pdf)
 - Document number: `TR30A117`
 - Edition: `07.2019`
 - Product: `HOR1-HCP`
