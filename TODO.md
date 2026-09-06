@@ -20,9 +20,26 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 - [ ] U1 ESP32-C3 Super Mini: Reihenabstand 15,24 mm und Pinseite (5V/GND/3V3 rechts bei USB oben, Bauteilseite) am Board prüfen.
 - [ ] Papiertest 1:1 für alle vier Module.
 
+### Befestigungslöcher
+
+Gefunden von `hardware/enclosure/test_case.py`, das die Sockel gegen die Lötstellen aus den Footprints rechnet.
+
+- [ ] H2 (62,2 / 3,5) liegt 3,3 mm neben PS1-Pad 3. Kein Sockel mit Gewindeeinsatz passt dorthin (Ø7,2 wäre das Minimum). Entweder H2 auf etwa (62,5 / 8,0) und dafür JP1 samt `BUCK_5V`/`ESP_5V`-Routing und Silkscreen nach unten schieben, oder H2 streichen und die Ecke auf der Leiste im Gehäuse liegen lassen. Das Gehäuse geht bis dahin vom Streichen aus.
+- [ ] H3 (39,9 / 40,5) liegt 4,7 mm neben einem U1-Stift, reicht nur für Ø7,2-Sockel. Auf x = 38,9 schieben (U2-Courtyard endet bei 36,75, keine Leiterbahn im Weg), dann kann `standoff_wall` im Gehäuse zurück auf 2,0.
+
 ## Weitere Aufgaben
 
 - [ ] Widerstand zwischen A und B am stromlosen U2 messen (integrierter 120-Ohm-Abschluss).
 - [ ] ESPHome-Konfiguration mit `hcp` Komponente, UART auf GPIO21/GPIO20, 57600 8E1.
-- [ ] Befestigungslöcher gegen das Gehäuse prüfen (aus `hardware/enclosure/test_case.py`): H2 (62,2 / 3,5) liegt 3,3 mm neben PS1-Pad 3, dort passt kein Sockel mit Gewindeeinsatz; H3 (39,9 / 40,5) liegt 4,7 mm neben einem U1-Stift, reicht nur für Ø7,2. Vorschlag: H3 auf x = 38,9; H2 auf (62,5 / 8,0) und dafür JP1 samt `BUCK_5V`/`ESP_5V`-Routing und Silkscreen nach unten schieben, oder H2 streichen und die Ecke auf der Leiste im Gehäuse liegen lassen.
-- [ ] Gehäuse: Entwurf liegt in [`hardware/enclosure/`](hardware/enclosure/README.md), nur mit Öffnung für J1. Vor dem Druck Modulhöhen und Buchsenmaße messen und `parts_height` / `jack_*` nachziehen; USB-C-Ausschnitt nur bei Bedarf.
+
+## Gehäuse
+
+Entwurf in [`hardware/enclosure/`](hardware/enclosure/README.md). Alle Modulhöhen sind Händlerangaben, im Code mit `UNGEPRÜFT` markiert.
+
+- [ ] Modulhöhen am Teil messen und in `modules` eintragen: LM2596 mit Elkos auf seinen Stiften, gesockelter ESP32 mit USB-C, Buchse J1. Größter Wert gegen `parts_height` (16 mm) halten.
+- [ ] Buchse J1 messen (Breite, Höhe, Tiefe ab Front) und `jack_*` anpassen; die Öffnung ist auf 12,2 × 13,3 ausgelegt. Lage der Rastnase (oben oder unten) notieren.
+- [ ] Nach Entscheidung zu H2/H3 (siehe oben) `standoff_refs` und `standoff_wall` in `case.py` nachziehen.
+- [ ] Probedruck der Wanne, 6P6C-Stecker durch die Öffnung stecken: Rastnase erreichbar, Stecker steht rechnerisch 13 mm aus der Wand.
+- [ ] Entscheiden, ob USB-C von U1 eine Öffnung in der +X-Wand bekommt. Zur Zeit nicht, Flashen nur mit abgenommenem Deckel.
+- [ ] Wandbefestigung der Box (Laschen oder Bodenlöcher) festlegen, aktuell keine.
+- [ ] Insert-Reserve prüfen: Sockel 7,2 mm hoch wegen der Ruthex-M3-Einsätze, Platine bräuchte nur 2 mm. Kürzerer Einsatz spart Bauhöhe.
