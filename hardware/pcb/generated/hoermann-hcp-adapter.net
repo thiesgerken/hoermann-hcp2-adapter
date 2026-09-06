@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/Users/tgerken/Privat/Projekte/hoermann/hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch")
-		(date "2026-09-06T08:38:50")
+		(date "2026-09-06T08:39:28")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -11,7 +11,7 @@
 			(title_block
 				(title "Hörmann HCP2 ESP32-C3 Adapter")
 				(company "Thies Gerken")
-				(rev "fc29ef6")
+				(rev "cabe87e")
 				(date "2026-09-05")
 				(source "hoermann-hcp-adapter.kicad_sch")
 				(comment
