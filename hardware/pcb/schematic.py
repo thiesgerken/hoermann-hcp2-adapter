@@ -29,7 +29,7 @@ GND_NET = "HCP_GND"
 PARTS = {
     "J1": {
         "value": "HCP2 6P6C",
-        "footprint": "HCP:RJ12_95001_6P6C",
+        "footprint": "HCP:RJ12_Amphenol_54601-x06_Horizontal",
         "at": (40.64, 88.9),
         "half_width": 10.16,
         "pins": (

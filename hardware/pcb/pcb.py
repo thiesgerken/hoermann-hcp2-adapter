@@ -43,7 +43,7 @@ PIN_NETS = {
 }
 
 FOOTPRINTS = {
-    "J1": "RJ12_95001_6P6C",
+    "J1": "RJ12_Amphenol_54601-x06_Horizontal",
     "PS1": "LM2596_HW-411",
     "JP1": "PinHeader_1x02_P2.54mm_Vertical",
     "U1": "ESP32-C3_SuperMini",
@@ -54,19 +54,19 @@ FOOTPRINTS = {
     "H4": "MountingHole_3.2mm_NoCourtyard",
 }
 
-# (x, y, rotation). J1 opening faces the top edge, PS1 IN side towards J1, U2 bus side
+# (x, y, rotation). J1 (Amphenol 54601 geometry, latch down) opens towards the top edge, PS1 IN side towards J1, U2 bus side
 # on the left edge under J1, U1 with its USB end flush with the right board edge so a
 # cable can be plugged in while mounted. Roughly 2 mm between module outlines and
 # 1.5 mm to the board edge elsewhere.
 PLACEMENT = {
-    "J1": (9.0, 0.0, 0),
+    "J1": (12.18, 16.77, 180),
     "PS1": (38.45, 12.25, 0),
     "JP1": (63.4, 8.0, 0),
     "U2": (19.5, 34.0, 180),
     "U1": (53.4, 34.0, 270),
     # M3 enclosure holes in the free spots: below J1, beside JP1, between U2 and U1,
     # and under the socketed U1 where the screw head fits beneath the module.
-    "H1": (3.5, 16.5, 0),
+    "H1": (3.5, 21.5, 0),
     "H2": (62.2, 3.5, 0),
     "H3": (39.9, 40.5, 0),
     "H4": (61.0, 34.0, 0),
@@ -93,10 +93,10 @@ VALUES = {
 # Points are absolute board coordinates. Pad centres are computed from the footprints
 # and checked against the route vertices in check_routes().
 ROUTES = (
-    ("HCP_25V", "F.Cu", SIGNAL, ((7.47, 10.84), (6.45, 9.82), (6.45, 8.3))),
-    ("HCP_25V", "F.Cu", POWER, ((6.45, 8.3), (6.45, 3.5), (18.75, 3.5))),
-    ("HCP_GND", "F.Cu", SIGNAL, ((10.53, 8.3), (10.53, 9.82), (11.55, 10.84))),
-    ("HCP_GND", "F.Cu", POWER, ((11.55, 10.84), (11.55, 14.5), (18.75, 14.5), (18.75, 21.0))),
+    ("HCP_25V", "F.Cu", SIGNAL, ((7.1, 16.77), (7.1, 15.5), (5.83, 14.23), (5.83, 11.0), (6.6, 10.23))),
+    ("HCP_25V", "F.Cu", POWER, ((6.6, 10.23), (6.6, 3.5), (18.75, 3.5))),
+    ("HCP_GND", "F.Cu", SIGNAL, ((10.91, 14.23), (10.91, 15.5), (12.18, 16.77))),
+    ("HCP_GND", "F.Cu", POWER, ((12.18, 16.77), (12.18, 21.0), (18.75, 21.0))),
     ("HCP_GND", "F.Cu", POWER, ((18.75, 21.0), (18.75, 23.9), (58.15, 23.9), (58.15, 21.0))),
     ("HCP_GND", "F.Cu", SIGNAL, ((58.15, 23.9), (63.8, 23.9), (63.8, 43.2), (59.75, 43.2), (59.75, 41.62))),
     ("HCP_GND", "F.Cu", SIGNAL, ((39.5, 23.9), (39.5, 30.19), (36.5, 30.19))),
@@ -106,8 +106,8 @@ ROUTES = (
     ("UART_RX_GPIO20", "F.Cu", SIGNAL, ((47.05, 26.38), (47.05, 32.73), (36.5, 32.73))),
     ("UART_TX_GPIO21", "B.Cu", SIGNAL, ((44.51, 26.38), (44.51, 35.27), (38.5, 35.27))),
     ("UART_TX_GPIO21", "F.Cu", SIGNAL, ((38.5, 35.27), (36.5, 35.27))),
-    ("HCP_B_MINUS", "F.Cu", SIGNAL, ((9.51, 10.84), (9.51, 13.5), (6.5, 13.5), (6.5, 32.5), (4.5, 34.0), (2.5, 34.0))),
-    ("HCP_A_PLUS", "B.Cu", SIGNAL, ((8.49, 8.3), (8.49, 6.8), (5.0, 6.8), (5.0, 12.5), (6.0, 13.5), (6.0, 39.08))),
+    ("HCP_B_MINUS", "F.Cu", SIGNAL, ((9.64, 16.77), (9.64, 19.3), (6.5, 19.3), (6.5, 32.5), (4.5, 34.0), (2.5, 34.0))),
+    ("HCP_A_PLUS", "B.Cu", SIGNAL, ((8.37, 14.23), (8.37, 12.3), (4.3, 12.3), (4.3, 17.0), (6.0, 18.7), (6.0, 39.08))),
     ("HCP_A_PLUS", "F.Cu", SIGNAL, ((6.0, 39.08), (2.5, 39.08))),
 )
 VIAS = (
@@ -121,12 +121,11 @@ SILK_LINES = (
     ((63.0, 12.6), (63.6, 13.4)),
 )
 SILK_TEXTS = (
-    ("Hörmann", 10.8, 14.6, 0, 0.8, "F.SilkS"),
-    ("HCP2 Adapter", 10.8, 16.0, 0, 0.8, "F.SilkS"),
-    (VERSION, 10.8, 17.4, 0, 0.8, "F.SilkS"),
-    ("(C) 2026", 10.8, 18.8, 0, 0.8, "F.SilkS"),
-    ("Thies Gerken", 10.8, 20.2, 0, 0.8, "F.SilkS"),
-    ("1", 13.1, 10.84, 0, 0.8, "F.SilkS"),
+    ("Hörmann HCP2", 11.4, 19.2, 0, 0.8, "F.SilkS"),
+    (f"Adapter {VERSION}", 11.4, 20.6, 0, 0.8, "F.SilkS"),
+    ("(C) 2026", 11.4, 22.0, 0, 0.8, "F.SilkS"),
+    ("Thies Gerken", 11.4, 23.4, 0, 0.8, "F.SilkS"),
+    ("1", 13.7, 16.77, 0, 0.8, "F.SilkS"),
     ("!", 61.5, 14.0, 0, 1.4, "F.SilkS"),
     ("DISCONNECT", 62.4, 20.2, 90, 0.8, "F.SilkS"),
     ("FOR USB", 63.6, 20.2, 90, 0.8, "F.SilkS"),
