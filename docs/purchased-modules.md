@@ -91,7 +91,7 @@ Abnahme am gelieferten Modul:
 
 1. Pinbeschriftung beider Seiten fotografieren und durchmessen.
 2. Gleichstromwiderstand zwischen A und B im stromlosen Zustand messen.
-3. Der gemessene Abschluss wird dokumentiert. Die Trägerplatine ergänzt keinen weiteren Abschlusswiderstand.
+3. Gemessen am stromlosen Modul: 120 Ohm zwischen A und B. Die Trägerplatine ergänzt keinen weiteren Abschlusswiderstand.
 4. Logikpegel am RX-Ausgang bei gewählter Versorgung messen.
 5. Sendeumschaltung und Empfang bei 57600 Baud mit gerader Parität prüfen.
 6. Galvanische Trennung zwischen TTL-Masse und Busseite messen.
