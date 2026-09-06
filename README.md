@@ -24,24 +24,40 @@
 >
 > Use this project entirely at your own risk. I am not responsible for any damage, injury, loss, or other consequence resulting from its use in any way. This independent project is not affiliated with, endorsed by, or sponsored by Hörmann.
 
-## About this repository
-
 This is the documentation repository for how I built my adapter around the [ESPHome Hörmann HCP component](https://esphome.io/components/cover/hoermann_hcp/). It may be useful for other people building one as well.
 
 It includes:
 
-- a fully routed two-layer KiCad carrier PCB with project-specific footprints
-- reproducible Python generators for the schematic, PCB, manufacturing outputs, and renders
-- a compact, parametric build123d enclosure matched directly to the PCB geometry
-- printable STL files and 3MF assembly previews
-- documented mechanical, electrical, and sourcing decisions
+- 🧩 a fully routed two-layer KiCad carrier PCB with project-specific footprints
+- ⚙️ reproducible Python generators for the schematic, PCB, manufacturing outputs, and renders
+- 📦 a compact, parametric build123d enclosure matched directly to the PCB geometry
+- 🖨️ printable STL files and 3MF assembly previews
+- 📚 documented mechanical, electrical, and sourcing decisions
 
-The board connects four purchased assemblies:
+## BOM
 
-- ESP32-C3 Super Mini running ESPHome
-- adjustable LM2596 buck converter for approximately 25 V to 5 V
-- isolated TTL-to-RS485 module with automatic direction control
-- unshielded 6P6C modular jack for the Hörmann HCP2 bus
+### Electronics
+
+| Qty. | Ref. | Component | Notes |
+|---:|---|---|---|
+| 1 | PCB | Carrier PCB | Two-layer, 65 × 44.5 mm; fabrication files are in [`pcb/`](pcb/) |
+| 1 | U1 | [ESP32-C3 Super Mini](reference/docs/purchased-modules.md#esp32-c3-super-mini) | Socketed; runs ESPHome |
+| 1 | PS1 | [LM2596 HW-411 buck converter](reference/docs/purchased-modules.md#lm2596-buck-converter-module) | Adjustable; set and verify 5.0 V before connecting U1 |
+| 1 | U2 | [Isolated TTL-to-RS485 module](reference/docs/purchased-modules.md#isolated-ttl-to-rs485-module) | 3.3 V/5 V, automatic direction control, integrated 120 Ω termination |
+| 1 | J1 | [Unshielded right-angle 6P6C jack](reference/docs/connector-rj12.md) | AliExpress item `1005003078110991`, option `6P6C` |
+| 1 | JP1 | 1×2, 2.54 mm pin header and jumper shunt | Disconnects `BUS_PWR` before USB is connected |
+| 2 | U1 sockets | 1×8, 2.54 mm socket headers | Keep U1 removable and provide clearance above H4 |
+| 1 | W1 | [Straight-through 6P6C cable](reference/docs/purchased-modules.md#6p6c-cable) | Verify all six conductors before use |
+
+### Enclosure
+
+| Qty. | Component | Notes |
+|---:|---|---|
+| 1 | Printed `bottom.stl` | Tray with PCB supports and 6P6C opening |
+| 1 | Printed `top.stl` | Ventilated lid |
+| 7 | Ruthex M3 heat-set inserts | Four for the lid and three for the PCB bosses |
+| 4 | M3 lid screws | Length must match the selected inserts |
+| 3 | M3 PCB screws | Length must match the PCB stack and selected inserts |
 
 The LM2596 is not galvanically isolated. The complete adapter therefore shares the HCP supply ground even though the RS485 signal path is isolated. Full galvanic isolation would require an isolated DC/DC converter.
 
