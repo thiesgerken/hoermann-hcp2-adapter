@@ -34,7 +34,11 @@ Die allgemeinen Galeriebilder zeigen verschiedene Varianten. Sie dürfen nicht a
 
 ## Footprint
 
-`HCP:RJ12_95001_6P6C` in `hardware/pcb/HCP.pretty/` folgt der 95001-Familie: Frontfläche bündig mit der Platinenkante, zwei Zapfen Ø2,4 mm im Abstand 12 mm, 6 mm hinter der Kante. Die Kontaktstifte stehen in zwei Reihen 8,3 und 10,84 mm hinter der Kante, 1,02 mm versetzt, Pin 1 in Draufsicht links. Der Zapfenabstand stammt aus der [Zeichnung der nicht gewählten 6P6C-Buchse](../hardware/reference/aliexpress-1005008379850389/mechanical-drawing.webp); die 8P8C-Zeichnung des gewählten Händlers zeigt dasselbe Muster mit 15 mm.
+`HCP:RJ12_95001_6P6C` in `hardware/pcb/HCP.pretty/` folgt der 95001-Familie: Frontfläche bündig mit der Platinenkante, zwei Zapfen Ø2,4 mm im vorläufigen Abstand 12 mm, 6 mm hinter der Kante. Die Kontaktstifte stehen in zwei Reihen 8,3 und 10,84 mm hinter der Kante, 1,02 mm versetzt, Pin 1 in Draufsicht links. Die 8P8C-Zeichnung des gewählten Händlers nennt für ihre abweichende Variante 15 mm Zapfenabstand und ist kein Maßnachweis für die ausgewählte 6P6C-Buchse. Alle Maße müssen vor der Fertigung am gelieferten Teil bestätigt werden.
+
+## Pinzählung
+
+Norm (TIA/FCC) für Modularstecker: Rastnase unten, Kontakte oben zum Betrachter, Kabel zum Betrachter, dann Pin 1 links. Daraus folgt für die Buchse: in die Öffnung geschaut mit Kerbe unten liegt Kontakt 1 links. Die Händlerzeichnung der 8P8C-Variante zeigt genau das um 180° gedreht (Kerbe oben, PIN1 rechts) und in der Draufsicht mit Kante oben Pin 1 links. Der Footprint übernimmt diese Draufsicht unverändert, HCP-Kontakt k liegt auf Pad k. Die HCP-Belegung von ESPHome benutzt dieselbe Normzählung; eine Spiegelung würde GND und +25 V vertauschen und wäre in keinem der veröffentlichten Aufbauten lauffähig.
 
 ## Elektrische HCP2-Belegung
 

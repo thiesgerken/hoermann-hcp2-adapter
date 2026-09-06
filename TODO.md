@@ -4,10 +4,9 @@ Offene Punkte. Erledigtes wird gelöscht, die Historie steht in Git.
 
 ## Platine bestellen: blockiert durch J1
 
-Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwestermodelle, nicht auf einem Datenblatt der gekauften Buchse. Sobald das Muster da ist:
+Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwestermodelle, nicht auf einem Datenblatt der gekauften Buchse. Die Pinzählung ist geklärt (Händlerzeichnung folgt der TIA-Norm, siehe `docs/connector-rj12.md`), offen ist nur die Mechanik der 6P6C-Variante. Sobald das Muster da ist:
 
 - [ ] Maße prüfen. Soll: Gehäuse 12,2 breit, 13,0 tief ab Front; Zapfen Ø2,4 im Abstand 12,0, 6,0 hinter der Front; erste Stiftreihe 2,3 hinter den Zapfen, Reihenabstand 2,54, Stiftversatz 1,02, Stift Ø0,9.
-- [ ] Kontaktfolge mit 1:1-Kabel durchmessen. Soll: Pin 1 in Draufsicht links in der kantennahen Reihe, Pin 2 rechts daneben in der hinteren Reihe. Norm: Stecker mit Rastnase unten, Kontakte oben, Kabel zu dir, dann Pin 1 links.
 - [ ] Vor dem Bestücken: nur J1 einlöten, Kabel zum Antrieb stecken, +25 V zwischen den Pads 5/6 (rechts) und 1/2 (links) messen. Stimmt die Polung, stimmt auch die Zählung von A+/B-.
 - [ ] Papiertest: `hardware/pcb/generated/hcp-pcb.pdf` 1:1 drucken, Buchse aufstecken.
 - [ ] Bei Abweichung: Buchse mit Datenblatt nehmen, etwa Amphenol 54601-906LF (`Connector_RJ:RJ12_Amphenol_54601-x06_Horizontal`), Footprint in `HCP.pretty` tauschen, J1-Routing in `pcb.py` anpassen.
