@@ -30,7 +30,10 @@ uv run python hardware/enclosure/test_case.py           # Maßketten prüfen
 ```
 
 Ausgabe landet immer neben dem Skript. Jeder Lauf druckt Bounding-Box und Volumen
-beider Teile.
+beider Teile und schreibt zusätzlich den Zusammenbau: `preview.stl` (Wanne mit
+Platine, Modulen und Stecker, für jeden STL-Viewer) und `preview.3mf` (dasselbe plus
+Deckel, alle Objekte benannt und gefärbt, Deckel und Hardware mit Alpha; ob ein
+Viewer die Transparenz anzeigt, hängt vom Viewer ab).
 
 **Live-Viewer:** einmal in einem eigenen Terminal starten und offen lassen:
 
@@ -71,7 +74,7 @@ USB-C von U1 zeigt nach +X (ohne Öffnung).
 | Deckel | 2.8 mm |
 | Platine | 65 × 44.5 × 1.6, Lochbild aus `pcb.py`, Ø3.2 |
 | Sockel | 3 × Ø7.2 × 7.2 mm unter H1, H3, H4; Ø4.0 × 6.7 Sackloch für Ruthex M3, 1 mm Fußkehle |
-| Leiste | an der +Y-Wand, 3.5 mm tief (1.5 mm unter der Platinenkante), bis Platinenunterkante |
+| Leiste | an der +Y-Wand von Säule zu Säule, 3.5 mm tief (1.5 mm unter der Platinenkante), bis Platinenunterkante |
 | Luft um die Platine | 9 mm seitlich (±X), 2 mm zur Buchse (+Y), 3 mm (−Y) |
 | Bauhöhe über Platine | 16 mm reserviert, 4 mm Luft zum Deckel |
 | Steckeröffnung | 14.2 × 15 mm, r2, ab Platinenoberseite, mittig vor J1 |
@@ -129,5 +132,9 @@ vollflächig aufliegt und die Schraubensenkungen Fleisch behalten.
 ```
 case.py        Modell; Parameterblock oben, alles Weitere abgeleitet
 test_case.py   Maßketten und Einbauprobe der Grobmodelle
-outputs.py     STL/PNG/Viewer, Kopie aus dem cad-Repo (cad_models)
+outputs.py     STL/3MF/PNG/Viewer, nach dem cad_models-Helfer aus dem cad-Repo
+bottom.stl     Wanne, druckfertig
+top.stl        Deckel, druckfertig (liegt auf der Außenseite)
+preview.stl    Zusammenbau ohne Deckel, nur zum Anschauen
+preview.3mf    Zusammenbau mit Deckel, gefärbt, nur zum Anschauen
 ```

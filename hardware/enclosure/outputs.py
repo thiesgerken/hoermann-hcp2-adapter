@@ -10,7 +10,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from build123d import ExportSVG, export_stl
+from build123d import Color, Compound, ExportSVG, Mesher, export_stl
 
 __all__ = ["preview", "write_outputs"]
 
@@ -37,7 +37,23 @@ def preview(shape, path, eye=None):
         os.remove(f"{path}.svg")
 
 
-def write_outputs(parts, directory, argv=None, assembly=None, mockups=None):
+def _rgba(hex_color, alpha):
+    return Color(*(int(hex_color[i:i + 2], 16) / 255 for i in (1, 3, 5)), alpha)
+
+
+def write_preview(path, opaque, translucent):
+    """Zusammenbau als eine Datei: `preview.stl` mit allem Undurchsichtigen, `preview.3mf`
+    zusätzlich mit den durchsichtigen Teilen. STL kennt keine Farben, 3MF trägt RGBA pro
+    Objekt; ob ein Viewer das Alpha auch anzeigt, ist seine Sache."""
+    export_stl(Compound(children=[shape for shape, _ in opaque.values()]), f"{path}.stl")
+    mesher = Mesher()
+    for name, (shape, color) in {**opaque, **translucent}.items():
+        shape.color = color
+        mesher.add_shape(shape, part_number=name)
+    mesher.write(f"{path}.3mf")
+
+
+def write_outputs(parts, directory, argv=None, assembly=None, mockups=None, translucent=()):
     """STLs neben das Skript schreiben; --png rendert Vorschauen, --show öffnet den Viewer.
 
     `parts` bildet den Dateinamen (ohne Endung) auf das Teil ab.
@@ -47,8 +63,11 @@ def write_outputs(parts, directory, argv=None, assembly=None, mockups=None):
     Vorschau brauchen sie einzeln und druckfertig in der Ausgangslage.
 
     `mockups` sind Grobmodelle der verbauten Hardware, schon an ihrem Platz. Sie
-    gehen nur in den Viewer: nichts davon wird gedruckt, also auch nichts davon
-    exportiert.
+    gehen in den Viewer und in `preview.stl`/`preview.3mf`, nie in die Teile-STLs:
+    nichts davon wird gedruckt.
+
+    `translucent` nennt Teile, die im Viewer und im 3MF halbdurchsichtig sind und in
+    `preview.stl` fehlen, typisch der Deckel: undurchsichtig verdeckte er alles.
     """
     argv = sys.argv if argv is None else argv
     directory = Path(directory)
@@ -61,15 +80,25 @@ def write_outputs(parts, directory, argv=None, assembly=None, mockups=None):
         if "--png" in argv:
             preview(shape, str(directory / f"preview-{name}.png"))
 
+    assembly = assembly or {}
+    mockups = mockups or {}
+    placed = {name: assembly[name] * shape if name in assembly else shape for name, shape in parts.items()}
+    placed.update(mockups)
+    # Gedruckte Teile kräftig und deckend, Hardware blass und durchscheinend,
+    # damit man durch sie hindurch auf die Wanne sieht
+    colors = [PART_COLORS[i % len(PART_COLORS)] for i in range(len(parts))]
+    colors += [MOCKUP_COLORS[i % len(MOCKUP_COLORS)] for i in range(len(mockups))]
+    alphas = [0.35 if name in translucent else 1.0 for name in parts] + [0.55] * len(mockups)
+
+    if mockups:
+        colored = {name: (shape, _rgba(c, a)) for (name, shape), c, a in zip(placed.items(), colors, alphas)}
+        write_preview(
+            str(directory / "preview"),
+            {n: v for n, v in colored.items() if n not in translucent},
+            {n: v for n, v in colored.items() if n in translucent},
+        )
+
     if "--show" in argv:
         from ocp_vscode import show
 
-        assembly = assembly or {}
-        placed = {name: assembly[name] * shape if name in assembly else shape for name, shape in parts.items()}
-        mockups = mockups or {}
-        placed.update(mockups)
-        # Gedruckte Teile kräftig und deckend, Hardware blass und durchscheinend,
-        # damit man durch sie hindurch auf die Wanne sieht
-        colors = [PART_COLORS[i % len(PART_COLORS)] for i in range(len(parts))]
-        colors += [MOCKUP_COLORS[i % len(MOCKUP_COLORS)] for i in range(len(mockups))]
-        show(*placed.values(), names=list(placed), colors=colors, alphas=[1.0] * len(parts) + [0.55] * len(mockups))
+        show(*placed.values(), names=list(placed), colors=colors, alphas=alphas)

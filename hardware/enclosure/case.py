@@ -336,9 +336,11 @@ def build_bottom():
                 mode=Mode.SUBTRACT,
             )
 
-        # Auflageleiste an der +Y-Wand, in die Wand hinein verlängert
+        # Auflageleiste an der +Y-Wand, in die Wand hinein und bis in die Achsen
+        # der Ecksäulen verlängert, damit sie in die Säulen übergeht. Nicht weiter:
+        # ein Kasten bis zur Innenkante träte am Eckradius durch die Außenhaut.
         with Locations((0, case_width / 2 - ledge_depth, floor_top)):
-            Box(case_length - 2 * column_reach, ledge_depth + wall_thickness / 2, standoff_height,
+            Box(2 * lid_screw_x, ledge_depth + wall_thickness / 2, standoff_height,
                 align=(Align.CENTER, Align.MIN, Align.MIN))
 
         # Steckeröffnung in der +Y-Wand
@@ -448,4 +450,5 @@ if __name__ == "__main__":
         # Deckel umdrehen und auf den Rand setzen
         assembly={"top": Location((0, 0, rim + lid_thickness / 2), (0, 180, 0))},
         mockups=build_mockups(),
+        translucent=["top"],
     )
