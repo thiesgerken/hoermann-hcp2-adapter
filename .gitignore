@@ -9,4 +9,3 @@ __pycache__/
 *.pyc
 *-drc.json
 *-erc.json
-preview-*.png

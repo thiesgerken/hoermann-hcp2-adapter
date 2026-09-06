@@ -1,111 +1,149 @@
-# Hörmann HCP ESP32 Adapter
+<div align="center">
 
-Planungsprojekt für einen ESPHome-Adapter am HCP2-Bus eines Hörmann Serie-4-Torantriebs.
+# Hörmann HCP2 Adapter
 
-## Status
+**An open carrier PCB and 3D-printable enclosure for connecting an ESP32-C3 to a Hörmann Series 4 garage door opener.**
 
-Ein ausführbarer Schaltplan und ein vollständig gerouteter, vorläufiger PCB-Entwurf mit echten Modul-Footprints liegen vor. Die Footprint-Geometrie stammt aus Händlerfotos und -zeichnungen und ist erst nach Vermessung der gelieferten Teile zur Fertigung freigegeben. Auf eine eigene Schutzbeschaltung wird verzichtet (D-005, D-014).
+![KiCad](https://img.shields.io/badge/PCB-KiCad-314CB0?logo=kicad&logoColor=white)
+![CAD](https://img.shields.io/badge/enclosure-build123d-5C8A43)
+![ESPHome](https://img.shields.io/badge/firmware-ESPHome-000000?logo=esphome&logoColor=white)
+![Status](https://img.shields.io/badge/status-prototype-orange)
 
-## Ziel
+</div>
 
-Die spätere Trägerplatine soll folgende gekaufte Baugruppen verbinden:
+<table>
+<tr>
+<td width="50%" align="center"><img src="pcb/generated/hcp-pcb-top.png" alt="Top view of the Hörmann HCP2 adapter PCB"><br><strong>65 × 44.5 mm carrier PCB</strong></td>
+<td width="50%" align="center"><img src="enclosure/preview-top.png" alt="Top enclosure CAD preview"><br><strong>Parametric two-part enclosure</strong></td>
+</tr>
+</table>
 
-- ESP32-C3 Super Mini mit ESPHome
-- einstellbares LM2596-Abwärtswandlermodul für 25 V auf 5 V
-- isoliertes TTL-zu-RS485-Modul mit automatischer Richtungsumschaltung
-- ungeschirmte 6P6C-Modularbuchse für den Hörmann-HCP2-Bus
+> [!CAUTION]
+> This is a prototype, not a fabrication-ready design. Module dimensions and the 6P6C jack pinout must be verified against the delivered parts before ordering a PCB or connecting it to an opener. See the [open checks](TODO.md).
 
-Der geplante Signalweg ist:
+## What this project provides
 
-```text
-HCP2 6P6C
-  +25 V / GND -> LM2596 -> 5 V -> BUS_PWR -> ESP32-C3
-  A+ / B-     -> RS485-Busseite | Isolation | TTL-Seite <-> ESP32-UART
+The value of this project is the hardware around readily available modules:
+
+- a fully routed two-layer KiCad carrier PCB with project-specific footprints
+- reproducible Python generators for the schematic, PCB, manufacturing outputs, and renders
+- a compact, parametric build123d enclosure matched directly to the PCB geometry
+- printable STL files and 3MF assembly previews
+- documented mechanical, electrical, and sourcing decisions
+
+The board connects four purchased assemblies:
+
+- ESP32-C3 Super Mini running ESPHome
+- adjustable LM2596 buck converter for approximately 25 V to 5 V
+- isolated TTL-to-RS485 module with automatic direction control
+- unshielded 6P6C modular jack for the Hörmann HCP2 bus
+
+```mermaid
+flowchart LR
+    HCP["Hörmann HCP2<br/>6P6C jack"]
+
+    subgraph ADAPTER["HCP2 adapter"]
+        direction LR
+        BUCK["LM2596<br/>25 V to 5 V"]
+        JUMPER["BUS_PWR<br/>disconnect"]
+        BUS["RS485<br/>bus side"]
+        ISO{{"galvanic<br/>isolation"}}
+        TTL["RS485<br/>TTL side"]
+        ESP["ESP32-C3<br/>ESPHome"]
+
+        BUCK --> JUMPER --> ESP
+        BUS <--> ISO <--> TTL <--> ESP
+    end
+
+    HCP -->|"+25 V / GND"| BUCK
+    HCP <-->|"A+ / B-"| BUS
 ```
 
-Der LM2596 ist nicht galvanisch getrennt. Deshalb teilt der Gesamtadapter trotz isoliertem RS485-Signalpfad die Masse der HCP-Versorgung. Vollständige galvanische Trennung würde zusätzlich einen isolierten DC/DC-Wandler erfordern und ist mit den gekauften Teilen nicht gegeben.
+The LM2596 is not galvanically isolated. The complete adapter therefore shares the HCP supply ground even though the RS485 signal path is isolated. Full galvanic isolation would require an isolated DC/DC converter.
 
-## Dokumentation
+## 🧩 PCB
 
-- [Offene Punkte](TODO.md)
-- [Gehäuse](hardware/enclosure/README.md)
-- [Bauteile und Beschaffungsstatus](docs/components.md)
-- [Gekaufte Module und Hilfsteile](docs/purchased-modules.md)
-- [Ausgewählte 6P6C-Buchse](docs/connector-rj12.md)
-- [Hörmann-Unterlagen](docs/hoermann-manuals.md)
-- [Quellen und Referenzen](docs/references.md)
-- [Entscheidungsprotokoll](docs/decisions.md)
-- [Lokales Händlerarchiv](hardware/reference/README.md)
+The [`pcb/`](pcb/) directory is the electrical source of truth. It contains the shared net model, schematic and layout generators, custom footprints, generated KiCad project, renders, ERC and DRC reports, and fabrication files.
 
-IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbücher liegen unter `hardware/manuals/hoermann/`. Archivierte Händlerseiten, Produktbeschreibungen und Bilder liegen unter `hardware/reference/`. Schaltplan- und PCB-Generator sowie Footprints liegen unter `hardware/pcb/`, alle daraus erzeugten KiCad-Dateien unter `hardware/pcb/generated/`. Das gedruckte Gehäuse (build123d) liegt unter `hardware/enclosure/`.
+| Property | Value |
+|---|---|
+| Board | 2 layers, 65 × 44.5 mm |
+| Routing | 0.5 mm signals, 0.8 mm power, four vias |
+| Input | Hörmann HCP2 through a 6P6C jack |
+| Controller | Socketed ESP32-C3 Super Mini |
+| Power | LM2596 module, approximately 25 V to 5 V |
+| Bus interface | Isolated automatic-direction TTL-to-RS485 module |
+| Mounting | Three M3 board holes plus one supported corner |
 
-## Schaltplan
+### Layout
 
-- Generator: [`hardware/pcb/schematic.py`](hardware/pcb/schematic.py)
-- gemeinsames Netzmodell: [`hardware/pcb/design.py`](hardware/pcb/design.py)
-- editierbarer KiCad-Schaltplan: [`hardware/pcb/generated/hcp.kicad_sch`](hardware/pcb/generated/hcp.kicad_sch)
-- KiCad-Netzliste: [`hardware/pcb/generated/hcp.net`](hardware/pcb/generated/hcp.net)
-- gerendertes PDF: [`hardware/pcb/generated/hcp-schematic.pdf`](hardware/pcb/generated/hcp-schematic.pdf)
+| Reference | Part and placement |
+|---|---|
+| J1 | Amphenol 54601-compatible right-angle 6P6C jack, flush with the top board edge |
+| PS1 | 43.4 × 21.2 mm LM2596 HW-411 module, input side toward J1 |
+| U2 | 34 × 18 mm isolated RS485 module on castellated pads |
+| U1 | ESP32-C3 Super Mini, USB-C flush with the right edge and antenna facing U2 |
+| JP1 | `BUS_PWR` disconnect jumper for safe USB use |
+| H1, H3, H4 | 3.2 mm M3 mounting holes aligned with the enclosure bosses |
 
-Erzeugung:
+### Generate the design
+
+KiCad must be installed and `kicad-cli` must be available.
 
 ```sh
-uv run python hardware/pcb/schematic.py
+uv run python pcb/schematic.py
+uv run python pcb/pcb.py
 ```
 
-Der Generator schreibt den Schaltplan mit eigenen Symbolen, Drähten und Netzlabels direkt als `.kicad_sch`, lässt `kicad-cli` den ERC laufen, exportiert die Netzliste, vergleicht sie mit `design.py` und rendert das PDF. Dafür muss KiCad installiert sein.
+The generators write editable KiCad files to [`pcb/generated/`](pcb/generated/), run ERC and DRC, render the schematic and both board sides, and package Gerber and Excellon data.
 
-## Vorläufiger PCB-Entwurf
+Useful outputs:
 
-- Generator: [`hardware/pcb/pcb.py`](hardware/pcb/pcb.py)
-- gemeinsames Netzmodell: [`hardware/pcb/design.py`](hardware/pcb/design.py)
-- Projekt-Footprints: [`hardware/pcb/HCP.pretty/`](hardware/pcb/HCP.pretty/)
-- KiCad-Projekt: [`hardware/pcb/generated/hcp.kicad_pro`](hardware/pcb/generated/hcp.kicad_pro)
-- editierbares PCB: [`hardware/pcb/generated/hcp.kicad_pcb`](hardware/pcb/generated/hcp.kicad_pcb)
-- gerenderte Oberseite: [`hardware/pcb/generated/hcp-pcb-top.png`](hardware/pcb/generated/hcp-pcb-top.png)
-- gerenderte Unterseite: [`hardware/pcb/generated/hcp-pcb-bottom.png`](hardware/pcb/generated/hcp-pcb-bottom.png)
-- Lagen-PDF (F.Cu, B.Cu, Silkscreen, Kontur): [`hardware/pcb/generated/hcp-pcb.pdf`](hardware/pcb/generated/hcp-pcb.pdf)
-- Gerber und Bohrdaten: [`hardware/pcb/generated/hcp-gerbers.zip`](hardware/pcb/generated/hcp-gerbers.zip)
+- [editable schematic](pcb/generated/hcp.kicad_sch)
+- [schematic PDF](pcb/generated/hcp-schematic.pdf)
+- [editable PCB](pcb/generated/hcp.kicad_pcb)
+- [layer PDF](pcb/generated/hcp-pcb.pdf)
+- [Gerber and drill archive](pcb/generated/hcp-gerbers.zip)
 
-Erzeugung:
+The title blocks include the short Git hash of `HEAD`. For release artifacts, commit the sources first, regenerate both designs, then commit the generated outputs.
+
+## 📦 Enclosure
+
+The [`enclosure/`](enclosure/) directory contains a two-part indoor enclosure generated with [build123d](https://build123d.readthedocs.io/):
+
+- `bottom.stl`: tray with three PCB bosses, a support rail, corner columns, and the 6P6C opening
+- `top.stl`: screw-fastened lid with a hexagonal ventilation pattern
+- `preview.stl`: open assembly for any STL viewer
+- `preview.3mf`: colored assembly with lid and internal hardware
+
+The outer size is **87.8 × 54.3 × 34.0 mm**. Four M3 screws secure the lid into Ruthex threaded inserts. The enclosure is intended for an indoor garage wall and is not waterproof.
+
+PCB dimensions, hole positions, and module placement are imported from [`pcb/pcb.py`](pcb/pcb.py) and the KiCad footprints. Only vertical dimensions and simplified component bodies are maintained separately.
 
 ```sh
-uv run python hardware/pcb/pcb.py
+uv sync
+uv run python enclosure/case.py
+uv run python enclosure/case.py --show
+uv run python enclosure/case.py --png
+uv run python enclosure/test_case.py
 ```
 
-Der Generator schreibt KiCad-Projekt und `fp-lib-table` nach `generated/`, liest die Footprints aus `HCP.pretty`, platziert und routet sie mit festen Koordinaten, führt den KiCad-DRC aus, rendert beide Seiten als PNG und die Lagen als PDF und packt Gerber- und Excellon-Dateien in ein Zip.
+See the [enclosure documentation](enclosure/README.md) for print orientation, clearances, viewer setup, and the mechanical decisions behind the model.
 
-Silkscreen und Schaltplan-Titelblock tragen den kurzen Git-Hash von `HEAD`. Für Fertigungsdaten deshalb zuerst die Quellen committen, dann beide Generatoren laufen lassen und die Ausgaben in einem Folgecommit ablegen. Der DRC meldet keine Fehler, keine Warnungen und keine offenen Verbindungen.
+## Assembly notes
 
-Platine: zweilagig, 65 × 44,5 mm, 0,5-mm-Signal- und 0,8-mm-Versorgungsleitungen, vier Vias.
+Before soldering PS1 onto the carrier board:
 
-| Ref. | Footprint | Lage |
-|---|---|---|
-| J1 | `RJ12_Amphenol_54601-x06_Horizontal` (KiCad-Bibliothek, Geometrie laut Händlerzeichnung der gekauften Buchse: Zapfen Ø3,2 im Abstand 10,16 mm, Stifte 1,27 mm versetzt; Rastnase unten, Pin 1 rechts hinten in Draufsicht, siehe `docs/connector-rj12.md`) | oben links, Frontfläche bündig mit der oberen Platinenkante |
-| PS1 | `LM2596_HW-411`, 43,4 × 21,2 mm, Eckpads 39,4 × 17,5 mm (am Modul gemessen), zwei 3,2-mm-Löcher deckungsgleich mit den Modullöchern | oben rechts, IN-Seite zu J1 |
-| U2 | `RS485_Isolated_34x18`, SMD-Pads für die Halblöcher | unten links, Busseite an der linken Kante |
-| U1 | `ESP32-C3_SuperMini`, 2 × 8 Pins, Reihenabstand 15,24 mm | unten rechts, USB-Ende bündig mit der rechten Kante, Antenne zu U2 |
-| JP1 | `PinHeader_1x02_P2.54mm_Vertical` | rechts neben PS1 |
-| H1, H3, H4 | 3,2-mm-Löcher für M3 ohne Courtyard | (3,5 / 21,5), (38,9 / 40,5), (61,0 / 34,0) mm von der linken oberen Ecke; H4 liegt unter dem gesockelten U1, der Schraubenkopf passt zwischen die Steckerleisten. Um jedes Loch sind 3,6 mm Unterseite lötstellenfrei für die Gehäusesockel; die rechte obere Ecke liegt im Gehäuse auf einer Leiste |
+1. Power the loose LM2596 module from approximately 25 V with no ESP32 connected.
+2. Adjust its output to 5.0 V using the `103` trimmer.
+3. Check startup and shutdown behavior under load. The output must not overshoot beyond 5.5 V.
+4. Solder PS1 only after those checks pass. Keep `BUS_PWR` open until the remaining board is assembled.
 
-Befestigung im Gehäuse über H1, H3 und H4. Die beiden PS1-Löcher liegen zusätzlich deckungsgleich auf der Trägerplatine.
+U1 plugs into two 1×8 socket headers. Install the headers, fasten the PCB inside the enclosure, then insert the ESP32. Never connect USB while `BUS_PWR` links the externally supplied 5 V rail.
 
-Dieser Stand darf nicht gefertigt werden. Die offenen Prüfungen stehen in [TODO.md](TODO.md).
+## HCP2 interface
 
-## Aufbau
-
-Vor dem Bestücken jeder Platine:
-
-1. LM2596-Modul (PS1) lose an etwa 25 V anschließen, ohne Last.
-2. Ausgang mit dem Trimmer `103` auf 5,0 V einstellen. Der Trimmer bleibt auf der Platine erreichbar, aber ein falsch eingestellter Wandler darf nie am ESP32 hängen.
-3. Ausgang beim Ein- und Ausschalten messen, es darf kein Überschwingen über 5,5 V geben.
-4. Erst dann PS1 einlöten. JP1 bleibt offen, bis der Rest bestückt ist.
-
-U1 wird nicht direkt aufgelötet, sondern auf zwei 1×8-Buchsenleisten gesteckt. Das Befestigungsloch H4 liegt unter dem Modul zwischen den Leisten, der Schraubenkopf passt nur unter ein gesockeltes Modul. Reihenfolge: Buchsenleisten löten, Platine im Gehäuse verschrauben, danach den ESP32 einstecken.
-
-## Feste HCP2-Rahmenbedingungen
-
-Laut ESPHome gilt für unterstützte Hörmann Serie-4-Antriebe:
+The ESPHome documentation specifies this pinout for supported Hörmann Series 4 openers:
 
 | Pin | Signal |
 |---:|---|
@@ -116,15 +154,39 @@ Laut ESPHome gilt für unterstützte Hörmann Serie-4-Antriebe:
 | 5 | +25 V |
 | 6 | +25 V |
 
-UART-Konfiguration: 57600 Baud, 8 Datenbits, gerade Parität und ein Stopbit. Modbus läuft auf ESPHome als Server.
+UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome participates as a Modbus server.
 
-## Betriebsrisiken
+## ⚠️ Safety and operating constraints
 
-- Nur HCP2-Geräte der Serie 4 sind im aktuellen Umfang vorgesehen.
-- HCP2-Zubehör darf nicht im laufenden Betrieb ein- oder ausgesteckt werden.
-- Eine unterbrochene Kommunikation oder ein Neustart des ESPHome-Geräts kann den Antrieb vorübergehend blockieren. Der Fehler wird durch Aus- und Einschalten des Antriebs beseitigt.
-- Der Bus stellt seine ungefähr 25 V erst während eines Busscans bereit. Der Adapter muss dann rechtzeitig starten und antworten.
-- Die Pinreihenfolge des konkreten Steckers und die 1:1-Belegung des Kabels müssen vor dem ersten Anschluss gemessen werden.
-- Das isolierte RS485-Modul macht den Aufbau wegen des nicht isolierten LM2596 nicht insgesamt galvanisch getrennt.
-- Der Hörmann-Antrieb erlaubt laut Zubehöranleitung insgesamt maximal 350 mA für Zubehör. Start- und Betriebsstrom des Adapters müssen gemessen werden.
-- Das RS485-Modul enthält laut Händler einen integrierten 120-Ohm-Abschluss. Die Platine erhält deshalb keinen zusätzlichen Abschlusswiderstand. Vor Inbetriebnahme wird der Widerstand zwischen A und B am stromlosen Modul geprüft.
+- Scope is limited to supported Hörmann Series 4 HCP2 devices.
+- Disconnect mains power and any emergency battery before installation.
+- HCP2 accessories must not be connected or removed while powered.
+- Interrupted communication or an ESPHome restart can temporarily block the opener. Power-cycling the opener clears this condition.
+- The bus provides approximately 25 V only during a bus scan. The adapter must boot and respond in time.
+- Verify the actual jack contact order and every conductor of the straight-through 6P6C cable before first connection.
+- The selected RS485 module reportedly includes 120 Ω termination. Measure A-to-B resistance with power removed before use. Do not fit a second termination.
+- Hörmann specifies a combined 350 mA accessory limit. Measure adapter startup and operating current.
+
+## Repository map
+
+```text
+pcb/                 PCB, schematic, footprints, and fabrication outputs
+enclosure/           Parametric enclosure source and printable files
+reference/docs/      Design records, component notes, and source analysis
+reference/           Archived vendor pages, manuals, and datasheets
+TODO.md              Measurements and commissioning checks still required
+```
+
+Reference material is intentionally separated from the two project deliverables. Start with [`pcb/`](pcb/) and [`enclosure/`](enclosure/); use [`reference/docs/`](reference/docs/) when a design decision or source needs review.
+
+## Documentation
+
+- [Enclosure design](enclosure/README.md)
+- [Open checks](TODO.md)
+- [Components and sourcing status](reference/docs/components.md)
+- [Purchased modules](reference/docs/purchased-modules.md)
+- [Selected 6P6C jack](reference/docs/connector-rj12.md)
+- [Hörmann manual analysis](reference/docs/hoermann-manuals.md)
+- [Sources and references](reference/docs/references.md)
+- [Decision log](reference/docs/decisions.md)
+- [Local vendor archive](reference/README.md)
