@@ -43,9 +43,9 @@ IC- und Board-Unterlagen liegen unter `hardware/datasheets/`. Hörmann-Handbüch
 
 - Generator: [`hardware/pcb/schematic.py`](hardware/pcb/schematic.py)
 - gemeinsames Netzmodell: [`hardware/pcb/design.py`](hardware/pcb/design.py)
-- editierbarer KiCad-Schaltplan: [`hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch`](hardware/pcb/generated/hoermann-hcp-adapter.kicad_sch)
-- KiCad-Netzliste: [`hardware/pcb/generated/hoermann-hcp-adapter.net`](hardware/pcb/generated/hoermann-hcp-adapter.net)
-- gerendertes PDF: [`hardware/pcb/generated/hoermann-hcp-adapter-schematic.pdf`](hardware/pcb/generated/hoermann-hcp-adapter-schematic.pdf)
+- editierbarer KiCad-Schaltplan: [`hardware/pcb/generated/hcp.kicad_sch`](hardware/pcb/generated/hcp.kicad_sch)
+- KiCad-Netzliste: [`hardware/pcb/generated/hcp.net`](hardware/pcb/generated/hcp.net)
+- gerendertes PDF: [`hardware/pcb/generated/hcp-schematic.pdf`](hardware/pcb/generated/hcp-schematic.pdf)
 
 Erzeugung:
 
@@ -60,12 +60,12 @@ Der Generator schreibt den Schaltplan mit eigenen Symbolen, Drähten und Netzlab
 - Generator: [`hardware/pcb/pcb.py`](hardware/pcb/pcb.py)
 - gemeinsames Netzmodell: [`hardware/pcb/design.py`](hardware/pcb/design.py)
 - Projekt-Footprints: [`hardware/pcb/HCP.pretty/`](hardware/pcb/HCP.pretty/)
-- KiCad-Projekt: [`hardware/pcb/generated/hoermann-hcp-adapter.kicad_pro`](hardware/pcb/generated/hoermann-hcp-adapter.kicad_pro)
-- editierbares PCB: [`hardware/pcb/generated/hoermann-hcp-adapter.kicad_pcb`](hardware/pcb/generated/hoermann-hcp-adapter.kicad_pcb)
-- gerenderte Oberseite: [`hardware/pcb/generated/hoermann-hcp-adapter-pcb-top.png`](hardware/pcb/generated/hoermann-hcp-adapter-pcb-top.png)
-- gerenderte Unterseite: [`hardware/pcb/generated/hoermann-hcp-adapter-pcb-bottom.png`](hardware/pcb/generated/hoermann-hcp-adapter-pcb-bottom.png)
-- Lagen-PDF (F.Cu, B.Cu, Silkscreen, Kontur): [`hardware/pcb/generated/hoermann-hcp-adapter-pcb.pdf`](hardware/pcb/generated/hoermann-hcp-adapter-pcb.pdf)
-- Gerber und Bohrdaten: [`hardware/pcb/generated/hoermann-hcp-adapter-gerbers.zip`](hardware/pcb/generated/hoermann-hcp-adapter-gerbers.zip)
+- KiCad-Projekt: [`hardware/pcb/generated/hcp.kicad_pro`](hardware/pcb/generated/hcp.kicad_pro)
+- editierbares PCB: [`hardware/pcb/generated/hcp.kicad_pcb`](hardware/pcb/generated/hcp.kicad_pcb)
+- gerenderte Oberseite: [`hardware/pcb/generated/hcp-pcb-top.png`](hardware/pcb/generated/hcp-pcb-top.png)
+- gerenderte Unterseite: [`hardware/pcb/generated/hcp-pcb-bottom.png`](hardware/pcb/generated/hcp-pcb-bottom.png)
+- Lagen-PDF (F.Cu, B.Cu, Silkscreen, Kontur): [`hardware/pcb/generated/hcp-pcb.pdf`](hardware/pcb/generated/hcp-pcb.pdf)
+- Gerber und Bohrdaten: [`hardware/pcb/generated/hcp-gerbers.zip`](hardware/pcb/generated/hcp-gerbers.zip)
 
 Erzeugung:
 

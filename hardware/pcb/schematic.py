@@ -1,7 +1,7 @@
 """Generate the KiCad schematic from the net model in design.py.
 
 Symbols, wire routes and labels are explicit coordinates on the 1.27 mm grid. The
-script writes generated/hoermann-hcp-adapter.kicad_sch, runs KiCad ERC, exports the
+script writes generated/hcp.kicad_sch, runs KiCad ERC, exports the
 netlist, checks it against EXPECTED_CONNECTIONS and renders the PDF.
 """
 import json
@@ -16,11 +16,11 @@ from design import EXPECTED_CONNECTIONS, git_version
 
 SOURCE_DIR = Path(__file__).parent
 OUTPUT_DIR = SOURCE_DIR / "generated"
-SCHEMATIC_PATH = OUTPUT_DIR / "hoermann-hcp-adapter.kicad_sch"
-NETLIST_PATH = OUTPUT_DIR / "hoermann-hcp-adapter.net"
-PDF_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-schematic.pdf"
-ERC_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-erc.json"
-PROJECT_NAME = "hoermann-hcp-adapter"
+SCHEMATIC_PATH = OUTPUT_DIR / "hcp.kicad_sch"
+NETLIST_PATH = OUTPUT_DIR / "hcp.net"
+PDF_PATH = OUTPUT_DIR / "hcp-schematic.pdf"
+ERC_PATH = OUTPUT_DIR / "hcp-erc.json"
+PROJECT_NAME = "hcp"
 GND_NET = "HCP_GND"
 
 # Each part: symbol body half width, pins as (number, name, electrical type, side, dy).

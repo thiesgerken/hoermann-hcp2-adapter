@@ -17,16 +17,16 @@ from design import EXPECTED_CONNECTIONS, git_version
 SOURCE_DIR = Path(__file__).parent
 LIBRARY_DIR = SOURCE_DIR / "HCP.pretty"
 OUTPUT_DIR = SOURCE_DIR / "generated"
-BOARD_PATH = OUTPUT_DIR / "hoermann-hcp-adapter.kicad_pcb"
-PROJECT_PATH = OUTPUT_DIR / "hoermann-hcp-adapter.kicad_pro"
+BOARD_PATH = OUTPUT_DIR / "hcp.kicad_pcb"
+PROJECT_PATH = OUTPUT_DIR / "hcp.kicad_pro"
 FP_LIB_TABLE_PATH = OUTPUT_DIR / "fp-lib-table"
-PREVIEW_TOP_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb-top.png"
-PREVIEW_BOTTOM_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb-bottom.png"
-PDF_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-pcb.pdf"
+PREVIEW_TOP_PATH = OUTPUT_DIR / "hcp-pcb-top.png"
+PREVIEW_BOTTOM_PATH = OUTPUT_DIR / "hcp-pcb-bottom.png"
+PDF_PATH = OUTPUT_DIR / "hcp-pcb.pdf"
 GERBER_DIR = OUTPUT_DIR / "gerbers"
-GERBER_ZIP = OUTPUT_DIR / "hoermann-hcp-adapter-gerbers.zip"
+GERBER_ZIP = OUTPUT_DIR / "hcp-gerbers.zip"
 VERSION = git_version()
-DRC_PATH = OUTPUT_DIR / "hoermann-hcp-adapter-drc.json"
+DRC_PATH = OUTPUT_DIR / "hcp-drc.json"
 
 BOARD_W, BOARD_H = 65.0, 44.5
 # Board-relative design coordinates are shifted by this origin when written, so the

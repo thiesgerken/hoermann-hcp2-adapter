@@ -10,7 +10,7 @@ Der Footprint `RJ12_95001_6P6C` beruht auf Händlerzeichnungen zweier Schwesterm
 
 - [ ] Gelieferte Buchse vermessen: Gehäusebreite, Tiefe ab Frontfläche, Zapfendurchmesser und -abstand, Abstand Frontfläche zu Zapfen, Abstand Zapfen zu erster Stiftreihe, Reihenabstand, Stiftversatz, Stiftdurchmesser. Sollwerte im Footprint: 12,2 / 13,0 / Ø2,4 / 12,0 / 6,0 / 2,3 / 2,54 / 1,02 / Ø0,9 mm.
 - [ ] Kontaktfolge durchmessen: 1:1-Kabel einstecken, Durchgang von Steckerkontakt 1 bis 6 auf die PCB-Stifte. Erwartet: Pin 1 in Draufsicht links in der kantennahen Reihe, Pin 2 rechts daneben in der hinteren Reihe.
-- [ ] Papiertest: `hoermann-hcp-adapter-pcb.pdf` im Maßstab 1:1 drucken, Buchse auf die F.Cu-Seite stecken. Dauert fünf Minuten und fängt jeden groben Fehler.
+- [ ] Papiertest: `hcp-pcb.pdf` im Maßstab 1:1 drucken, Buchse auf die F.Cu-Seite stecken. Dauert fünf Minuten und fängt jeden groben Fehler.
 - [ ] Falls das Muster abweicht oder erst spät kommt: auf eine Buchse mit Datenblatt und KiCad-Footprint wechseln, zum Beispiel Amphenol 54601-906LF (`Connector_RJ:RJ12_Amphenol_54601-x06_Horizontal`). Dann Footprint in `HCP.pretty` austauschen und J1-Routing in `pcb.py` anpassen.
 
 ### Übrige Footprints
