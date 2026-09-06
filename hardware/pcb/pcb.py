@@ -118,8 +118,6 @@ SILK_TEXTS = (
     ("DISCONNECT", 62.4, 19.2, 90, 0.8, "F.SilkS"),
     ("FOR USB", 63.6, 19.2, 90, 0.8, "F.SilkS"),
     ("ANT", 40.9, 34.0, 90, 0.8, "F.SilkS"),
-    (f"Hörmann HCP2 Adapter {VERSION}", 25.0, 30.5, 0, 1.5, "B.SilkS"),
-    ("(C) 2026 Thies Gerken", 25.0, 33.5, 0, 1.2, "B.SilkS"),
 )
 
 
