@@ -61,7 +61,7 @@ FOOTPRINTS = {
 PLACEMENT = {
     "J1": (9.0, 0.0, 0),
     "PS1": (38.45, 12.25, 0),
-    "JP1": (63.0, 8.0, 0),
+    "JP1": (63.4, 8.0, 0),
     "U2": (19.5, 34.0, 180),
     "U1": (53.4, 34.0, 270),
     # M3 enclosure holes in the free spots: below J1, beside JP1, between U2 and U1,
@@ -74,7 +74,7 @@ PLACEMENT = {
 REFERENCE_POSITIONS = {
     "J1": (9.0, 3.0),
     "PS1": (38.45, 19.2),
-    "JP1": (63.0, 13.1),
+    "JP1": (61.4, 9.27, 90),
     "U2": (19.5, 27.5),
     "U1": (56.5, 29.5),
 }
@@ -100,8 +100,8 @@ ROUTES = (
     ("HCP_GND", "F.Cu", POWER, ((18.0, 21.4), (18.0, 23.9), (58.9, 23.9), (58.9, 21.4))),
     ("HCP_GND", "F.Cu", SIGNAL, ((58.9, 23.9), (63.8, 23.9), (63.8, 43.2), (59.75, 43.2), (59.75, 41.62))),
     ("HCP_GND", "F.Cu", SIGNAL, ((39.5, 23.9), (39.5, 30.19), (36.5, 30.19))),
-    ("BUCK_5V", "F.Cu", POWER, ((58.9, 3.1), (58.9, 6.2), (60.7, 8.0), (63.0, 8.0))),
-    ("ESP_5V", "B.Cu", POWER, ((63.0, 10.54), (63.0, 11.5), (64.0, 12.5), (64.0, 41.62), (62.29, 41.62))),
+    ("BUCK_5V", "F.Cu", POWER, ((58.9, 3.1), (58.9, 6.2), (60.7, 8.0), (63.4, 8.0))),
+    ("ESP_5V", "B.Cu", POWER, ((63.4, 10.54), (63.4, 11.5), (64.0, 12.1), (64.0, 41.62), (62.29, 41.62))),
     ("ESP_3V3", "F.Cu", SIGNAL, ((57.21, 41.62), (57.21, 37.81), (36.5, 37.81))),
     ("UART_RX_GPIO20", "F.Cu", SIGNAL, ((47.05, 26.38), (47.05, 32.73), (36.5, 32.73))),
     ("UART_TX_GPIO21", "B.Cu", SIGNAL, ((44.51, 26.38), (44.51, 35.27), (38.5, 35.27))),
@@ -112,6 +112,12 @@ ROUTES = (
 VIAS = (
     ("UART_TX_GPIO21", 38.5, 35.27),
 )
+# Arrow from the USB warning up to JP1.
+SILK_LINES = (
+    ((63.0, 15.3), (63.0, 12.6)),
+    ((63.0, 12.6), (62.4, 13.4)),
+    ((63.0, 12.6), (63.6, 13.4)),
+)
 SILK_TEXTS = (
     ("Hörmann", 10.8, 14.6, 0, 0.8, "F.SilkS"),
     ("HCP2 Adapter", 10.8, 16.0, 0, 0.8, "F.SilkS"),
@@ -119,8 +125,9 @@ SILK_TEXTS = (
     ("(C) 2026", 10.8, 18.8, 0, 0.8, "F.SilkS"),
     ("Thies Gerken", 10.8, 20.2, 0, 0.8, "F.SilkS"),
     ("1", 6.45, 12.6, 0, 0.8, "F.SilkS"),
-    ("DISCONNECT", 62.4, 19.2, 90, 0.8, "F.SilkS"),
-    ("FOR USB", 63.6, 19.2, 90, 0.8, "F.SilkS"),
+    ("!", 61.5, 14.0, 0, 1.4, "F.SilkS"),
+    ("DISCONNECT", 62.4, 20.2, 90, 0.8, "F.SilkS"),
+    ("FOR USB", 63.6, 20.2, 90, 0.8, "F.SilkS"),
     ("ANT", 40.9, 34.0, 90, 0.8, "F.SilkS"),
 )
 
@@ -179,11 +186,11 @@ def place_footprint(ref):
     text = re.sub(r'\(property "Value" "[^"]*"', f'(property "Value" "{VALUES[ref]}"', text, count=1)
     if ref in REFERENCE_POSITIONS:
         # Property positions are footprint-relative; convert the absolute target back.
-        rx, ry = REFERENCE_POSITIONS[ref]
+        rx, ry, *angle = REFERENCE_POSITIONS[ref]
         lx, ly = rotate(rx - x, ry - y, -rotation)
         text = re.sub(
             r'(\(property "Reference" "[^"]*"\s*\(at )[^)]*\)',
-            lambda m: f"{m.group(1)}{lx:.2f} {ly:.2f} 0)",
+            lambda m: f"{m.group(1)}{lx:.2f} {ly:.2f} {angle[0] if angle else 0})",
             text,
             count=1,
         )
@@ -292,13 +299,19 @@ def build_board():
         f'  (gr_rect (start {ORIGIN[0]} {ORIGIN[1]}) (end {ORIGIN[0] + BOARD_W} {ORIGIN[1] + BOARD_H}) (stroke (width 0.1) (type default)) '
         f'(fill none) (layer "Edge.Cuts") (uuid "{object_uuid("board-outline")}"))\n'
     )
+    for index, (start, end) in enumerate(SILK_LINES):
+        start, end = sheet(*start), sheet(*end)
+        board += (
+            f'  (gr_line (start {start[0]} {start[1]}) (end {end[0]} {end[1]}) '
+            f'(stroke (width 0.2) (type default)) (layer "F.SilkS") (uuid "{object_uuid(f"line-{index}")}"))\n'
+        )
     for index, (text, x, y, rotation, size, layer) in enumerate(SILK_TEXTS):
         x, y = sheet(x, y)
         mirror = " (justify mirror)" if layer.startswith("B.") else ""
         board += (
             f'  (gr_text "{text}" (at {x} {y} {rotation}) (layer "{layer}") '
             f'(uuid "{object_uuid(f"text-{index}")}") '
-            f"(effects (font (size {size} {size}) (thickness 0.15)){mirror}))\n"
+            f"(effects (font (size {size} {size}) (thickness {max(0.15, round(size * 0.18, 2))})){mirror}))\n"
         )
     board += "  (embedded_fonts no)\n)\n"
     BOARD_PATH.write_text(board)
