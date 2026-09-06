@@ -13,5 +13,4 @@ Entwurf in [`hardware/enclosure/`](hardware/enclosure/README.md). Modulhöhen si
 - [ ] Modulhöhen am Teil messen und in `modules` eintragen: LM2596 mit Elkos auf seinen Stiften, gesockelter ESP32 mit USB-C, Buchse J1. Größter Wert gegen `parts_height` (16 mm) halten.
 - [ ] Buchsenhöhe am Muster prüfen (11,65 laut Zeichnung, `jack_height` in `case.py`).
 - [ ] Probedruck der Wanne, 6P6C-Stecker durch die Öffnung stecken: Rasthebel von unten erreichbar? Die Buchse ist 18 mm tief, der Stecker steht kaum aus der Wand. Sonst `jack_hole_below` vergrößern oder `spacing_top` verkleinern.
-- [ ] Entscheiden, ob USB-C von U1 eine Öffnung in der +X-Wand bekommt. Zur Zeit nicht, Flashen nur mit abgenommenem Deckel.
 - [ ] Wandbefestigung der Box (Laschen oder Bodenlöcher) festlegen, aktuell keine.
