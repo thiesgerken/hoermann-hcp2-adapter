@@ -46,7 +46,6 @@ Vollständiger lokaler Index: [hardware/reference/README.md](../hardware/referen
 | isoliertes TTL-zu-RS485-Modul | <https://de.aliexpress.com/item/1005010178764203.html> | [Archiv](../hardware/reference/aliexpress-1005010178764203/) |
 | LM2596-Modul | <https://de.aliexpress.com/item/1005006362601789.html> | [Archiv](../hardware/reference/aliexpress-1005006362601789/) |
 | ESP32-C3 Super Mini | <https://de.aliexpress.com/item/1005005967641936.html> | [Archiv](../hardware/reference/aliexpress-1005005967641936/) |
-| frühere Buchsenoption, nicht ausgewählt | <https://de.aliexpress.com/item/1005008379850389.html> | [Archiv](../hardware/reference/aliexpress-1005008379850389/) |
 | ausgewählte 6P6C-Buchse | <https://de.aliexpress.com/item/1005003078110991.html> | [Archiv](../hardware/reference/aliexpress-1005003078110991/) |
 
 ## Quellenregeln
