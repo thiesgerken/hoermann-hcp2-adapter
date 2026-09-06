@@ -72,7 +72,7 @@ PLACEMENT = {
     "H4": (61.0, 34.0, 0),
 }
 REFERENCE_POSITIONS = {
-    "J1": (9.0, 14.6),
+    "J1": (9.0, 3.0),
     "PS1": (38.45, 19.2),
     "JP1": (63.0, 13.1),
     "U2": (19.5, 27.5),
@@ -113,9 +113,11 @@ VIAS = (
     ("UART_TX_GPIO21", 38.5, 35.27),
 )
 SILK_TEXTS = (
-    (f"Hörmann HCP2 Adapter {VERSION}", 29.5, 24.0, 0, 0.8, "F.SilkS"),
-    ("(C) 2026", 10.6, 16.0, 0, 0.8, "F.SilkS"),
-    ("Thies Gerken", 10.6, 17.4, 0, 0.8, "F.SilkS"),
+    ("Hörmann", 10.8, 14.6, 0, 0.8, "F.SilkS"),
+    ("HCP2 Adapter", 10.8, 16.0, 0, 0.8, "F.SilkS"),
+    (VERSION, 10.8, 17.4, 0, 0.8, "F.SilkS"),
+    ("(C) 2026", 10.8, 18.8, 0, 0.8, "F.SilkS"),
+    ("Thies Gerken", 10.8, 20.2, 0, 0.8, "F.SilkS"),
     ("1", 6.45, 12.6, 0, 0.8, "F.SilkS"),
     ("DISCONNECT", 62.4, 19.2, 90, 0.8, "F.SilkS"),
     ("FOR USB", 63.6, 19.2, 90, 0.8, "F.SilkS"),
