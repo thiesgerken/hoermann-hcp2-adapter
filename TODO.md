@@ -4,7 +4,7 @@ Open work only. Completed items are deleted because Git retains the history.
 
 ## Commissioning
 
-- [ ] Configure ESPHome with the `hcp` component, UART on GPIO21/GPIO20 at 57600 8E1, and the logger on `hardware_uart: USB_SERIAL_JTAG`. Otherwise, the boot log uses UART0 and reaches the RS485 bus.
+- [ ] Flash [`esphome/hcp.yaml`](esphome/hcp.yaml) and confirm on a live opener that the bus connects, the cover reports position, and the light and buttons respond.
 
 ## Enclosure
 

@@ -31,6 +31,7 @@ It includes:
 - 🧩 a fully routed two-layer KiCad carrier PCB with project-specific footprints
 - ⚙️ reproducible Python generators for the schematic, PCB, manufacturing outputs, and renders
 - 📦 a compact, parametric build123d enclosure matched directly to the PCB geometry
+- 🔌 a ready-to-flash ESPHome configuration with Wi-Fi provisioning
 - 🖨️ printable STL files and 3MF assembly previews
 - 📚 documented mechanical, electrical, and sourcing decisions
 
@@ -154,7 +155,7 @@ The ESPHome documentation specifies this pinout for supported Hörmann Series 4 
 | 5 | +25 V |
 | 6 | +25 V |
 
-UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome participates as a Modbus server.
+UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome participates as a Modbus server. The configuration is in [`esphome/`](esphome/README.md) and uses `GPIO21` for TX and `GPIO20` for RX.
 
 ## ⚠️ Safety and operating constraints
 
@@ -172,16 +173,18 @@ UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome par
 ```text
 pcb/                 PCB, schematic, footprints, and fabrication outputs
 enclosure/           Parametric enclosure source and printable files
+esphome/             ESPHome configuration for the ESP32-C3
 reference/docs/      Design records, component notes, and source analysis
 reference/           Archived vendor pages, manuals, and datasheets
 TODO.md              Measurements and commissioning checks still required
 ```
 
-Reference material is intentionally separated from the two project deliverables. Start with [`pcb/`](pcb/) and [`enclosure/`](enclosure/); use [`reference/docs/`](reference/docs/) when a design decision or source needs review.
+Reference material is intentionally separated from the project deliverables. Start with [`pcb/`](pcb/), [`enclosure/`](enclosure/), and [`esphome/`](esphome/); use [`reference/docs/`](reference/docs/) when a design decision or source needs review.
 
 ## Documentation
 
 - [Enclosure design](enclosure/README.md)
+- [Firmware](esphome/README.md)
 - [Open checks](TODO.md)
 - [Components and sourcing status](reference/docs/components.md)
 - [Purchased modules](reference/docs/purchased-modules.md)

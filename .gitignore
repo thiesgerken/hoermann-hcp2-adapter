@@ -9,3 +9,5 @@ __pycache__/
 *.pyc
 *-drc.json
 *-erc.json
+esphome/secrets.yaml
+esphome/.esphome/

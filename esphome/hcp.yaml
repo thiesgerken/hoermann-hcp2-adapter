@@ -1,0 +1,95 @@
+substitutions:
+  name: garage-door
+  friendly_name: Garage Door
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+
+esp32:
+  variant: esp32c3
+  framework:
+    type: esp-idf
+
+# GPIO20 and GPIO21 are UART0 and carry the HCP bus, so the log must stay on USB.
+logger:
+  hardware_uart: USB_SERIAL_JTAG
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+  # A restart drops the Modbus link and leaves the opener unresponsive until it is
+  # power-cycled. Losing the API connection is not worth that, so never reboot for it.
+  reboot_timeout: 0s
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  reboot_timeout: 0s
+  # Light sleep delays the response to bus polls, which the opener treats as a fault.
+  power_save_mode: none
+  ap:
+    ssid: ${friendly_name} Setup
+    password: !secret ap_password
+
+# Serves a provisioning page on the fallback access point after 90 s without Wi-Fi.
+captive_portal:
+
+# Lets a browser set the credentials over USB during the initial flash.
+improv_serial:
+
+# Bluetooth provisioning. Disabled because the BLE stack costs RAM on the C3, and the
+# enclosure exposes no button for an authorizer. The fallback access point above already
+# covers re-provisioning with the lid closed.
+# esp32_improv:
+#   authorizer: none
+
+uart:
+  id: hcp_uart
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+  baud_rate: 57600
+  parity: EVEN
+  stop_bits: 1
+
+modbus:
+  uart_id: hcp_uart
+  role: server
+
+hoermann_hcp:
+  id: hcp
+
+cover:
+  - platform: hoermann_hcp
+    name: None
+    device_class: garage
+
+light:
+  - platform: hoermann_hcp
+    name: Light
+
+button:
+  - platform: hoermann_hcp
+    vent:
+      name: Vent
+    half_open:
+      name: Half open
+
+binary_sensor:
+  - platform: hoermann_hcp
+    is_connected:
+      name: Bus connected
+      entity_category: diagnostic
+
+sensor:
+  - platform: wifi_signal
+    name: Wi-Fi signal
+    update_interval: 60s
+    entity_category: diagnostic
+  - platform: uptime
+    name: Uptime
+    entity_category: diagnostic
