@@ -112,13 +112,31 @@ The bosses sit close to walls, the support rail, and corner columns. A 1 mm fill
 
 Warm air rises, while solid tray walls retain stiffness. The hex grid is clipped to the internal opening so the lid bears continuously on the wall rim and leaves sufficient material around screw recesses.
 
+## Print settings
+
+Wall and web thicknesses are multiples of the 0.4 mm extrusion width and every Z dimension is a multiple of 0.2 mm, so a slicer on that grid fills them with whole extrusions instead of infill.
+
+| Setting | Value | Reason |
+|---|---|---|
+| Layer height | 0.2 mm | no feature needs finer resolution |
+| Wall loops | 3 | 1.2 mm per side fills the 2.4 mm wall and the 2.0 mm ring around each insert completely |
+| Extrusion width | 0.4 mm | profiles using 0.42 or 0.45 mm turn the 0.4 mm grid into gap fill |
+| Top / bottom layers | 5 / 4 | the 2.4 mm floor is twelve layers |
+| Infill | 20 to 25 %, gyroid | carries only the floor and the column cores |
+| Supports | optional, tray only | the 15.2 mm plug opening bridges; support there breaks away easily |
+| Brim | lid only | a 2.8 mm perforated plate lifts at the corners |
+| Hole compensation | none | inserts want tight blind holes, and M3 passes a Ø3.4 hole printed undersize |
+
+PETG is preferred over PLA. It holds screw torque at the threaded inserts better and tolerates a warm garage, although either material works indoors.
+
+The tray prints floor down as exported. Rotate the lid 180° so the screw counterbores face up, which removes the only overhang in that part.
+
 ## Before the final print
 
 - Measure the installed heights of the LM2596 including capacitors, the socketed ESP32 including USB-C, and jack J1. Compare the largest value plus clearance with `parts_height`.
 - Verify the physical jack height against the 11.65 mm drawing value in `jack_height`.
 - Trial-fit a 6P6C plug. The 18 mm deep jack leaves little plug body outside the wall. Confirm that the latch remains reachable through the opening extension below the jack.
 - Check the unsupported upper-right PCB corner for play after assembly. It rests only on the support rail.
-- Choose PETG or PLA. The enclosure is intended for an indoor garage wall.
 
 ## Files
 
@@ -127,7 +145,7 @@ case.py        Parametric model and user-facing dimensions
 outputs.py     STL, 3MF, PNG, and live-view exports
 test_case.py   Clearance and simplified assembly checks
 bottom.stl     Print-ready tray
-top.stl        Print-ready lid, oriented on its exterior face
+top.stl        Print-ready lid, exterior face down; flip it for printing
 preview.stl    Open assembly for viewing only
 preview.3mf    Colored complete assembly for viewing only
 ```
