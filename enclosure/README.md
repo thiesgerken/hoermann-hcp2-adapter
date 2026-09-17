@@ -77,6 +77,7 @@ Top view with +Y upward. The PCB orientation matches the KiCad render. J1 faces 
 | Plug opening | 15.2 × 16.65 mm, 2 mm corner radius, from 3 mm below to 2 mm above the jack |
 | Ventilation | 4 mm hexagons across flats, 1.6 mm webs, 2 mm margin from wall rim and screw recesses |
 | Lid screws | 4 × M3, Ø3.4 mm clearance, Ø6 × 2 mm counterbore |
+| Fasteners | 7 × Ruthex M3 inserts, 5.7 mm long; 7 × M3 × 6 socket cap screws |
 
 ## Mechanical decisions
 

@@ -56,9 +56,9 @@ It includes:
 |---:|---|---|
 | 1 | Printed `bottom.stl` | Tray with PCB supports and 6P6C opening |
 | 1 | Printed `top.stl` | Ventilated lid |
-| 7 | Ruthex M3 heat-set inserts | Four for the lid and three for the PCB bosses |
-| 4 | M3 lid screws | Length must match the selected inserts |
-| 3 | M3 PCB screws | Length must match the PCB stack and selected inserts |
+| 7 | Ruthex M3 heat-set inserts, 5.7 mm long, Ø4.0 mm hole | Four for the lid columns and three for the PCB bosses |
+| 4 | M3 × 6 socket cap screws | Lid. Anything longer than 7.5 mm bottoms out in the blind hole |
+| 3 | M3 × 6 socket cap screws | PCB. Full thread engagement would need 7.3 mm, and 4.4 mm is ample for M3 |
 
 The LM2596 is not galvanically isolated. The complete adapter therefore shares the HCP supply ground even though the RS485 signal path is isolated. Full galvanic isolation would require an isolated DC/DC converter.
 
