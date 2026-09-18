@@ -17,8 +17,10 @@ The enclosure has two parts: `bottom.stl`, the tray, and `top.stl`, the lid with
 
 `case.py` reads the board dimensions, hole pattern, and module locations directly from [`../pcb/pcb.py`](../pcb/pcb.py) and the footprints in `../pcb/HCP.pretty/`. Only component heights and simplified module bodies are maintained manually.
 
-> [!WARNING]
-> This is a prototype. The PCB has not been manufactured and all module heights come from vendor data. Values requiring measurement are marked `UNVERIFIED` in the code. Measure the delivered modules and update the parameter block in `case.py` before printing the final enclosure.
+> [!NOTE]
+> The module heights in the parameter block come from vendor data. They were checked
+> against the assembled board and the printed tray and needed no correction, but they stay
+> worth a look if a module is sourced elsewhere.
 
 ## Workflow
 

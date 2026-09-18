@@ -220,7 +220,7 @@ enclosure/           Parametric enclosure source and printable files
 esphome/             ESPHome configuration for the ESP32-C3
 reference/docs/      Design records, component notes, and source analysis
 reference/           Archived vendor pages, manuals, and datasheets
-TODO.md              Measurements and commissioning checks still required
+TODO.md              Open checks, currently none
 ```
 
 Reference material is intentionally separated from the project deliverables. Start with [`pcb/`](pcb/), [`enclosure/`](enclosure/), and [`esphome/`](esphome/); use [`reference/docs/`](reference/docs/) when a design decision or source needs review.
