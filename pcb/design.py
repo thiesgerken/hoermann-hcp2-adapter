@@ -6,8 +6,8 @@ EXPECTED_CONNECTIONS = {
     "BUCK_5V": {"PS1.3", "JP1.1"},
     "ESP_5V": {"JP1.2", "U1.1"},
     "ESP_3V3": {"U1.5", "U2.1"},
-    "UART_TX_GPIO21": {"U1.16", "U2.2"},
-    "UART_RX_GPIO20": {"U1.14", "U2.3"},
+    "UART_RX_GPIO21": {"U1.16", "U2.2"},
+    "UART_TX_GPIO20": {"U1.14", "U2.3"},
 }
 
 

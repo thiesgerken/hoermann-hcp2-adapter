@@ -50,8 +50,11 @@ improv_serial:
 
 uart:
   id: hcp_uart
-  tx_pin: GPIO21
-  rx_pin: GPIO20
+  # U2 labels its pins from its own point of view, so its TX pad is an output that
+  # drives the ESP32 and its RX pad is the input. The carrier board wires GPIO21 to
+  # that TX pad, which makes GPIO21 the receiver here.
+  tx_pin: GPIO20
+  rx_pin: GPIO21
   baud_rate: 57600
   parity: EVEN
   stop_bits: 1

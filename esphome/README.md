@@ -34,13 +34,18 @@ RAM on the ESP32-C3, and the enclosure exposes no button for an authorizer.
 
 | Setting | Value |
 |---|---|
-| UART TX | `GPIO21` |
-| UART RX | `GPIO20` |
+| UART TX | `GPIO20` |
+| UART RX | `GPIO21` |
 | Baud rate | 57600, 8 data bits, even parity, 1 stop bit |
 | Modbus role | Server, address 2 |
 
 `GPIO20` and `GPIO21` are UART0 on the ESP32-C3, so the logger is pinned to
 `USB_SERIAL_JTAG`. Leaving it on UART0 would push log output onto the RS485 bus.
+
+The pin assignment looks swapped against the carrier board's net names because U2
+labels its TTL pads from its own point of view: its `TX` pad is an output that drives
+the ESP32. Measured on the assembled board, `GPIO20` as TX is the combination that
+makes the RS485 driver switch on.
 
 > [!CAUTION]
 > Every restart drops the Modbus link and leaves the opener unresponsive to all controls,

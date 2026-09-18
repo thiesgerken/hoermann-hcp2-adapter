@@ -155,7 +155,9 @@ The ESPHome documentation specifies this pinout for supported Hörmann Series 4 
 | 5 | +25 V |
 | 6 | +25 V |
 
-UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome participates as a Modbus server. The configuration is in [`esphome/`](esphome/README.md) and uses `GPIO21` for TX and `GPIO20` for RX.
+UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome participates as a Modbus server. The configuration is in [`esphome/`](esphome/README.md) and uses `GPIO20` for TX and `GPIO21` for RX. That looks reversed next to the net
+names on the board, and it is not: U2's TTL pads carry the module's own pin names, so
+its `TX` pad drives the ESP32 rather than being driven by it.
 
 ## ⚠️ Safety and operating constraints
 

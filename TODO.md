@@ -4,7 +4,7 @@ Open work only. Completed items are deleted because Git retains the history.
 
 ## Commissioning
 
-- [ ] Flash [`esphome/hcp.yaml`](esphome/hcp.yaml) and confirm on a live opener that the bus connects, the cover reports position, and the light and buttons respond.
+- [ ] Confirm on the live opener that the cover reports position and that the light and the buttons respond. The bus link itself is proven: the opener polls continuously and the adapter answers.
 
 ## Enclosure
 

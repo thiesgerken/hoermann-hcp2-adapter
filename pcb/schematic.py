@@ -73,8 +73,8 @@ PARTS = {
             (6, "B+", "bidirectional", "left", 0),
             (7, "EARTH/NC", "passive", "left", 5.08),
             (1, "VIN", "power_in", "right", -3.81),
-            (2, "TX", "input", "right", -1.27),
-            (3, "RX", "output", "right", 1.27),
+            (2, "TX (RO)", "output", "right", -1.27),
+            (3, "RX (DI)", "input", "right", 1.27),
             (4, "GND", "power_in", "right", 3.81),
         ),
     },
@@ -86,8 +86,8 @@ PARTS = {
         "pins": (
             (1, "5V", "power_in", "left", -8.89),
             (5, "3V3", "power_out", "left", -6.35),
-            (16, "GPIO21/U0TXD", "output", "left", -1.27),
-            (14, "GPIO20/U0RXD", "input", "left", 1.27),
+            (16, "GPIO21/U0TXD", "input", "left", -1.27),
+            (14, "GPIO20/U0RXD", "output", "left", 1.27),
             (3, "GND", "power_in", "left", 6.35),
             (7, "GPIO4", "bidirectional", "right", -8.89),
             (9, "GPIO3", "bidirectional", "right", -6.35),
@@ -124,8 +124,8 @@ WIRES = {
     "BUCK_5V": (((124.46, 60.96), (152.4, 60.96)),),
     "ESP_5V": (((167.64, 60.96), (185.42, 60.96), (185.42, 95.25), (195.58, 95.25)),),
     "ESP_3V3": (((195.58, 97.79), (180.34, 97.79), (180.34, 110.49), (124.46, 110.49)),),
-    "UART_TX_GPIO21": (((195.58, 102.87), (182.88, 102.87), (182.88, 113.03), (124.46, 113.03)),),
-    "UART_RX_GPIO20": (((195.58, 105.41), (187.96, 105.41), (187.96, 115.57), (124.46, 115.57)),),
+    "UART_RX_GPIO21": (((195.58, 102.87), (182.88, 102.87), (182.88, 113.03), (124.46, 113.03)),),
+    "UART_TX_GPIO20": (((195.58, 105.41), (187.96, 105.41), (187.96, 115.57), (124.46, 115.57)),),
 }
 # Ground symbols sit at the open end of the GND wires.
 GND_SYMBOLS = ((58.42, 101.6), (93.98, 71.12), (129.54, 71.12), (129.54, 123.19), (190.5, 115.57))
@@ -137,13 +137,14 @@ LABELS = (
     ("BUCK_5V", 134.62, 60.96, 0),
     ("ESP_5V", 185.42, 78.74, 90),
     ("ESP_3V3", 152.4, 110.49, 0),
-    ("UART_TX_GPIO21", 152.4, 113.03, 0),
-    ("UART_RX_GPIO20", 152.4, 115.57, 0),
+    ("UART_RX_GPIO21", 152.4, 113.03, 0),
+    ("UART_TX_GPIO20", 152.4, 115.57, 0),
 )
 NOTES = (
     ("HCP2 bus, 6P6C. Contact numbering per ESPHome HCP documentation.", 25.4, 128.27),
     ("Adjust PS1 to 5.0 V before connecting U1. Open JP1 whenever USB is plugged into U1.", 99.06, 45.72),
-    ("U2 is powered from 3V3 so its RX output stays at ESP32 logic level.", 99.06, 132.08),
+    ("U2 is powered from 3V3 so its TX output stays at ESP32 logic level.", 99.06, 132.08),
+    ("U2 pin names are from the module's own view: TX drives the ESP32, RX is driven by it.", 99.06, 135.89),
 )
 
 

@@ -25,7 +25,7 @@ Typical pin order with USB-C at the top:
 | GPIO1 | GPIO20 |
 | GPIO0 | GPIO21 |
 
-The preliminary schematic assigns GPIO21 to UART TX and GPIO20 to UART RX. Configure both explicitly in ESPHome and verify them on the physical board.
+The schematic wires GPIO21 to U2's `TX` pad and GPIO20 to its `RX` pad. Because those names are the module's own, ESPHome has to be configured the other way round: `tx_pin: GPIO20`, `rx_pin: GPIO21`.
 
 Open checks:
 
@@ -79,6 +79,7 @@ Local documents:
 - Vendor description: isolated 3.3 V/5 V TTL-to-RS485 module with automatic direction control
 - Approximate dimensions: 34 × 18 × 9 mm
 - TTL side at 2.54 mm pitch: VIN, TX, RX, GND
+- Those TTL names are from the module's point of view, confirmed by measurement on the assembled board: `TX` is the receiver output that drives the MCU, `RX` is the driver input. Wiring MCU TX to the pad marked `TX` leaves the RS485 driver permanently off.
 - Bus side at 5.08 mm pitch: A+, B- or B+ in some images, plus a third terminal
 - No DE or RE line; direction changes automatically
 - Vendor claims: up to 2 Mbit/s, galvanic isolation, TVS, fuse, and integrated 120 Ω termination

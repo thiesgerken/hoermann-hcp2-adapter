@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/Users/tgerken/Privat/Projekte/hoermann/pcb/hcp.kicad_sch")
-		(date "2026-09-06T11:43:33")
+		(date "2026-09-18T16:46:02")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -11,7 +11,7 @@
 			(title_block
 				(title "Hörmann HCP2 ESP32-C3 Adapter")
 				(company "Thies Gerken")
-				(rev "609722a")
+				(rev "32cfca7")
 				(date "2026-09-05")
 				(source "hcp.kicad_sch")
 				(comment
@@ -569,7 +569,7 @@
 				(pin
 					(num "14")
 					(name "GPIO20/U0RXD")
-					(type "input")
+					(type "output")
 				)
 				(pin
 					(num "15")
@@ -579,7 +579,7 @@
 				(pin
 					(num "16")
 					(name "GPIO21/U0TXD")
-					(type "output")
+					(type "input")
 				)
 			)
 		)
@@ -608,13 +608,13 @@
 				)
 				(pin
 					(num "2")
-					(name "TX")
-					(type "input")
+					(name "TX_(RO)")
+					(type "output")
 				)
 				(pin
 					(num "3")
-					(name "RX")
-					(type "output")
+					(name "RX_(DI)")
+					(type "input")
 				)
 				(pin
 					(num "4")
@@ -751,35 +751,35 @@
 		)
 		(net
 			(code "7")
-			(name "/UART_RX_GPIO20")
-			(class "Default")
-			(node
-				(ref "U1")
-				(pin "14")
-				(pinfunction "GPIO20/U0RXD_14")
-				(pintype "input")
-			)
-			(node
-				(ref "U2")
-				(pin "3")
-				(pinfunction "RX_3")
-				(pintype "output")
-			)
-		)
-		(net
-			(code "8")
-			(name "/UART_TX_GPIO21")
+			(name "/UART_RX_GPIO21")
 			(class "Default")
 			(node
 				(ref "U1")
 				(pin "16")
 				(pinfunction "GPIO21/U0TXD_16")
-				(pintype "output")
+				(pintype "input")
 			)
 			(node
 				(ref "U2")
 				(pin "2")
-				(pinfunction "TX_2")
+				(pinfunction "TX_(RO)_2")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "8")
+			(name "/UART_TX_GPIO20")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "14")
+				(pinfunction "GPIO20/U0RXD_14")
+				(pintype "output")
+			)
+			(node
+				(ref "U2")
+				(pin "3")
+				(pinfunction "RX_(DI)_3")
 				(pintype "input")
 			)
 		)
