@@ -13,14 +13,14 @@
 
 <table>
 <tr>
-<td width="34%" align="center"><img src="pcb/hcp-pcb-top.png" alt="Top view of the Hörmann HCP2 adapter PCB"><br><strong>65 × 44.5 mm carrier PCB</strong></td>
+<td width="34%" align="center"><img src="pcb/hcp-cross-pcb-top.png" alt="Top view of the Hörmann HCP2 adapter PCB"><br><strong>65 × 44.5 mm carrier PCB</strong></td>
 <td width="33%" align="center"><img src="enclosure/preview-top.png" alt="Enclosure lid CAD preview"><br><strong>Ventilated lid</strong></td>
 <td width="33%" align="center"><img src="enclosure/preview-bottom.png" alt="Enclosure tray CAD preview"><br><strong>Fitted electronics tray</strong></td>
 </tr>
 </table>
 
 > [!CAUTION]
-> One board has been built from these files and runs on a ProMatic 4. The opener's jack pinout is mirrored against the table below, so the link needs a reversed 6P6C cable. Verify the pinout of your own opener and every conductor of your cable before connecting anything. See the [open checks](TODO.md).
+> One board has been built from these files and runs on a ProMatic 4. Two variants exist because the opener's jack pinout is mirrored against the one the ESPHome documentation gives, and each wants a different 6P6C cable. Verify the pinout of your own opener and every conductor of your cable before connecting anything. See [Variants](#variants).
 >
 > Use this project entirely at your own risk. I am not responsible for any damage, injury, loss, or other consequence resulting from its use in any way. This independent project is not affiliated with, endorsed by, or sponsored by Hörmann.
 
@@ -48,7 +48,7 @@ It includes:
 | 1 | J1 | [Unshielded right-angle 6P6C jack](reference/docs/connector-rj12.md) | AliExpress item `1005003078110991`, option `6P6C` |
 | 1 | JP1 | 1×2, 2.54 mm pin header and jumper shunt | Disconnects `BUS_PWR` before USB is connected |
 | 2 | U1 sockets | 1×8, 2.54 mm socket headers | Keep U1 removable and provide clearance above H4 |
-| 1 | W1 | [Reversed (rollover) 6P6C cable](reference/docs/purchased-modules.md#6p6c-cable) | See [HCP2 interface](#hcp2-interface). Verify all six conductors before use |
+| 1 | W1 | [6P6C cable](reference/docs/purchased-modules.md#6p6c-cable) | Reversed for the `cross` board, straight-through for `straight`. See [Variants](#variants). Verify all six conductors before use |
 
 ### Enclosure
 
@@ -64,17 +64,35 @@ The LM2596 is not galvanically isolated. The complete adapter therefore shares t
 
 ## 🧩 PCB
 
-The [`pcb/`](pcb/) directory is the electrical source of truth. It contains the shared net model, schematic and layout generators, custom footprints, generated KiCad project, renders, ERC and DRC reports, and fabrication files.
+The [`pcb/`](pcb/) directory is the electrical source of truth. It contains the shared net model, schematic and layout generators, custom footprints, generated KiCad projects, renders, ERC and DRC reports, and fabrication files.
 
 | Property | Value |
 |---|---|
 | Board | 2 layers, 65 × 44.5 mm |
-| Routing | 0.5 mm signals, 0.8 mm power, four vias |
+| Routing | 0.5 mm signals, 0.8 mm power, two vias, three on the straight variant |
 | Input | Hörmann HCP2 through a 6P6C jack |
 | Controller | Socketed ESP32-C3 Super Mini |
 | Power | LM2596 module, approximately 25 V to 5 V |
 | Bus interface | Isolated automatic-direction TTL-to-RS485 module |
 | Mounting | Three M3 board holes plus one supported corner |
+
+### Variants
+
+Two boards are generated from the same sources. They are identical except for how the six
+contacts of J1 map onto the nets, and each one says on its silkscreen which cable it wants.
+
+| Variant | Silkscreen | Cable | J1 contacts |
+|---|---|---|---|
+| `cross` | `CABLE: X` | Reversed (rollover) | 1, 2 GND · 3 B- · 4 A+ · 5, 6 +25 V |
+| `straight` | `CABLE: II` | Straight-through 1:1 | 1, 2 +25 V · 3 A+ · 4 B- · 5, 6 GND |
+
+`cross` follows the pinout in the ESPHome documentation and is the board built and tested
+here. The openers measured for this project are mirrored against that pinout, which is why
+it needs a reversed cable. `straight` exists for anyone who would rather buy an ordinary
+1:1 cable, and for openers that turn out to match it directly.
+
+Measure your own opener before ordering either board. Getting this wrong puts +25 V on the
+adapter's ground.
 
 ### Layout
 
@@ -92,21 +110,25 @@ The [`pcb/`](pcb/) directory is the electrical source of truth. It contains the 
 KiCad must be installed and `kicad-cli` must be available.
 
 ```sh
-uv run python pcb/schematic.py
-uv run python pcb/pcb.py
+for variant in cross straight; do
+  uv run python pcb/schematic.py $variant
+  uv run python pcb/pcb.py $variant
+done
 ```
 
-The generators write editable KiCad files directly to [`pcb/`](pcb/), run ERC and DRC, render the schematic and both board sides, and package Gerber and Excellon data.
+The generators write editable KiCad files directly to [`pcb/`](pcb/), run ERC and DRC, render the schematic and both board sides, and package Gerber and Excellon data. Omitting the argument builds `cross`.
 
-Useful outputs:
+Useful outputs, per variant:
 
-- [editable schematic](pcb/hcp.kicad_sch)
-- [schematic PDF](pcb/hcp-schematic.pdf)
-- [editable PCB](pcb/hcp.kicad_pcb)
-- [layer PDF](pcb/hcp-pcb.pdf)
-- [Gerber and drill archive](pcb/hcp-gerbers.zip)
+| | Reversed cable | Straight cable |
+|---|---|---|
+| Editable schematic | [`hcp-cross.kicad_sch`](pcb/hcp-cross.kicad_sch) | [`hcp-straight.kicad_sch`](pcb/hcp-straight.kicad_sch) |
+| Schematic PDF | [`hcp-cross-schematic.pdf`](pcb/hcp-cross-schematic.pdf) | [`hcp-straight-schematic.pdf`](pcb/hcp-straight-schematic.pdf) |
+| Editable PCB | [`hcp-cross.kicad_pcb`](pcb/hcp-cross.kicad_pcb) | [`hcp-straight.kicad_pcb`](pcb/hcp-straight.kicad_pcb) |
+| Layer PDF | [`hcp-cross-pcb.pdf`](pcb/hcp-cross-pcb.pdf) | [`hcp-straight-pcb.pdf`](pcb/hcp-straight-pcb.pdf) |
+| Gerber and drill archive | [`hcp-cross-gerbers.zip`](pcb/hcp-cross-gerbers.zip) | [`hcp-straight-gerbers.zip`](pcb/hcp-straight-gerbers.zip) |
 
-The title blocks include the short Git hash of `HEAD`. For release artifacts, commit the sources first, regenerate both designs, then commit the generated outputs.
+The title blocks include the short Git hash of `HEAD`. For release artifacts, commit the sources first, regenerate all four designs, then commit the generated outputs.
 
 ## 📦 Enclosure
 
@@ -155,12 +177,15 @@ The ESPHome documentation specifies this pinout for supported Hörmann Series 4 
 | 5 | +25 V |
 | 6 | +25 V |
 
-J1 is wired to that table, and the opener's own jack is mirrored against it: on the
-ProMatic 4 measured here, +25 V sits on contacts 1 and 2. A straight-through cable
-therefore feeds +25 V into the adapter's ground, so the link needs a **reversed (rollover)
-6P6C cable**, the kind where the two plugs show opposite conductor order when held
-identically. Measure every conductor before the first connection. Reversing the supply
-survived once here only because the opener limits accessory current to 350 mA.
+The opener's own jack is mirrored against that table: on the ProMatic 4 measured here,
++25 V sits on contacts 1 and 2. The `cross` board follows the table and therefore needs a
+**reversed (rollover) cable**, the kind whose two plugs show opposite conductor order when
+held identically. The `straight` board mirrors J1 instead and takes a plain 1:1 cable. See
+[Variants](#variants).
+
+Measure your opener and every conductor of your cable before the first connection. Pairing
+the wrong cable with either board feeds +25 V into the adapter's ground. Doing that here
+survived only because the opener limits accessory current to 350 mA.
 
 UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome participates as a Modbus server. The configuration is in [`esphome/`](esphome/README.md) and uses `GPIO20` for TX and `GPIO21` for RX. That looks reversed next to the net
 names on the board, and it is not: U2's TTL pads carry the module's own pin names, so
@@ -208,7 +233,7 @@ the counter run even without the bridge.
 - HCP2 accessories must not be connected or removed while powered.
 - Interrupted communication or an ESPHome restart can temporarily block the opener. Power-cycling the opener clears this condition.
 - The bus provides approximately 25 V only during a bus scan. The adapter must boot and respond in time.
-- Verify the actual jack contact order and every conductor of the reversed 6P6C cable before first connection.
+- Verify the actual jack contact order and every conductor of the cable before first connection, and check that the cable matches the variant printed on the board.
 - The selected RS485 module reportedly includes 120 Ω termination. Measure A-to-B resistance with power removed before use. Do not fit a second termination.
 - Hörmann specifies a combined 350 mA accessory limit. Measure adapter startup and operating current.
 

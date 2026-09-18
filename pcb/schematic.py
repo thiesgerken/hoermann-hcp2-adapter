@@ -12,15 +12,17 @@ import sys
 import uuid
 from pathlib import Path
 
-from design import EXPECTED_CONNECTIONS, git_version
+from design import J1_PINS, connections, git_version, selected_variant
 
 SOURCE_DIR = Path(__file__).parent
 OUTPUT_DIR = SOURCE_DIR
-SCHEMATIC_PATH = OUTPUT_DIR / "hcp.kicad_sch"
-NETLIST_PATH = OUTPUT_DIR / "hcp.net"
-PDF_PATH = OUTPUT_DIR / "hcp-schematic.pdf"
-ERC_PATH = OUTPUT_DIR / "hcp-erc.json"
-PROJECT_NAME = "hcp"
+VARIANT = selected_variant()
+EXPECTED_CONNECTIONS = connections(VARIANT)
+PROJECT_NAME = f"hcp-{VARIANT}"
+SCHEMATIC_PATH = OUTPUT_DIR / f"{PROJECT_NAME}.kicad_sch"
+NETLIST_PATH = OUTPUT_DIR / f"{PROJECT_NAME}.net"
+PDF_PATH = OUTPUT_DIR / f"{PROJECT_NAME}-schematic.pdf"
+ERC_PATH = OUTPUT_DIR / f"{PROJECT_NAME}-erc.json"
 GND_NET = "HCP_GND"
 
 # Each part: symbol body half width, pins as (number, name, electrical type, side, dy).
@@ -32,13 +34,18 @@ PARTS = {
         "footprint": "HCP:RJ12_Amphenol_54601-x06_Horizontal",
         "at": (40.64, 88.9),
         "half_width": 10.16,
-        "pins": (
-            (6, "+25V", "passive", "right", -6.35),
-            (5, "+25V", "power_out", "right", -3.81),
-            (4, "A+", "passive", "right", -1.27),
-            (3, "B-", "passive", "right", 1.27),
-            (2, "GND", "passive", "right", 3.81),
-            (1, "GND", "power_out", "right", 6.35),
+        # The signals keep their places in the drawing and only the contact numbers move
+        # between the variants, so the numbers come from the net model.
+        "pins": tuple(
+            (int(J1_PINS[VARIANT][net_name][index].split(".")[1]), label, kind, "right", dy)
+            for net_name, index, label, kind, dy in (
+                ("HCP_25V", 1, "+25V", "passive", -6.35),
+                ("HCP_25V", 0, "+25V", "power_out", -3.81),
+                ("HCP_A_PLUS", 0, "A+", "passive", -1.27),
+                ("HCP_B_MINUS", 0, "B-", "passive", 1.27),
+                ("HCP_GND", 1, "GND", "passive", 3.81),
+                ("HCP_GND", 0, "GND", "power_out", 6.35),
+            )
         ),
     },
     "PS1": {
@@ -141,7 +148,7 @@ LABELS = (
     ("UART_TX_GPIO20", 152.4, 115.57, 0),
 )
 NOTES = (
-    ("HCP2 bus, 6P6C. Contact numbering per ESPHome HCP documentation.", 25.4, 128.27),
+    (f"HCP2 bus, 6P6C. {'Contact numbering per ESPHome HCP documentation; needs a reversed cable.' if VARIANT == 'cross' else 'Mirrored against the ESPHome HCP documentation; needs a straight cable.'}", 25.4, 128.27),
     ("Adjust PS1 to 5.0 V before connecting U1. Open JP1 whenever USB is plugged into U1.", 99.06, 45.72),
     ("U2 is powered from 3V3 so its TX output stays at ESP32 logic level.", 99.06, 132.08),
     ("U2 pin names are from the module's own view: TX drives the ESP32, RX is driven by it.", 99.06, 135.89),
