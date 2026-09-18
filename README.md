@@ -20,7 +20,7 @@
 </table>
 
 > [!CAUTION]
-> One board has been built from these files and runs on a ProMatic 4. The opener's jack pinout is mirrored against the table below, so the link needs a reversed 6P6C cable. Verify the pinout of your own opener and every conductor of your cable before connecting anything. See the [open checks](TODO.md).
+> Verify the pinout of your own opener and every conductor of your cable before connecting anything.
 >
 > Use this project entirely at your own risk. I am not responsible for any damage, injury, loss, or other consequence resulting from its use in any way. This independent project is not affiliated with, endorsed by, or sponsored by Hörmann.
 
