@@ -113,16 +113,19 @@ Local archive: [AliExpress 1005007375826162](../aliexpress-1005007375826162/)
 ## 6P6C cable
 
 - AliExpress: <https://www.aliexpress.com/item/1005005913976427.html>
-- Vendor description: RJ11/RJ12 6P6C plug-to-plug straight-through cable
+- Vendor description: RJ11/RJ12 6P6C plug-to-plug straight-through cable, which is the wrong type for this adapter
 - Listed lengths: 0.5 m, 1 m, 2 m, 3 m, and 5 m; the purchased length is not yet recorded
 
 Product images are inconsistent and some show only four visible conductors. Verify every cable before connection:
 
 1. Both plugs have six contacts.
 2. All six conductors have continuity.
-3. Contact 1 maps to contact 1 through contact 6 mapping to contact 6.
-4. No adjacent contacts are shorted.
+3. No adjacent contacts are shorted.
+4. Contact 1 maps to contact 6, 2 to 5, and 3 to 4.
 
-A crossed telephone cable can swap +25 V and GND and must not be used.
+The last point is the opposite of what this file originally required. The opener's jack is
+mirrored against the pinout in the ESPHome documentation that J1 follows, so the adapter
+needs a reversed cable and a straight-through one puts +25 V on the adapter's ground. The
+purchased cable is straight-through and was rebuilt into a reversed one by hand.
 
 Local archive: [AliExpress 1005005913976427](../aliexpress-1005005913976427/)

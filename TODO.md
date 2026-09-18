@@ -2,10 +2,6 @@
 
 Open work only. Completed items are deleted because Git retains the history.
 
-## Commissioning
-
-- [ ] Confirm on the live opener that the cover reports position and that the light and the buttons respond. The bus link itself is proven: the opener polls continuously and the adapter answers.
-
 ## Enclosure
 
 The design is in [`enclosure/`](enclosure/README.md). Module heights currently come from vendor data and are marked `UNVERIFIED` in the code.

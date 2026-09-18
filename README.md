@@ -20,7 +20,7 @@
 </table>
 
 > [!CAUTION]
-> This is a prototype, not a fabrication-ready design. Module dimensions and the 6P6C jack pinout must be verified against the delivered parts before ordering a PCB or connecting it to an opener. See the [open checks](TODO.md).
+> One board has been built from these files and runs on a ProMatic 4. The opener's jack pinout is mirrored against the table below, so the link needs a reversed 6P6C cable. Verify the pinout of your own opener and every conductor of your cable before connecting anything. See the [open checks](TODO.md).
 >
 > Use this project entirely at your own risk. I am not responsible for any damage, injury, loss, or other consequence resulting from its use in any way. This independent project is not affiliated with, endorsed by, or sponsored by Hörmann.
 
@@ -48,7 +48,7 @@ It includes:
 | 1 | J1 | [Unshielded right-angle 6P6C jack](reference/docs/connector-rj12.md) | AliExpress item `1005003078110991`, option `6P6C` |
 | 1 | JP1 | 1×2, 2.54 mm pin header and jumper shunt | Disconnects `BUS_PWR` before USB is connected |
 | 2 | U1 sockets | 1×8, 2.54 mm socket headers | Keep U1 removable and provide clearance above H4 |
-| 1 | W1 | [Straight-through 6P6C cable](reference/docs/purchased-modules.md#6p6c-cable) | Verify all six conductors before use |
+| 1 | W1 | [Reversed (rollover) 6P6C cable](reference/docs/purchased-modules.md#6p6c-cable) | See [HCP2 interface](#hcp2-interface). Verify all six conductors before use |
 
 ### Enclosure
 
@@ -155,9 +155,51 @@ The ESPHome documentation specifies this pinout for supported Hörmann Series 4 
 | 5 | +25 V |
 | 6 | +25 V |
 
+J1 is wired to that table, and the opener's own jack is mirrored against it: on the
+ProMatic 4 measured here, +25 V sits on contacts 1 and 2. A straight-through cable
+therefore feeds +25 V into the adapter's ground, so the link needs a **reversed (rollover)
+6P6C cable**, the kind where the two plugs show opposite conductor order when held
+identically. Measure every conductor before the first connection. Reversing the supply
+survived once here only because the opener limits accessory current to 350 mA.
+
 UART settings: **57600 baud, 8 data bits, even parity, 1 stop bit**. ESPHome participates as a Modbus server. The configuration is in [`esphome/`](esphome/README.md) and uses `GPIO20` for TX and `GPIO21` for RX. That looks reversed next to the net
 names on the board, and it is not: U2's TTL pads carry the module's own pin names, so
 its `TX` pad drives the ESP32 rather than being driven by it.
+
+## Troubleshooting
+
+The bus offers a hostile debugging environment: it carries power only during a bus scan,
+and the opener cuts it again within seconds when the adapter fails to register. That is
+too short to read a log. These checks all work on the bench instead, with the board on a
+25 V supply and the bus disconnected.
+
+**Does the transmitter work?** Send continuously and measure the DC average, which a plain
+multimeter resolves. A temporary `interval` writing 128 zero bytes every 30 ms keeps the
+line low about 80 % of the time. Measure between U2's A and B pads:
+
+| A against B | Meaning |
+|---|---|
+| about 185 mV, unchanged while sending | The driver never switches on. Check the pin roles first |
+| moves to roughly 1.6 V while sending | Transmit path is good |
+| exactly 0.000 V | The isolated side is not running. The module is dead or unpowered |
+
+The 185 mV is the module's fail-safe bias, so seeing it at all proves the isolated side
+has power.
+
+**Does the receiver work?** With the bus disconnected, GPIO21 must sit at a steady 3.3 V.
+That is U2's receiver output holding the UART idle level. A wandering level below 0.5 V
+means the receiver output is not driving, or the castellated joint is cold.
+
+**Is anything arriving from the bus?** Count bytes instead of logging them. A `uart:`
+`debug:` block with a custom `sequence` replaces the default hex dump, so it costs no log
+traffic, and a global written to flash with `global_preferences->sync()` survives the
+supply being cut. Drive the onboard LED from it and the answer is readable in the garage
+without a host attached. Set `dummy_receiver: true` while measuring so the counter does
+not depend on Modbus draining the UART, and back to `false` for normal operation.
+
+**Verify the counter before trusting it.** Point the UART at two free neighbouring pins,
+GPIO4 and GPIO3, and bridge them. Crosstalk from the transmitting pin is enough to make
+the counter run even without the bridge.
 
 ## ⚠️ Safety and operating constraints
 
@@ -166,7 +208,7 @@ its `TX` pad drives the ESP32 rather than being driven by it.
 - HCP2 accessories must not be connected or removed while powered.
 - Interrupted communication or an ESPHome restart can temporarily block the opener. Power-cycling the opener clears this condition.
 - The bus provides approximately 25 V only during a bus scan. The adapter must boot and respond in time.
-- Verify the actual jack contact order and every conductor of the straight-through 6P6C cable before first connection.
+- Verify the actual jack contact order and every conductor of the reversed 6P6C cable before first connection.
 - The selected RS485 module reportedly includes 120 Ω termination. Measure A-to-B resistance with power removed before use. Do not fit a second termination.
 - Hörmann specifies a combined 350 mA accessory limit. Measure adapter startup and operating current.
 
