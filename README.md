@@ -11,6 +11,10 @@
 
 </div>
 
+<p align="center">
+  <img src="assembled.jpg" alt="The assembled adapter in its printed tray, with the ventilated lid beside it" width="620">
+</p>
+
 <table>
 <tr>
 <td width="34%" align="center"><img src="pcb/hcp-cross-pcb-top.png" alt="Top view of the Hörmann HCP2 adapter PCB"><br><strong>65 × 44.5 mm carrier PCB</strong></td>
@@ -240,6 +244,7 @@ the counter run even without the bridge.
 ## Repository map
 
 ```text
+assembled.jpg        Photo of the assembled adapter
 LICENSE              MIT, except for the archived third-party material
 pcb/                 PCB, schematic, footprints, and fabrication outputs
 enclosure/           Parametric enclosure source and printable files
