@@ -113,7 +113,7 @@ Local archive: [AliExpress 1005007375826162](../aliexpress-1005007375826162/)
 ## 6P6C cable
 
 - AliExpress: <https://www.aliexpress.com/item/1005005913976427.html>
-- Vendor description: RJ11/RJ12 6P6C plug-to-plug straight-through cable, which is the wrong type for this adapter
+- Vendor description: RJ11/RJ12 6P6C plug-to-plug straight-through cable, which suits the `straight` board and not the `cross` one
 - Listed lengths: 0.5 m, 1 m, 2 m, 3 m, and 5 m; the purchased length is not yet recorded
 
 Product images are inconsistent and some show only four visible conductors. Verify every cable before connection:
@@ -123,9 +123,10 @@ Product images are inconsistent and some show only four visible conductors. Veri
 3. No adjacent contacts are shorted.
 4. Contact 1 maps to contact 6, 2 to 5, and 3 to 4.
 
-The last point is the opposite of what this file originally required. The opener's jack is
-mirrored against the pinout in the ESPHome documentation that J1 follows, so the adapter
-needs a reversed cable and a straight-through one puts +25 V on the adapter's ground. The
-purchased cable is straight-through and was rebuilt into a reversed one by hand.
+Point 4 holds for the `cross` board, whose J1 follows the pinout in the ESPHome
+documentation while the opener's jack is mirrored against it. The `straight` board mirrors
+J1 instead and wants 1 to 1 through 6 to 6. Pairing the wrong cable with either board puts
++25 V on the adapter's ground. The purchased cable is straight-through and was rebuilt into
+a reversed one by hand for the `cross` board built here.
 
 Local archive: [AliExpress 1005005913976427](../aliexpress-1005005913976427/)

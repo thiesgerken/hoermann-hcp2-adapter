@@ -1,8 +1,8 @@
 (export
 	(version "E")
 	(design
-		(source "/Users/tgerken/Privat/Projekte/hoermann/pcb/hcp.kicad_sch")
-		(date "2026-09-18T16:46:02")
+		(source "/Users/tgerken/Privat/Projekte/wt-hoermann-straight-variant/pcb/hcp-cross.kicad_sch")
+		(date "2026-09-18T17:45:36")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -11,9 +11,9 @@
 			(title_block
 				(title "Hörmann HCP2 ESP32-C3 Adapter")
 				(company "Thies Gerken")
-				(rev "32cfca7")
+				(rev "0a3efae")
 				(date "2026-09-05")
-				(source "hcp.kicad_sch")
+				(source "hcp-cross.kicad_sch")
 				(comment
 					(number "1")
 					(value "")
@@ -75,11 +75,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hcp")
+				(value "hcp-cross")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hcp.kicad_sch")
+				(value "hcp-cross.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -133,11 +133,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hcp")
+				(value "hcp-cross")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hcp.kicad_sch")
+				(value "hcp-cross.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -179,11 +179,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hcp")
+				(value "hcp-cross")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hcp.kicad_sch")
+				(value "hcp-cross.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -231,11 +231,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hcp")
+				(value "hcp-cross")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hcp.kicad_sch")
+				(value "hcp-cross.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
@@ -319,11 +319,11 @@
 			)
 			(property
 				(name "Sheetname")
-				(value "hcp")
+				(value "hcp-cross")
 			)
 			(property
 				(name "Sheetfile")
-				(value "hcp.kicad_sch")
+				(value "hcp-cross.kicad_sch")
 			)
 			(sheetpath
 				(names "/")
