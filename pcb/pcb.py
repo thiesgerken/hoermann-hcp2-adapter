@@ -12,21 +12,26 @@ import sys
 import uuid
 from pathlib import Path
 
-from design import EXPECTED_CONNECTIONS, git_version
+from design import VARIANTS, connections, git_version, selected_variant
 
 SOURCE_DIR = Path(__file__).parent
 LIBRARY_DIR = SOURCE_DIR / "HCP.pretty"
 OUTPUT_DIR = SOURCE_DIR
-BOARD_PATH = OUTPUT_DIR / "hcp.kicad_pcb"
-PROJECT_PATH = OUTPUT_DIR / "hcp.kicad_pro"
+# The enclosure imports this module for the placement and the footprints, so the variant
+# must not be read from that script's command line.
+VARIANT = selected_variant() if __name__ == "__main__" else VARIANTS[0]
+EXPECTED_CONNECTIONS = connections(VARIANT)
+STEM = f"hcp-{VARIANT}"
+BOARD_PATH = OUTPUT_DIR / f"{STEM}.kicad_pcb"
+PROJECT_PATH = OUTPUT_DIR / f"{STEM}.kicad_pro"
 FP_LIB_TABLE_PATH = OUTPUT_DIR / "fp-lib-table"
-PREVIEW_TOP_PATH = OUTPUT_DIR / "hcp-pcb-top.png"
-PREVIEW_BOTTOM_PATH = OUTPUT_DIR / "hcp-pcb-bottom.png"
-PDF_PATH = OUTPUT_DIR / "hcp-pcb.pdf"
+PREVIEW_TOP_PATH = OUTPUT_DIR / f"{STEM}-pcb-top.png"
+PREVIEW_BOTTOM_PATH = OUTPUT_DIR / f"{STEM}-pcb-bottom.png"
+PDF_PATH = OUTPUT_DIR / f"{STEM}-pcb.pdf"
 GERBER_DIR = OUTPUT_DIR / "gerbers"
-GERBER_ZIP = OUTPUT_DIR / "hcp-gerbers.zip"
+GERBER_ZIP = OUTPUT_DIR / f"{STEM}-gerbers.zip"
 VERSION = git_version()
-DRC_PATH = OUTPUT_DIR / "hcp-drc.json"
+DRC_PATH = OUTPUT_DIR / f"{STEM}-drc.json"
 
 BOARD_W, BOARD_H = 65.0, 44.5
 # Board-relative design coordinates are shifted by this origin when written, so the
@@ -91,11 +96,35 @@ VALUES = {
 
 # Points are absolute board coordinates. Pad centres are computed from the footprints
 # and checked against the route vertices in check_routes().
-ROUTES = (
-    ("HCP_25V", "F.Cu", SIGNAL, ((7.1, 16.77), (7.1, 15.5), (5.83, 14.23), (5.83, 11.0), (6.6, 10.23))),
-    ("HCP_25V", "F.Cu", POWER, ((6.6, 10.23), (6.6, 3.5), (18.75, 3.5))),
-    ("HCP_GND", "F.Cu", SIGNAL, ((10.91, 14.23), (10.91, 15.5), (12.18, 16.77))),
-    ("HCP_GND", "F.Cu", POWER, ((12.18, 16.77), (12.18, 21.0), (18.75, 21.0))),
+#
+# J1 carries the two bus pairs on mirrored contacts between the variants, so every route
+# that touches it is variant specific. The contacts sit on two staggered rows, which is
+# why the mirror cannot simply be reflected in x.
+J1_ROUTES = {
+    "cross": (
+        ("HCP_25V", "F.Cu", SIGNAL, ((7.1, 16.77), (7.1, 15.5), (5.83, 14.23), (5.83, 11.0), (6.6, 10.23))),
+        ("HCP_25V", "F.Cu", POWER, ((6.6, 10.23), (6.6, 3.5), (18.75, 3.5))),
+        ("HCP_GND", "F.Cu", SIGNAL, ((10.91, 14.23), (10.91, 15.5), (12.18, 16.77))),
+        ("HCP_GND", "F.Cu", POWER, ((12.18, 16.77), (12.18, 21.0), (18.75, 21.0))),
+        ("HCP_B_MINUS", "F.Cu", SIGNAL, ((9.64, 16.77), (9.64, 19.3), (6.5, 19.3), (6.5, 32.5), (4.5, 34.0), (2.5, 34.0))),
+        ("HCP_A_PLUS", "B.Cu", SIGNAL, ((8.37, 14.23), (8.37, 12.3), (4.3, 12.3), (4.3, 17.0), (6.0, 18.7), (6.0, 39.08))),
+        ("HCP_A_PLUS", "F.Cu", SIGNAL, ((6.0, 39.08), (2.5, 39.08))),
+    ),
+    # Supply and ground swap ends of the contact row, so the supply now leaves on the
+    # right under the jack body and ground takes the short way down to PS1. A+ ends up on
+    # the wrong side of ground and changes layer to get past it.
+    "straight": (
+        ("HCP_25V", "F.Cu", SIGNAL, ((10.91, 14.23), (10.91, 15.5), (12.18, 16.77))),
+        ("HCP_25V", "F.Cu", POWER, ((10.91, 14.23), (10.91, 3.5), (18.75, 3.5))),
+        ("HCP_GND", "F.Cu", SIGNAL, ((7.1, 16.77), (7.1, 15.5), (5.83, 14.23))),
+        ("HCP_GND", "F.Cu", POWER, ((7.1, 16.77), (8.0, 17.67), (8.0, 21.0), (18.75, 21.0))),
+        ("HCP_B_MINUS", "F.Cu", SIGNAL, ((8.37, 14.23), (8.37, 12.3), (4.3, 12.3), (4.3, 17.5), (6.5, 19.7), (6.5, 32.5), (4.5, 34.0), (2.5, 34.0))),
+        ("HCP_A_PLUS", "F.Cu", SIGNAL, ((9.64, 16.77), (9.64, 19.5))),
+        ("HCP_A_PLUS", "B.Cu", SIGNAL, ((9.64, 19.5), (9.64, 21.5), (6.0, 25.1), (6.0, 39.08))),
+        ("HCP_A_PLUS", "F.Cu", SIGNAL, ((6.0, 39.08), (2.5, 39.08))),
+    ),
+}
+SHARED_ROUTES = (
     ("HCP_GND", "F.Cu", POWER, ((18.75, 21.0), (18.75, 23.9), (58.15, 23.9), (58.15, 21.0))),
     ("HCP_GND", "F.Cu", SIGNAL, ((58.15, 23.9), (63.8, 23.9), (63.8, 43.2), (59.75, 43.2), (59.75, 41.62))),
     ("HCP_GND", "F.Cu", SIGNAL, ((39.5, 23.9), (39.5, 30.19), (36.5, 30.19))),
@@ -105,14 +134,12 @@ ROUTES = (
     ("UART_TX_GPIO20", "F.Cu", SIGNAL, ((47.05, 26.38), (47.05, 32.73), (36.5, 32.73))),
     ("UART_RX_GPIO21", "B.Cu", SIGNAL, ((44.51, 26.38), (44.51, 35.27), (38.5, 35.27))),
     ("UART_RX_GPIO21", "F.Cu", SIGNAL, ((38.5, 35.27), (36.5, 35.27))),
-    ("HCP_B_MINUS", "F.Cu", SIGNAL, ((9.64, 16.77), (9.64, 19.3), (6.5, 19.3), (6.5, 32.5), (4.5, 34.0), (2.5, 34.0))),
-    ("HCP_A_PLUS", "B.Cu", SIGNAL, ((8.37, 14.23), (8.37, 12.3), (4.3, 12.3), (4.3, 17.0), (6.0, 18.7), (6.0, 39.08))),
-    ("HCP_A_PLUS", "F.Cu", SIGNAL, ((6.0, 39.08), (2.5, 39.08))),
 )
+ROUTES = SHARED_ROUTES + J1_ROUTES[VARIANT]
 VIAS = (
     ("UART_RX_GPIO21", 38.5, 35.27),
     ("HCP_A_PLUS", 6.0, 39.08),
-)
+) + ((("HCP_A_PLUS", 9.64, 19.5),) if VARIANT == "straight" else ())
 # Arrow from the USB warning up to JP1.
 SILK_LINES = (
     ((63.0, 15.3), (63.0, 12.6)),
@@ -120,15 +147,20 @@ SILK_LINES = (
     ((63.0, 12.6), (63.6, 13.4)),
 )
 SILK_TEXTS = (
-    ("Hörmann HCP2", 11.4, 19.2, 0, 0.8, "F.SilkS"),
-    (f"Adapter {VERSION}", 11.4, 20.6, 0, 0.8, "F.SilkS"),
-    ("(C) 2026", 11.4, 22.0, 0, 0.8, "F.SilkS"),
-    ("Thies Gerken", 11.4, 23.4, 0, 0.8, "F.SilkS"),
+    # Five lines between the silkscreen of J1 above and U2 below, which leaves room for
+    # 1.38 mm of line pitch and no more.
+    ("Hörmann HCP2", 11.4, 18.75, 0, 0.8, "F.SilkS"),
+    (f"Adapter {VERSION}", 11.4, 20.13, 0, 0.8, "F.SilkS"),
+    ("(C) 2026", 11.4, 21.51, 0, 0.8, "F.SilkS"),
+    ("Thies Gerken", 11.4, 22.89, 0, 0.8, "F.SilkS"),
     ("1", 13.7, 16.77, 0, 0.8, "F.SilkS"),
     ("!", 61.5, 14.0, 0, 1.4, "F.SilkS"),
     ("DISCONNECT", 62.4, 20.2, 90, 0.8, "F.SilkS"),
     ("FOR USB", 63.6, 20.2, 90, 0.8, "F.SilkS"),
     ("ANT", 40.9, 34.0, 90, 0.8, "F.SilkS"),
+    # The two boards look identical once assembled, and plugging the wrong cable into
+    # either puts +25 V on the adapter's ground.
+    (f"CABLE: {'X' if VARIANT == 'cross' else 'II'}", 11.4, 24.27, 0, 0.8, "F.SilkS"),
 )
 
 
