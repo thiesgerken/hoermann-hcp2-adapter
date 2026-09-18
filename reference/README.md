@@ -6,8 +6,8 @@ Vendor pages were retrieved on 2026-09-05.
 
 Everything in this directory except [`docs/`](docs/) is third-party material, archived so
 that the design decisions in this repository stay verifiable. None of it is my work, none
-of it is covered by this project's license, and no permission to redistribute it is granted
-or implied. Rights remain with the respective owners.
+of it is covered by the repository's MIT license, and no permission to redistribute it is
+granted or implied. Rights remain with the respective owners.
 
 | Material | Rights holder |
 |---|---|
@@ -19,7 +19,7 @@ or implied. Rights remain with the respective owners.
 | `esphome-hoermann-hcp-wiring.svg` | The ESPHome project. Taken from its documentation, which is licensed CC BY-NC-SA 4.0. |
 
 [`docs/`](docs/) holds my own design records, component notes, and source analysis, and
-follows the license of the repository.
+follows the repository's [MIT license](../LICENSE).
 
 If you hold rights to any of this material and want it removed, get in touch and I will
 take it down.

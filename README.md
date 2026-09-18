@@ -240,6 +240,7 @@ the counter run even without the bridge.
 ## Repository map
 
 ```text
+LICENSE              MIT, except for the archived third-party material
 pcb/                 PCB, schematic, footprints, and fabrication outputs
 enclosure/           Parametric enclosure source and printable files
 esphome/             ESPHome configuration for the ESP32-C3
@@ -249,6 +250,15 @@ TODO.md              Open checks, currently none
 ```
 
 Reference material is intentionally separated from the project deliverables. Start with [`pcb/`](pcb/), [`enclosure/`](enclosure/), and [`esphome/`](esphome/); use [`reference/docs/`](reference/docs/) when a design decision or source needs review.
+
+## License
+
+[MIT](LICENSE), covering the PCB, the enclosure, the generators, the ESPHome
+configuration, and the documentation.
+
+[`reference/`](reference/README.md) is excluded. It archives manuals, datasheets, and
+vendor listings that belong to their respective owners, with the exception of
+[`reference/docs/`](reference/docs/), which is mine and follows the license above.
 
 ## Documentation
 
